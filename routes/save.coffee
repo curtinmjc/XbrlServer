@@ -8,9 +8,10 @@ router.post('/save', (req, res) ->
   if not req.body.sets? and not req.body.series?
     res.send(500)
 
+  env = JSON.parse(process.env.VCAP_SERVICES)
   uuid = uuid.v4()
   options = {
-    uri: 'https://<user>:<pass>@0741ae13-4f99-4ffb-8282-60d27e161c7f-bluemix.cloudant.com/share/'
+    uri: "https://#{env['cloudantNoSQLDB'][0].url}/share/"
     method: 'POST',
     json: {sets: req.body.sets, series: req.body.series, uuid: uuid},
     headers: { 'Content-type': 'application/json'}

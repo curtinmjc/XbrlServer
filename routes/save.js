@@ -11,13 +11,14 @@
   router = express.Router();
 
   router.post('/save', function(req, res) {
-    var options;
+    var env, options;
     if ((req.body.sets == null) && (req.body.series == null)) {
       res.send(500);
     }
+    env = JSON.parse(process.env.VCAP_SERVICES);
     uuid = uuid.v4();
     options = {
-      uri: 'https://<user>:<pass>@0741ae13-4f99-4ffb-8282-60d27e161c7f-bluemix.cloudant.com/share/',
+      uri: "https://" + env['cloudantNoSQLDB'][0].url + "/share/",
       method: 'POST',
       json: {
         sets: req.body.sets,
