@@ -15,11 +15,10 @@
     if ((req.body.sets == null) && (req.body.series == null)) {
       res.send(500);
     }
-    console.log("https://" + env['cloudantNoSQLDB'][0]['credentials']['url'] + "/share/");
     env = JSON.parse(process.env.VCAP_SERVICES);
     uuid = uuid.v4();
     options = {
-      uri: "https://" + env['cloudantNoSQLDB'][0]['credentials']['url'] + "/share/",
+      uri: "" + env['cloudantNoSQLDB'][0]['credentials']['url'] + "/share/",
       method: 'POST',
       json: {
         sets: req.body.sets,
