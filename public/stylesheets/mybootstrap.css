@@ -1,0 +1,244 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+    padding-top: 50px;
+    font-family: 'Didact Gothic', sans-serif;
+    font-size: 12pt;
+    font-weight: 200;
+    position: relative;
+}
+
+.asterisk
+{
+    color: #FFF;
+    font-size: 8pt;
+}
+
+.bx-viewport
+{
+    left: 5px;
+}
+
+#chart-container
+{
+    margin-right: 0px;
+    height: 600px;
+}
+
+#inputs
+{
+    transform: translateY(5%);
+}
+
+.jumbotron
+{
+    background: #111111 url(./../images/header-bg.jpg) no-repeat center;
+    color: rgba(255, 255, 255, 0.6);
+    background-size: cover;
+    padding: 25px 0px 0px 0px;
+}
+
+.jumbotron h2
+{
+    color: #FFF;
+}
+
+.jumbotron .btn-primary
+{
+    color: #FFF;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0px;
+}
+
+.ui-autocomplete
+{
+    background-color: #181818;
+    height: 300px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    color: #FFF;
+    max-width: 800px;
+}
+
+input[type='text'].ui-autocomplete-loading {
+    background: url('/images/ajax-loader-autocomplete.gif') no-repeat right center;
+    background-color: #181818;
+}
+
+.button-ajax-loading {
+    background: url('/images/ajax-loader-button.gif') no-repeat right center;
+    background-color: #2b669a;
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus
+{
+    background-color: #2b669a;
+}
+
+.list-group
+{
+    background-color: #181818;
+    border: solid 2px #2b669a;
+    color: #FFF;
+}
+
+.list-group-item
+{
+    font-family: 'Didact Gothic', sans-serif;
+    font-size: 12pt;
+    font-weight: 200;
+    color: #FFF;
+}
+
+input
+{
+    background-color: #181818;
+    border: solid 2px #2b669a;
+    color: white;
+}
+
+#menu-container
+{
+    position: absolute;
+    width: 800px;
+    background-color: #181818;
+}
+
+.hiddenElement
+{
+    visibility: hidden;
+}
+
+.tip
+{
+    font-size: 9pt;
+    color: #5cb85c;
+}
+
+@-webkit-keyframes glow {
+    0% {
+        -webkit-box-shadow: 0 0 16px rgba(255 ,0, 0, 0.5);
+    }
+    100% {
+        -webkit-box-shadow: 0 0 16px rgba(255 ,0, 0, 1.0);
+    }
+}
+@-moz-keyframes glow {
+    0% {
+        -moz-box-shadow: 0 0 16px rgba(255 ,0, 0, 0.5);
+    }
+    100% {
+        -moz-box-shadow: 0 0 16px rgba(255 ,0, 0, 1.0);
+    }
+}
+@-o-keyframes glow {
+    0% {
+        box-shadow: 0 0 16px rgba(255 ,0, 0, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 16px rgba(255 ,0, 0, 1.0);
+    }
+}
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 16px rgba(255 ,0, 0, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 16px rgba(255 ,0, 0, 1.0);
+    }
+}
+
+.errorBox {
+    -webkit-box-shadow: 0 0 16px rgba(255 ,0, 0, 0.5);
+    box-shadow: 0 0 16px rgba(255 ,0, 0, 0.5);
+
+    -webkit-animation-name: glow;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+    -webkit-animation-timing-function: ease-in-out;
+
+    -moz-animation-name: glow;
+    -moz-animation-duration: 1s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-direction: alternate;
+    -moz-animation-timing-function: ease-in-out;
+
+    -o-animation-name: glow;
+    -o-animation-duration: 1s;
+    -o-animation-iteration-count: infinite;
+    -o-animation-direction: alternate;
+    -o-animation-timing-function: ease-in-out;
+
+    animation-name: glow;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+
+#text-content
+{
+    padding: 2em 0em 7em 0em;
+    color: rgba(0,0,0,0.5);
+}
+
+#text-content h2 {
+    font-weight: bold;
+    font-size: 2.7em;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+#text-content h3
+{
+    font-weight: bold;
+}
+
+#text-content h4
+{
+    font-weight: bold;
+}
+
+#text-content .byline
+{
+    font-size: 1.3em;
+}
+
+#Contact
+{
+    padding: 7em 0em 7em 0em;
+    background: #2b669a;
+    background-size: cover;
+}
+
+#Contact h2
+{
+    font-weight: bold;
+    font-size: 2.7em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+#Contact h3
+{
+    color: rgba(255, 255, 255, 0.6);
+}
+
+#Contact a
+{
+    color: rgba(255,255,255,1);
+}
+
+#Terms
+{
+    padding: 7em 0em 7em 0em;
+    background: #000;
+    background-size: cover;
+    font-size: 1em;
+    color: rgba(255,255,255,0.3);
+}
+
+#Terms a
+{
+    text-decoration: none;
+    color: rgba(255,255,255,0.6);
+}

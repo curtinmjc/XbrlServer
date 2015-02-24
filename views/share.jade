@@ -1,0 +1,25 @@
+doctype html
+html
+    head(title="Share")
+        script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+        script(src="/scripts/bootstrap.min.js")
+    body
+        .row
+            .col-md-8
+                input(value="#{pageData.shareUrl}",size="55",style="float: left;")
+            .col-md-4
+                .a2a_kit.a2a_kit.a2a_default_style
+                    a.a2a_button_email
+                    a.a2a_button_twitter
+                    a.a2a_button_linkedin
+                    a.a2a_button_reddit
+                    a.a2a_button_wordpress
+                    a.a2a_button_facebook
+                    a.a2a_button_google_plus
+                script.
+                    var a2a_config = a2a_config || {};
+                    a2a_config.no_3p = 1;
+                    a2a_config.linkname = 'XBRL on IBM Bluemix';
+                    a2a_config.linkurl = '#{pageData.shareUrl}';
+                script(type="text/javascript",src="//static.addtoany.com/menu/page.js")
+

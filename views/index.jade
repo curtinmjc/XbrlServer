@@ -1,0 +1,174 @@
+doctype html
+html
+    head
+        title= title
+        meta(charset="utf-8")
+        meta(http-equiv="X-UA-Compatible",content="IE=edge")
+        meta(name="viewport",content="width=device-width,initial-scale=1")
+        link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Didact+Gothic')
+        link(rel='stylesheet', href='/stylesheets/bootstrap.min.css', media='all')
+        link(rel='stylesheet', href='/stylesheets/mybootstrap.css', media='all')
+        link(rel='stylesheet', href='/stylesheets/jquery.bxslider.css', media='all')
+        script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+        script(src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js")
+        script(src="http://code.highcharts.com/highcharts.js")
+        script(src="http://code.highcharts.com/modules/data.js")
+        script(src="http://code.highcharts.com/modules/exporting.js")
+        script(src="/scripts/jquery.bxslider.min.js")
+        script(src="/scripts/bootstrap.min.js")
+        script(src="/scripts/ie10-viewport-bug-workaround.js")
+        script(src="/scripts/dark-gothic.js")
+        script.
+            var facts = !{JSON.stringify(pageData.facts)};
+            var displayedSets = !{JSON.stringify(pageData.sets)};
+            var displayedSeries = !{JSON.stringify(pageData.series)};
+        script(src="/scripts/index.js")
+
+
+    body(data-spy="scroll",data-target="#mainNavbar", data-offset="50")
+        #mainNavbar.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
+            .container
+                .navbar-header
+                    button.navbar-toggle(type="button",data-toggle="collapse",data-target=".navbar-collapse")
+                        span.sr-only Toggle Navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    .navbar-brand SEC XBRL on IBM Bluemix
+                .navbar-collapse.collapse
+                    ul.nav.navbar-nav
+                        li
+                            a(href="#Home") Home
+                        li
+                            a(href="#About") About
+                        li
+                            a(href="#Philosophy") Philosophy
+                        li
+                            a(href="#Technology") Technology
+                        li
+                            a(href="#Contact") Contact
+                        li
+                            a(href="#Terms") Terms
+        #Home.jumbotron
+            .container.text-center(style="height:700px;")
+                //h1(style="color: red;") Cloudant appears to be down right now, a support ticket has been submitted.
+                ul.bxslider
+                    li.text-center
+                        #inputs
+                            h2 SEC XBRL on IBM Bluemix
+                            p 1) Search for a company name or ticker (e.g. IBM or International):
+                            div
+                                input#company(type="text", style="width:200px;", tabindex="1")
+                                input#identifier(type="hidden")
+                            small
+                                | (Tip: You can use&nbsp
+                                a(href="http://lucene.apache.org/core/2_9_4/queryparsersyntax.html#Term Modifiers",target="_blank") Lucence Modifiers
+                                | )
+                            p 2) Search for a concept name (e.g. Revenue or Equity):
+                            div
+                                input#concept(type="text", style="width:200px;", tabindex="2")
+                            small
+                                | (Tip: You can use&nbsp
+                                a(href="http://lucene.apache.org/core/2_9_4/queryparsersyntax.html#Term Modifiers",target="_blank") Lucence Modifiers
+                                | )
+                            p 3) When you're ready click...
+                            div
+                                a#addSeries.btn.btn-sm.btn-primary(href='#',role="button",style="width: 100px;", tabindex="3") Go
+                    li
+                        #chart-container
+
+
+                #externalSliderControls.hiddenElement(style="height: 35px;margin-top: 10px; margin-bottom: 10px;")
+                    .row
+                        .col-md-2
+                            a#startOver.btn.btn-sm.btn-primary(href='#', style="float: left; width: 120px;") &laquo; Start Over
+                        .col-md-8
+                            #shareControls
+                                button#share.btn.btn-sm.btn-primary(href='#', style="width: 100px")
+                                    img(src="/images/share16.png", style="margin-right: 10px;")
+                                    | Share
+                        .col-md-2
+                            a#addAnother.btn.btn-sm.btn-primary(href='#', style="float: right; width: 120px;") Add Another &raquo;
+        #text-content
+            #About.container.text-center
+                h2 About
+                h3 What Is This?
+                p
+                    | It's a set of data collected from the 10-K, 10-K/A, 10-Q, 10-Q/A, 20-F, and 20-F/A&nbsp;
+                    a(href="http://www.sec.gov/edgar.shtml") filings
+                    | &nbsp of US listed companies as sent to the&nbsp;
+                    a(href="http://www.sec.gov/edgar.shtml") SEC
+                    | &nbsp;in&nbsp;
+                    a(href="http://en.wikipedia.org/wiki/XBRL") XBRL
+                    | &nbspformat.  These filings have been downloaded, processed, and the data uploaded here so that it can be visualized using a simple graph.
+                p The entire SEC XBRL data set has been processed up to the end of the previous month.
+            #Philosophy.container.text-center
+                h2 Philosophy
+                h3 About The Data
+                .row
+                    .col-md-4
+                        h4 Namespaces
+                        p
+                            | A design goal for parsing the XBRL data stored on the SEC servers was that all parsing should use streaming, never holding an entire document (or model thereof) in memory at once.  As such any files that redefine XML namespaces or prefixes are ignored.  See&nbsp;
+                            a(href="http://www.ibm.com/developerworks/library/x-namcar/") this document
+                            | &nbsp;for more information.  Any borderline, neurotic, or psychotic XML files are ignored.  Being fully namespace normal is nice, but not required, as not all namespaces need to be defined on the root element for our purposes. This exludes approximately 3% of available data.
+                        h4 Duplicates/Amendments
+                        p If there are two or more facts that have the same context and dimensionality, but different values, the most recently filed one is displayed.
+                        p If there are two or more facts that have the same context, dimensionality and filing date, and one was filed as part of an amendment, the one filed as part of an anamendment is displayed.
+                        p If there are two or more facts that have the same context, dimensionality, filing date, and neither or both were filed as part of an amendment, one is chosen at random.  This shouldn't happen.
+
+                    .col-md-4
+                        h4 Concepts Over Time
+                        p As any US filer is aware, the SEC continually releases new taxonomies for filing XBRL data.  This being the case elements have different namespaces over time.  For example, a filer reporting their assets in 2009 would have used us-gaap:Assets where us-gaap equals "http://xbrl.us/us-gaap/2009-01-31" but a filer filing assets in 2013 would have used us-gaap:Assets where us-gaap equals "http://fasb.org/us-gaap-std/2013-01-31".  How can we then graph Assets over time if the XML elements are not strictly equal?  Simple, we match on name. "Assets" is considered "Assets" no matter its target namespace (this applies to all elements).
+                        p This approach could conceivably produce some inconsistencies, but I feel that the likelihood of this is low enough that the simplicity of this approach is warranted.  It may be possible to maintain a mapping of deprecated elements and their replacements, but this would make queries much more complex and time consuming.
+                        p Also, this may again encourage the adoption of things like the XBRL versioning spec, which would make maintaining such mappings much, much easier.
+                    .col-md-4
+                        h4 Duration Concepts
+                        p It’s a trivial matter to create a line graph of a number of facts that occur at a number of particular instants in time.  Just arrange them in order of time on the X axis, by value on the Y axis, and connect the dots from left to right.  Indeed this is exactly how a concept like Assets is graphed.  Facts that represent a duration in time are a little trickier.  Cash flow for example, is generally recorded as how much flow occurred over a period (e.g. a quarter or YTD).
+                        p To make things even more difficult most US filers report information for multiple durations for the same concept!  For example, in Q1 over the quarter, in Q2 and Q3 over the quarter and YTD, and finally over the entire year.  This can result in many overlapping periods (six, in this example) that cannot all be graphed at the same time.
+                        p With this in mind, only duration concepts that represent an entire year (annual) or those that represent a quarter (quarterly) are displayed.  For quarterly facts, sometimes one quarter can be "missing" (e.g. Q1, Q2, Q3, Q1).  This is due to the way that 10Q/10K filings happen, Q4 is generally not reported separately in the annual filing.  The data point could be inferred, but here only what data is reported is displayed.
+
+            #Technology.container.text-center
+                h2 Technology
+                .byline What Powers SEC XBRL on IBM Bluemix
+                .row
+                    .col-md-4
+                        img(src="/images/bluemix150.png")
+                        p This app runs on IBM Bluemix. Bluemix is a platform as a service (PaaS) offering based on the Cloud Foundry open source project that promises to deliver enterprise-level features and services that are easy to integrate into cloud applications.
+                        a.btn.btn-primary(href="https://www.bluemix.net") More Info &raquo;
+                    .col-md-4
+                        img(src="/images/nodejs250.png")
+                        p To build a databse of XBRL data and to display it here Node.js is used. Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
+                        a.btn.btn-primary(href="http://nodejs.org/") More Info &raquo;
+                    .col-md-4
+                        img(src="/images/Cloudant150.png")
+                        p
+                            | Currently there are&nbsp;
+                            span#numDataPoints
+                            | &nbsp;data points being indexed.  The backing store is Cloudant.  Cloudant is a "NoSQL" database, which is ideal for storing the arbitrarily dimensional data that XBRL provides.
+                        a.btn.btn-primary(href="https://cloudant.com/") More Info &raquo;
+        #Contact.text-center
+            h2 Contact
+            h3 Get ahold of the developer
+            div
+                a(href="mailto: tpotma@ca.ibm.com") tpotma@ca.ibm.com
+            div
+                a(href="http://potmat.wordpress.com") http://potmat.wordpress.com
+        #Terms.text-center.textForDarkBackground
+            p
+                | Use of this website is governed by the&nbsp;
+                a(href="https://www.ibm.com/legal/us/en/") IBM Terms of Use.
+            h3 DISCLAIMER OF WARRANTY
+            p USE OF THIS SITE IS AT YOUR SOLE RISK. ALL MATERIALS, INFORMATION, PRODUCTS, SOFTWARE, PROGRAMS, AND SERVICES ARE PROVIDED "AS IS," WITH NO WARRANTIES OR GUARANTEES WHATSOEVER. IBM EXPRESSLY DISCLAIMS TO THE FULLEST EXTENT PERMITTED BY LAW ALL EXPRESS, IMPLIED, STATUTORY, AND OTHER WARRANTIES, GUARANTEES, OR REPRESENTATIONS, INCLUDING, WITHOUT LIMITATION, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT OF PROPRIETARY AND INTELLECTUAL PROPERTY RIGHTS. WITHOUT LIMITATION, IBM MAKES NO WARRANTY OR GUARANTEE THAT THIS WEB SITE WILL BE UNINTERRUPTED, TIMELY, SECURE, OR ERROR-FREE.
+            p YOU UNDERSTAND AND AGREE THAT IF YOU DOWNLOAD OR OTHERWISE OBTAIN MATERIALS, INFORMATION, PRODUCTS, SOFTWARE, PROGRAMS, OR SERVICES, YOU DO SO AT YOUR OWN DISCRETION AND RISK AND THAT YOU WILL BE SOLELY RESPONSIBLE FOR ANY DAMAGES THAT MAY RESULT, INCLUDING LOSS OF DATA OR DAMAGE TO YOUR COMPUTER SYSTEM.
+            p SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF WARRANTIES, SO THE ABOVE EXCLUSIONS MAY NOT APPLY TO YOU.
+            h3 LIMITATION OF LIABILITY
+            p IN NO EVENT WILL IBM BE LIABLE TO ANY PARTY FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY OR CONSEQUENTIAL DAMAGES OF ANY TYPE WHATSOEVER RELATED TO OR ARISING FROM THIS WEB SITE OR ANY USE OF THIS WEB SITE, OR OF ANY SITE OR RESOURCE LINKED TO, REFERENCED, OR ACCESSED THROUGH THIS WEB SITE, OR FOR THE USE OR DOWNLOADING OF, OR ACCESS TO, ANY MATERIALS, INFORMATION, PRODUCTS, OR SERVICES, INCLUDING, WITHOUT LIMITATION, ANY LOST PROFITS, BUSINESS INTERRUPTION, LOST SAVINGS OR LOSS OF PROGRAMS OR OTHER DATA, EVEN IF IBM IS EXPRESSLY ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THIS EXCLUSION AND WAIVER OF LIABILITY APPLIES TO ALL CAUSES OF ACTION, WHETHER BASED ON CONTRACT, WARRANTY, TORT, OR ANY OTHER LEGAL THEORIES.
+            p
+                | &copy; IBM. All rights reserved. | Photos by&nbsp;
+                a(href="http://fotogrph.com/") Fotogrph&nbsp;
+                | | Design by&nbsp;
+                a(href="http://templated.co") TEMPLATED
+                | &nbsp;(modified to work with&nbsp
+                a(href="http://getbootstrap.com/") Bootstrap
+                | )
