@@ -16,10 +16,10 @@
       res.send(500);
     }
     env = JSON.parse(process.env.VCAP_SERVICES);
-    console.log("https://" + env['cloudantNoSQLDB'][0].url + "/share/");
+    console.log("https://" + env['cloudantNoSQLDB'][0]['url'] + "/share/");
     uuid = uuid.v4();
     options = {
-      uri: "https://" + env['cloudantNoSQLDB'][0].url + "/share/",
+      uri: "https://" + env['cloudantNoSQLDB'][0]['url'] + "/share/",
       method: 'POST',
       json: {
         sets: req.body.sets,
