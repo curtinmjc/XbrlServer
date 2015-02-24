@@ -33,7 +33,7 @@
       if (!error && response.statusCode === 201) {
         return res.end(uuid);
       } else {
-        return res.send(response.statusCode);
+        return res.send(response);
       }
     });
   });

@@ -21,7 +21,7 @@ router.post('/save', (req, res) ->
     if (not error && response.statusCode is 201)
       res.end(uuid)
     else
-      res.send(response.statusCode)
+      res.send(response)
   )
 )
 
