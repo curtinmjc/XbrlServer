@@ -24,31 +24,6 @@ rotateText = (text, rotation) ->
     return (v.charCodeAt() + rotation + bound) % bound)
   )
 
-
-#router.get(/\/companies/, (req, res) ->
-#
-#  term = req.query.term
-#
-#  tickerResolver(term, (tickerLookup) ->
-#
-#    designDocUri = "http://f0884b3f-8c7e-44fe-8132-da237a0197b0-bluemix:f36e6b9ea5c38e9e4347fec14c7847745e31b655f597346eb36d0bb5a8d7ed13@f0884b3f-8c7e-44fe-8132-da237a0197b0-bluemix.cloudant.com/entities/_design/entitiesSearches/_search/nameSearch"
-#    query = "\"http://www.sec.gov/CIK\"%20AND%20name:#{term}*"
-#
-#    index = {}
-#    recursiveCloudantSearch(designDocUri, query, 'identifier', 'name', {value: null}, index, 100,  ->
-#
-#      if tickerLookup?
-#        index[tickerLookup.cik] = tickerLookup.name
-#
-#      results = []
-#      for k,v of index
-#        results.push({id: k, value: unEscape(v)})
-#
-#      res.end(JSON.stringify(results))
-#    )
-#  )
-#)
-
 router.get(/\/companies/, (req, res) ->
 
   term = req.query.term
