@@ -8,8 +8,9 @@ router.post('/save', (req, res) ->
   if not req.body.sets? and not req.body.series?
     res.send(500)
 
+
+  console.log(process.env.VCAP_SERVICES)
   env = JSON.parse(process.env.VCAP_SERVICES)
-  console.log("https://#{env['cloudantNoSQLDB'][0]['url']}/share/")
   uuid = uuid.v4()
   options = {
     uri: "https://#{env['cloudantNoSQLDB'][0]['url']}/share/"
