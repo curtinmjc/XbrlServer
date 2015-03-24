@@ -1,10 +1,11 @@
 http = require('http')
+reduce = require("stream-reduce")
 JSONStream = require('JSONStream')
 request = require('request')
 require('date-utils');
 
 getCloudantUrl = () ->
-    return env['cloudantNoSQLDB'][0]['credentials']['url'] || "something else"
+    return env['cloudantNoSQLDB'][0]['credentials']['url']
 
 unEscape = (value) ->
   return value.replace('&amp;', '&')
