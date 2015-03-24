@@ -1,11 +1,10 @@
 http = require('http')
-reduce = require("stream-reduce");
 JSONStream = require('JSONStream')
 request = require('request')
 require('date-utils');
 
 getCloudantUrl = () ->
-    return env['cloudantNoSQLDB'][0]['credentials']['url']
+    return env['cloudantNoSQLDB'][0]['credentials']['url'] || "something else"
 
 unEscape = (value) ->
   return value.replace('&amp;', '&')
@@ -32,7 +31,7 @@ recursiveCloudantSearch = (designDocUri, query, keySelector, valueSelector, book
 
 getParsedFactData = (identifier, elementName, callback) ->
 
-  cloudantFactsUri = "https://0741ae13-4f99-4ffb-8282-60d27e161c7f-bluemix.cloudant.com/facts/_design/factsMainViews/_view/EntityConceptName?key=[\"#{identifier}\",\"#{elementName}\"]&include_docs=true&stale=update_after&reduce=false"
+  cloudantFactsUri = "#{getCloudantUrl()}/facts/_design/factsMainViews/_view/EntityConceptName?key=[\"#{identifier}\",\"#{elementName}\"]&include_docs=true&stale=update_after&reduce=false"
   {FactTransformStream} = require('../streams/FactTransformStream')
 
   request({url: cloudantFactsUri})

@@ -1,7 +1,6 @@
 express = require('express')
 http = require('http')
 async = require('async')
-reduce = require("stream-reduce");
 request = require('request')
 router = express.Router()
 {getParsedFactData} = require('./helpers')
