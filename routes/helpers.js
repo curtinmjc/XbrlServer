@@ -13,6 +13,8 @@
   require('date-utils');
 
   getCloudantUrl = function() {
+    var env;
+    env = JSON.parse(process.env.VCAP_SERVICES);
     return env['cloudantNoSQLDB'][0]['credentials']['url'];
   };
 

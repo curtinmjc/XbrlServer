@@ -5,6 +5,7 @@ request = require('request')
 require('date-utils');
 
 getCloudantUrl = () ->
+    env = JSON.parse(process.env.VCAP_SERVICES)
     return env['cloudantNoSQLDB'][0]['credentials']['url']
 
 unEscape = (value) ->
