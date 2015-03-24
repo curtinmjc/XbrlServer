@@ -2,6 +2,7 @@ express = require('express')
 {tickerResolver} = require('./helpers')
 {recursiveCloudantSearch} = require('./helpers')
 {unEscape} = require('./helpers')
+{getCloudantUrl} = require('./helpers')
 JSONStream = require('JSONStream')
 request = require('request')
 router = express.Router()
@@ -29,7 +30,7 @@ router.get(/\/companies/, (req, res) ->
   term = req.query.term
   tickerResolver(term, (tickerLookup) ->
 
-    cloudantUri = "https://0741ae13-4f99-4ffb-8282-60d27e161c7f-bluemix.cloudant.com/facts/_design/factsMainSearchIndexes/_search/EntityCipherCompanyName?q=companyName:#{term}&counts=[\"companyName\"]&limit=0"
+    cloudantUri = "#{getCloudantUrl()}/facts/_design/factsMainSearchIndexes/_search/EntityCipherCompanyName?q=companyName:#{term}&counts=[\"companyName\"]&limit=0"
     request({url: cloudantUri})
     .pipe(JSONStream.parse('counts.companyName')).on('data', (data) ->
 

@@ -1,13 +1,14 @@
 express = require('express')
 JSONStream = require('JSONStream')
 request = require('request')
+{getCloudantUrl} = require('./helpers')
 router = express.Router()
 
 router.get(/\/elements/, (req, res) ->
 
   identifier = req.query.identifier
   term = req.query.term
-  cloudantUri = "https://0741ae13-4f99-4ffb-8282-60d27e161c7f-bluemix.cloudant.com/facts/_design/factsMainSearchIndexes/_search/EntitySplitConcept?q=entity:\"#{identifier}\"%20AND%20conceptNameSplit:#{term}&counts=[\"conceptNameSplit\"]&limit=0"
+  cloudantUri = "#{getCloudantUrl()}/facts/_design/factsMainSearchIndexes/_search/EntitySplitConcept?q=entity:\"#{identifier}\"%20AND%20conceptNameSplit:#{term}&counts=[\"conceptNameSplit\"]&limit=0"
   request({url: cloudantUri})
   .pipe(JSONStream.parse('counts.conceptNameSplit')).on('data', (data) ->
 

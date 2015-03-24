@@ -6,6 +6,7 @@ request = require('request')
 router = express.Router()
 {getParsedFactData} = require('./helpers')
 {unEscape} = require('./helpers')
+{getCloudantUrl} = require('./helpers')
 
 getParsedFactDataInternal = (set, callback) ->
   getParsedFactData(set.identifier, set.conceptName, (data) -> callback(null, data))
@@ -18,7 +19,7 @@ router.get(/\/show\/([a-zA-Z0-9\-]+)/, (req, res) ->
   id = req.params[0]
 
   options = {
-    uri: "https://0741ae13-4f99-4ffb-8282-60d27e161c7f-bluemix.cloudant.com/share/_design/shareMainViews/_view/UUID?key=\"#{id}\"&include_docs=true",
+    uri: "#{getCloudantUrl()}/share/_design/shareMainViews/_view/UUID?key=\"#{id}\"&include_docs=true",
     method: 'GET',
   }
 

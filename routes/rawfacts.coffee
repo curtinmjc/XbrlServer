@@ -3,11 +3,12 @@ http = require('http')
 request = require('request')
 JSONStream = require('JSONStream')
 {tickerResolver} = require('./helpers')
+{getCloudantUrl} = require('./helpers')
 {ObjectStringTransformStream} = require('../streams/ObjectStringTransformStream')
 
 sendResponse = (identifier, elementName, res) ->
 
-  request({url: "https://0741ae13-4f99-4ffb-8282-60d27e161c7f-bluemix.cloudant.com/facts/_design/factsMainViews/_view/EntityConceptName?key=[\"http://www.sec.gov/CIK/#{identifier}\",\"#{elementName}\"]&include_docs=true&stale=update_after&reduce=false"})
+  request({url: "#{getCloudantUrl()}/facts/_design/factsMainViews/_view/EntityConceptName?key=[\"http://www.sec.gov/CIK/#{identifier}\",\"#{elementName}\"]&include_docs=true&stale=update_after&reduce=false"})
   .pipe(JSONStream.parse('rows.*.doc'))
   .pipe(new ObjectStringTransformStream())
   .pipe(res)

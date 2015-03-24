@@ -1,6 +1,7 @@
 request = require('request')
 express = require('express')
 uuid = require('node-uuid')
+{getCloudantUrl} = require('./helpers')
 router = express.Router()
 
 router.post('/save', (req, res) ->
@@ -8,10 +9,9 @@ router.post('/save', (req, res) ->
   if not req.body.sets? and not req.body.series?
     res.send(500)
 
-  env = JSON.parse(process.env.VCAP_SERVICES)
   uuid = uuid.v4()
   options = {
-    uri: "#{env['cloudantNoSQLDB'][0]['credentials']['url']}/share/"
+    uri: "#{getCloudantUrl()}/share/"
     method: 'POST',
     json: {sets: req.body.sets, series: req.body.series, uuid: uuid},
     headers: { 'Content-type': 'application/json'}
