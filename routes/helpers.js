@@ -13,11 +13,7 @@
   require('date-utils');
 
   getCloudantUrl = function() {
-    if ((typeof env !== "undefined" && env !== null) && (env['cloudantNoSQLDB'][0]['credentials']['url'] != null)) {
-      return env['cloudantNoSQLDB'][0]['credentials']['url'];
-    } else {
-      return "please fill in";
-    }
+    return env['cloudantNoSQLDB'][0]['credentials']['url'];
   };
 
   unEscape = function(value) {

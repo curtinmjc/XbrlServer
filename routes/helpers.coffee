@@ -5,10 +5,7 @@ request = require('request')
 require('date-utils');
 
 getCloudantUrl = () ->
-  if env? and env['cloudantNoSQLDB'][0]['credentials']['url']?
     return env['cloudantNoSQLDB'][0]['credentials']['url']
-  else
-    return "please fill in"
 
 unEscape = (value) ->
   return value.replace('&amp;', '&')
