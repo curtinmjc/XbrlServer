@@ -8,7 +8,7 @@ router.get(/\/elements/, (req, res) ->
 
   identifier = req.query.identifier
   term = req.query.term
-  cloudantUri = "#{getCloudantUrl()}/facts/_design/factsMainSearchIndexes/_search/EntitySplitConcept?q=entity:\"#{identifier}\"%20AND%20conceptNameSplit:#{term}&counts=[\"conceptNameSplit\"]&limit=0"
+  cloudantUri = "#{getCloudantUrl()}/facts2/_design/factsMainSearchIndexes/_search/EntitySplitConcept?q=entity:\"#{identifier}\"%20AND%20conceptNameSplit:#{term}&counts=[\"conceptNameSplit\"]&limit=0"
   request({url: cloudantUri})
   .pipe(JSONStream.parse('counts.conceptNameSplit')).on('data', (data) ->
 

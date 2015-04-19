@@ -44,7 +44,7 @@
 
   getParsedFactData = function(identifier, elementName, callback) {
     var FactTransformStream, cloudantFactsUri;
-    cloudantFactsUri = "" + (getCloudantUrl()) + "/facts/_design/factsMainViews/_view/EntityConceptName?key=[\"" + identifier + "\",\"" + elementName + "\"]&include_docs=true&stale=update_after&reduce=false";
+    cloudantFactsUri = "" + (getCloudantUrl()) + "/facts2/_design/factsMainViews/_view/EntityConceptName?key=[\"" + identifier + "\",\"" + elementName + "\"]&include_docs=true&stale=update_after&reduce=false";
     FactTransformStream = require('../streams/FactTransformStream').FactTransformStream;
     return request({
       url: cloudantFactsUri

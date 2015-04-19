@@ -56,21 +56,15 @@ html
                     li.text-center
                         #inputs
                             h2 SEC XBRL on IBM Bluemix
-                            p 1) Search for a company name or ticker (e.g. IBM or International):
+                            h3 1) Search for a company name or ticker:
+                            h5 (e.g. IBM, International, or Invest*)
                             div
                                 input#company(type="text", style="width:200px;", tabindex="1")
                                 input#identifier(type="hidden")
-                            small
-                                | (Tip: You can use&nbsp
-                                a(href="http://lucene.apache.org/core/2_9_4/queryparsersyntax.html#Term Modifiers",target="_blank") Lucence Modifiers
-                                | )
-                            p 2) Search for a concept name (e.g. Revenue or Equity):
+                            h3 2) Search for a concept name:
+                            h5 (e.g. Revenue, Equity, or Stock*)
                             div
                                 input#concept(type="text", style="width:200px;", tabindex="2")
-                            small
-                                | (Tip: You can use&nbsp
-                                a(href="http://lucene.apache.org/core/2_9_4/queryparsersyntax.html#Term Modifiers",target="_blank") Lucence Modifiers
-                                | )
                             p 3) When you're ready click...
                             div
                                 a#addSeries.btn.btn-sm.btn-primary(href='#',role="button",style="width: 100px;", tabindex="3") Go
@@ -107,11 +101,6 @@ html
                 h3 About The Data
                 .row
                     .col-md-4
-                        h4 Namespaces
-                        p
-                            | A design goal for parsing the XBRL data stored on the SEC servers was that all parsing should use streaming, never holding an entire document (or model thereof) in memory at once.  As such any files that redefine XML namespaces or prefixes are ignored.  See&nbsp;
-                            a(href="http://www.ibm.com/developerworks/library/x-namcar/") this document
-                            | &nbsp;for more information.  Any borderline, neurotic, or psychotic XML files are ignored.  Being fully namespace normal is nice, but not required, as not all namespaces need to be defined on the root element for our purposes. This exludes approximately 3% of available data.
                         h4 Duplicates/Amendments
                         p If there are two or more facts that have the same context and dimensionality, but different values, the most recently filed one is displayed.
                         p If there are two or more facts that have the same context, dimensionality and filing date, and one was filed as part of an amendment, the one filed as part of an anamendment is displayed.
