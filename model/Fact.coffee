@@ -46,6 +46,8 @@ class exports.Fact
       k isnt "http://www.xbrl.org/2003/instance/Unit" and
       k isnt "http://www.w3.org/2001/XMLSchema-instance/nil" and
       k isnt "http://www.xbrl.org/2003/instance/Value" and
+      k isnt "http://www.xbrl.org/2003/instance/Decimals" and
+      k isnt "http://www.xbrl.org/2003/instance/Precision" and
       k isnt "http://www.sec.gov/Archives/edgar/companyName" and
       k isnt "http://www.sec.gov/Archives/edgar/filingDate" and
       k isnt "http://www.sec.gov/Archives/edgar/accessionNumber" and
@@ -67,6 +69,8 @@ class exports.Fact
     for k,v of @doc
       if k isnt "http://www.w3.org/2001/XMLSchema-instance/nil" and
         k isnt "http://www.xbrl.org/2003/instance/Value" and
+        k isnt "http://www.xbrl.org/2003/instance/Decimals" and
+        k isnt "http://www.xbrl.org/2003/instance/Precision" and
         k isnt "http://www.sec.gov/Archives/edgar/companyName" and
         k isnt "http://www.sec.gov/Archives/edgar/filingDate" and
         k isnt "http://www.sec.gov/Archives/edgar/accessionNumber" and

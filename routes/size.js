@@ -14,7 +14,7 @@
 
   router.get('/size', function(req, res) {
     var cloudantUri;
-    cloudantUri = "" + (getCloudantUrl()) + "/facts/_design/factsMainViews/_view/EntityConceptName?stale=update_after";
+    cloudantUri = "" + (getCloudantUrl()) + "/facts2/_design/factsMainViews/_view/EntityConceptName?stale=update_after";
     return request({
       url: cloudantUri
     }).pipe(JSONStream.parse('rows.*.value')).on('data', function(data) {

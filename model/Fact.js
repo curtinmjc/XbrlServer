@@ -56,7 +56,7 @@
       _ref = this.doc;
       for (k in _ref) {
         v = _ref[k];
-        if (k !== "http://www.xbrl.org/2003/instance/Entity" && k !== "http://www.xbrl.org/2003/instance/Concept" && k !== "http://www.xbrl.org/2003/instance/Period" && k !== "http://www.xbrl.org/2003/instance/Unit" && k !== "http://www.w3.org/2001/XMLSchema-instance/nil" && k !== "http://www.xbrl.org/2003/instance/Value" && k !== "http://www.sec.gov/Archives/edgar/companyName" && k !== "http://www.sec.gov/Archives/edgar/filingDate" && k !== "http://www.sec.gov/Archives/edgar/accessionNumber" && k !== "http://www.sec.gov/Archives/edgar/fileNumber" && k !== "http://www.sec.gov/Archives/edgar/url" && k !== "http://xbrl.sec.gov/Amendment" && k !== "http://xbrl.sec.gov/FiscalYear" && k !== "http://xbrl.sec.gov/FiscalPeriod" && k !== "_id" && k !== "_rev") {
+        if (k !== "http://www.xbrl.org/2003/instance/Entity" && k !== "http://www.xbrl.org/2003/instance/Concept" && k !== "http://www.xbrl.org/2003/instance/Period" && k !== "http://www.xbrl.org/2003/instance/Unit" && k !== "http://www.w3.org/2001/XMLSchema-instance/nil" && k !== "http://www.xbrl.org/2003/instance/Value" && k !== "http://www.xbrl.org/2003/instance/Decimals" && k !== "http://www.xbrl.org/2003/instance/Precision" && k !== "http://www.sec.gov/Archives/edgar/companyName" && k !== "http://www.sec.gov/Archives/edgar/filingDate" && k !== "http://www.sec.gov/Archives/edgar/accessionNumber" && k !== "http://www.sec.gov/Archives/edgar/fileNumber" && k !== "http://www.sec.gov/Archives/edgar/url" && k !== "http://xbrl.sec.gov/Amendment" && k !== "http://xbrl.sec.gov/FiscalYear" && k !== "http://xbrl.sec.gov/FiscalPeriod" && k !== "_id" && k !== "_rev") {
           this.dimensions[k] = v;
         }
       }
@@ -72,7 +72,7 @@
       _ref = this.doc;
       for (k in _ref) {
         v = _ref[k];
-        if (k !== "http://www.w3.org/2001/XMLSchema-instance/nil" && k !== "http://www.xbrl.org/2003/instance/Value" && k !== "http://www.sec.gov/Archives/edgar/companyName" && k !== "http://www.sec.gov/Archives/edgar/filingDate" && k !== "http://www.sec.gov/Archives/edgar/accessionNumber" && k !== "http://www.sec.gov/Archives/edgar/fileNumber" && k !== "http://www.sec.gov/Archives/edgar/url" && k !== "http://xbrl.sec.gov/Amendment" && k !== "http://xbrl.sec.gov/FiscalYear" && k !== "http://xbrl.sec.gov/FiscalPeriod" && k !== "_id" && k !== "_rev") {
+        if (k !== "http://www.w3.org/2001/XMLSchema-instance/nil" && k !== "http://www.xbrl.org/2003/instance/Value" && k !== "http://www.xbrl.org/2003/instance/Decimals" && k !== "http://www.xbrl.org/2003/instance/Precision" && k !== "http://www.sec.gov/Archives/edgar/companyName" && k !== "http://www.sec.gov/Archives/edgar/filingDate" && k !== "http://www.sec.gov/Archives/edgar/accessionNumber" && k !== "http://www.sec.gov/Archives/edgar/fileNumber" && k !== "http://www.sec.gov/Archives/edgar/url" && k !== "http://xbrl.sec.gov/Amendment" && k !== "http://xbrl.sec.gov/FiscalYear" && k !== "http://xbrl.sec.gov/FiscalPeriod" && k !== "_id" && k !== "_rev") {
           hashValues.push(v);
         }
       }
