@@ -33,7 +33,7 @@ recursiveCloudantSearch = (designDocUri, query, keySelector, valueSelector, book
 
 getParsedFactData = (identifier, elementName, callback) ->
 
-  cloudantFactsUri = "#{getCloudantUrl()}/facts2/_design/factsMainViews/_view/EntityConceptName?key=[\"#{identifier}\",\"#{elementName}\"]&include_docs=true&stale=update_after&reduce=false"
+  cloudantFactsUri = "#{getCloudantUrl()}/facts/_design/factsMainViews/_view/EntityConceptName?key=[\"#{identifier}\",\"#{elementName}\"]&include_docs=true&stale=update_after&reduce=false"
   {FactTransformStream} = require('../streams/FactTransformStream')
 
   request({url: cloudantFactsUri})
