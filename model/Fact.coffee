@@ -1,3 +1,5 @@
+#hello
+
 class exports.Fact
   constructor: (@doc) ->
     @IsDuration = doc['http://www.xbrl.org/2003/instance/Period'].indexOf('--') >= 0
