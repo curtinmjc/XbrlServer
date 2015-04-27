@@ -17,12 +17,12 @@ router.post('/save', (req, res) ->
     headers: { 'Content-type': 'application/json'}
   }
 
-  request.post(options, (error, response, body) ->
-    if (not error && response.statusCode is 201)
-      res.end(uuid)
-    else
-      res.send(response)
-  )
+#  request.post(options, (error, response, body) ->
+#    if (not error && response.statusCode is 201)
+#      res.end(uuid)
+#    else
+#      res.send(response)
+#  )
 )
 
 module.exports = router

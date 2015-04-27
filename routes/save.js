@@ -18,7 +18,7 @@
       res.send(500);
     }
     uuid = uuid.v4();
-    options = {
+    return options = {
       uri: (getCloudantUrl()) + "/share/",
       method: 'POST',
       json: {
@@ -30,13 +30,6 @@
         'Content-type': 'application/json'
       }
     };
-    return request.post(options, function(error, response, body) {
-      if (!error && response.statusCode === 201) {
-        return res.end(uuid);
-      } else {
-        return res.send(response);
-      }
-    });
   });
 
   module.exports = router;

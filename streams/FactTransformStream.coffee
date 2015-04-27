@@ -40,12 +40,12 @@ class exports.FactTransformStream extends stream.Transform
 
     for seriesDescription, facts of seriesCollection
 
-      #Sort by startDate ASC, endDate ASC
+#Sort by startDate ASC, endDate ASC
       facts.sort (a,b) -> a.GetSortValue(b)
 
       for fact in facts
 
-        #Value may be nil, even if it wasn't declared so, we dont' need to worry about those facts
+#Value may be nil, even if it wasn't declared so, we don't need to worry about those facts
         if not fact.Value?
           continue;
 
