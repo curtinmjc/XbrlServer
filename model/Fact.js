@@ -9,7 +9,7 @@
       this.EndDate = this.IsDuration ? new Date(this.doc['http://www.xbrl.org/2003/instance/Period'].split('--')[1]) : new Date(this.doc['http://www.xbrl.org/2003/instance/Period']);
       this.FilingDate = new Date(this.doc['http://www.sec.gov/Archives/edgar/filingDate']);
       this.Amendment = JSON.parse(this.doc['http://xbrl.sec.gov/Amendment']);
-      this.Value = JSON.parse(this.doc['http://www.xbrl.org/2003/instance/Value']);
+      this.Value = this.doc['http://www.xbrl.org/2003/instance/Value'] != null ? JSON.parse(this.doc['http://www.xbrl.org/2003/instance/Value']) : null;
       this.CIK = this.doc['http://www.xbrl.org/2003/instance/Entity'].substring(this.doc['http://www.xbrl.org/2003/instance/Entity'].lastIndexOf('/') + 1, this.doc['http://www.xbrl.org/2003/instance/Entity'].length);
       this.URL = this.doc['http://www.sec.gov/Archives/edgar/url'];
       this.AccesssionNumber = this.doc['http://www.sec.gov/Archives/edgar/accessionNumber'];

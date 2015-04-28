@@ -34,7 +34,7 @@ html
                         span.icon-bar
                         span.icon-bar
                         span.icon-bar
-                    .navbar-brand SEC XBRL on IBM Bluemix
+                    .navbar-brand SEC XBRL on IBM Bluemix [BETA]
                 .navbar-collapse.collapse
                     ul.nav.navbar-nav
                         li
@@ -42,9 +42,7 @@ html
                         li
                             a(href="#About") About
                         li
-                            a(href="#Philosophy") Philosophy
-                        li
-                            a(href="#Technology") Technology
+                            a(href="#Philosophy") Beta
                         li
                             a(href="#Contact") Contact
                         li
@@ -55,7 +53,7 @@ html
                 ul.bxslider
                     li.text-center
                         #inputs
-                            h2 SEC XBRL on IBM Bluemix
+                            h2 SEC XBRL on IBM Bluemix [BETA]
                             h3 1) Search for a company name or ticker:
                             h5 (e.g. IBM, International, or Invest*)
                             div
@@ -88,54 +86,18 @@ html
                 h2 About
                 h3 What Is This?
                 p
-                    | It's a set of data collected from the 10-K, 10-K/A, 10-Q, 10-Q/A, 20-F, and 20-F/A&nbsp;
-                    a(href="http://www.sec.gov/edgar.shtml") filings
-                    | &nbsp of US listed companies as sent to the&nbsp;
-                    a(href="http://www.sec.gov/edgar.shtml") SEC
-                    | &nbsp;in&nbsp;
-                    a(href="http://en.wikipedia.org/wiki/XBRL") XBRL
-                    | &nbspformat.  These filings have been downloaded, processed, and the data uploaded here so that it can be visualized using a simple graph.
-                p The entire SEC XBRL data set has been processed up to the end of the previous month.
-            #Philosophy.container.text-center
-                h2 Philosophy
-                h3 About The Data
-                .row
-                    .col-md-4
-                        h4 Duplicates/Amendments
-                        p If there are two or more facts that have the same context and dimensionality, but different values, the most recently filed one is displayed.
-                        p If there are two or more facts that have the same context, dimensionality and filing date, and one was filed as part of an amendment, the one filed as part of an anamendment is displayed.
-                        p If there are two or more facts that have the same context, dimensionality, filing date, and neither or both were filed as part of an amendment, one is chosen at random.  This shouldn't happen.
-
-                    .col-md-4
-                        h4 Concepts Over Time
-                        p As any US filer is aware, the SEC continually releases new taxonomies for filing XBRL data.  This being the case elements have different namespaces over time.  For example, a filer reporting their assets in 2009 would have used us-gaap:Assets where us-gaap equals "http://xbrl.us/us-gaap/2009-01-31" but a filer filing assets in 2013 would have used us-gaap:Assets where us-gaap equals "http://fasb.org/us-gaap-std/2013-01-31".  How can we then graph Assets over time if the XML elements are not strictly equal?  Simple, we match on name. "Assets" is considered "Assets" no matter its target namespace (this applies to all elements).
-                        p This approach could conceivably produce some inconsistencies, but I feel that the likelihood of this is low enough that the simplicity of this approach is warranted.  It may be possible to maintain a mapping of deprecated elements and their replacements, but this would make queries much more complex and time consuming.
-                        p Also, this may again encourage the adoption of things like the XBRL versioning spec, which would make maintaining such mappings much, much easier.
-                    .col-md-4
-                        h4 Duration Concepts
-                        p It’s a trivial matter to create a line graph of a number of facts that occur at a number of particular instants in time.  Just arrange them in order of time on the X axis, by value on the Y axis, and connect the dots from left to right.  Indeed this is exactly how a concept like Assets is graphed.  Facts that represent a duration in time are a little trickier.  Cash flow for example, is generally recorded as how much flow occurred over a period (e.g. a quarter or YTD).
-                        p To make things even more difficult most US filers report information for multiple durations for the same concept!  For example, in Q1 over the quarter, in Q2 and Q3 over the quarter and YTD, and finally over the entire year.  This can result in many overlapping periods (six, in this example) that cannot all be graphed at the same time.
-                        p With this in mind, only duration concepts that represent an entire year (annual) or those that represent a quarter (quarterly) are displayed.  For quarterly facts, sometimes one quarter can be "missing" (e.g. Q1, Q2, Q3, Q1).  This is due to the way that 10Q/10K filings happen, Q4 is generally not reported separately in the annual filing.  The data point could be inferred, but here only what data is reported is displayed.
-
-            #Technology.container.text-center
-                h2 Technology
-                .byline What Powers SEC XBRL on IBM Bluemix
-                .row
-                    .col-md-4
-                        img(src="/images/bluemix150.png")
-                        p This app runs on IBM Bluemix. Bluemix is a platform as a service (PaaS) offering based on the Cloud Foundry open source project that promises to deliver enterprise-level features and services that are easy to integrate into cloud applications.
-                        a.btn.btn-primary(href="https://www.bluemix.net") More Info &raquo;
-                    .col-md-4
-                        img(src="/images/nodejs250.png")
-                        p To build a databse of XBRL data and to display it here Node.js is used. Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
-                        a.btn.btn-primary(href="http://nodejs.org/") More Info &raquo;
-                    .col-md-4
-                        img(src="/images/Cloudant150.png")
-                        p
-                            | Currently there are&nbsp;
-                            span#numDataPoints
-                            | &nbsp;data points being indexed.  The backing store is Cloudant.  Cloudant is a "NoSQL" database, which is ideal for storing the arbitrarily dimensional data that XBRL provides.
-                        a.btn.btn-primary(href="https://cloudant.com/") More Info &raquo;
+                    | This is the development branch of&nbsp;
+                    a(href="http://xbrl.mybluemix.net") http://xbrl.mybluemix.net
+                p
+                    | As such, it may be unavailable, crash or behave in any number of unexpected ways. It's also likley to have only a subset of the data for testing purposes. Currently there are&nbsp;
+                    span#numDataPoints
+                    | &nbsp;data points being indexed.
+            #Beta.container.text-center
+                h2 Beta
+                h3 What's Being Worked On?
+                p
+                    | Right now I'm looking at adding in the &nbsp;
+                    a(href="http://fundamentalaccountingconcepts.wikispaces.com/") fundamental accounting concepts.
         #Contact.text-center
             h2 Contact
             h3 Get ahold of the developer
