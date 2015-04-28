@@ -6,7 +6,7 @@ class exports.Fact
     @EndDate = if @IsDuration then new Date(doc['http://www.xbrl.org/2003/instance/Period'].split('--')[1]) else new Date(doc['http://www.xbrl.org/2003/instance/Period'])
     @FilingDate = new Date(doc['http://www.sec.gov/Archives/edgar/filingDate'])
     @Amendment = JSON.parse(doc['http://xbrl.sec.gov/Amendment'])
-    @Value = JSON.parse(@doc['http://www.xbrl.org/2003/instance/Value'])
+    @Value = if !@IsNil then JSON.parse(@doc['http://www.xbrl.org/2003/instance/Value']) else null
     @CIK = @doc['http://www.xbrl.org/2003/instance/Entity'].substring(@doc['http://www.xbrl.org/2003/instance/Entity'].lastIndexOf('/')+1, @doc['http://www.xbrl.org/2003/instance/Entity'].length)
     @URL = @doc['http://www.sec.gov/Archives/edgar/url']
     @AccesssionNumber = @doc['http://www.sec.gov/Archives/edgar/accessionNumber']
