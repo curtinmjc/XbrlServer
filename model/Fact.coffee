@@ -1,11 +1,11 @@
 class exports.Fact
   constructor: (@doc) ->
-    @IsDuration = doc['http://www.xbrl.org/2003/instance/Period'].indexOf('--') >= 0
-    @IsNil = JSON.parse(doc["http://www.w3.org/2001/XMLSchema-instance/nil"])
-    @StartDate = if @IsDuration then new Date(doc['http://www.xbrl.org/2003/instance/Period'].split('--')[0]) else new Date(doc['http://www.xbrl.org/2003/instance/Period'])
-    @EndDate = if @IsDuration then new Date(doc['http://www.xbrl.org/2003/instance/Period'].split('--')[1]) else new Date(doc['http://www.xbrl.org/2003/instance/Period'])
-    @FilingDate = new Date(doc['http://www.sec.gov/Archives/edgar/filingDate'])
-    @Amendment = JSON.parse(doc['http://xbrl.sec.gov/Amendment'])
+    @IsDuration = @doc['http://www.xbrl.org/2003/instance/Period'].indexOf('--') >= 0
+    @IsNil = JSON.parse(@doc["http://www.w3.org/2001/XMLSchema-instance/nil"])
+    @StartDate = if @IsDuration then new Date(@doc['http://www.xbrl.org/2003/instance/Period'].split('--')[0]) else new Date(@doc['http://www.xbrl.org/2003/instance/Period'])
+    @EndDate = if @IsDuration then new Date(@doc['http://www.xbrl.org/2003/instance/Period'].split('--')[1]) else new Date(@doc['http://www.xbrl.org/2003/instance/Period'])
+    @FilingDate = new Date(@doc['http://www.sec.gov/Archives/edgar/filingDate'])
+    @Amendment = JSON.parse(@doc['http://xbrl.sec.gov/Amendment'])
     @Value = if !@IsNil then JSON.parse(@doc['http://www.xbrl.org/2003/instance/Value']) else null
     @CIK = @doc['http://www.xbrl.org/2003/instance/Entity'].substring(@doc['http://www.xbrl.org/2003/instance/Entity'].lastIndexOf('/')+1, @doc['http://www.xbrl.org/2003/instance/Entity'].length)
     @URL = @doc['http://www.sec.gov/Archives/edgar/url']
