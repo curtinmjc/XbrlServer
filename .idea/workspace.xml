@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c29c413d-2788-498b-9726-bdf1ff4f30d2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/Fact.coffee" afterPath="$PROJECT_DIR$/model/Fact.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/Fact.js.map" afterPath="$PROJECT_DIR$/model/Fact.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/Fact.js" afterPath="$PROJECT_DIR$/model/Fact.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="XbrlServer.iws" />
@@ -457,7 +454,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21274298" sideWeight="0.5002633" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33072627" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32997763" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16883117" sideWeight="0.4997367" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16883117" sideWeight="0.4997367" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18210863" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -512,7 +509,8 @@
     <MESSAGE value="new branch dev" />
     <MESSAGE value="added support for FACs" />
     <MESSAGE value="fixed rawfacts, nil facts, changed page to show beta status" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed rawfacts, nil facts, changed page to show beta status" />
+    <MESSAGE value="change to Fact constructor for nil facts" />
+    <option name="LAST_COMMIT_MESSAGE" value="change to Fact constructor for nil facts" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
