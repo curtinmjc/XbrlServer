@@ -46,6 +46,8 @@ html
                         li
                             a(href="#Technology") Technology
                         li
+                            a(href="#Source") Source
+                        li
                             a(href="#Contact") Contact
                         li
                             a(href="#Terms") Terms
@@ -103,14 +105,14 @@ html
                     .col-md-4
                         h4 Duplicates/Amendments
                         p If there are two or more facts that have the same context and dimensionality, but different values, the most recently filed one is displayed.
-                        p If there are two or more facts that have the same context, dimensionality and filing date, and one was filed as part of an amendment, the one filed as part of an anamendment is displayed.
-                        p If there are two or more facts that have the same context, dimensionality, filing date, and neither or both were filed as part of an amendment, one is chosen at random.  This shouldn't happen.
+                        p If there are two facts that have the same context, dimensionality and filing date, they are the most recent, and one was filed as part of an amendment, the one filed as part of an anamendment is displayed.
+                        p If there are two or more facts that have the same context, dimensionality, filing date, they are the most recent, and neither or all were filed as part of an amendment, one is chosen at random.  This shouldn't happen.
 
                     .col-md-4
                         h4 Concepts Over Time
                         p As any US filer is aware, the SEC continually releases new taxonomies for filing XBRL data.  This being the case elements have different namespaces over time.  For example, a filer reporting their assets in 2009 would have used us-gaap:Assets where us-gaap equals "http://xbrl.us/us-gaap/2009-01-31" but a filer filing assets in 2013 would have used us-gaap:Assets where us-gaap equals "http://fasb.org/us-gaap-std/2013-01-31".  How can we then graph Assets over time if the XML elements are not strictly equal?  Simple, we match on name. "Assets" is considered "Assets" no matter its target namespace (this applies to all elements).
-                        p This approach could conceivably produce some inconsistencies, but I feel that the likelihood of this is low enough that the simplicity of this approach is warranted.  It may be possible to maintain a mapping of deprecated elements and their replacements, but this would make queries much more complex and time consuming.
-                        p Also, this may again encourage the adoption of things like the XBRL versioning spec, which would make maintaining such mappings much, much easier.
+                        p This approach could produce some inconsistencies, but I feel that the likelihood of this is low enough that its simplicity is warranted.  It may be possible to maintain a mapping of deprecated elements and their replacements, but this would make queries much more complex and time consuming.
+                        p Also, this may encourage the adoption of things like the XBRL versioning spec, which would make maintaining such mappings much, much easier.
                     .col-md-4
                         h4 Duration Concepts
                         p It’s a trivial matter to create a line graph of a number of facts that occur at a number of particular instants in time.  Just arrange them in order of time on the X axis, by value on the Y axis, and connect the dots from left to right.  Indeed this is exactly how a concept like Assets is graphed.  Facts that represent a duration in time are a little trickier.  Cash flow for example, is generally recorded as how much flow occurred over a period (e.g. a quarter or YTD).
@@ -127,7 +129,7 @@ html
                         a.btn.btn-primary(href="https://www.bluemix.net") More Info &raquo;
                     .col-md-4
                         img(src="/images/nodejs250.png")
-                        p To build a databse of XBRL data and to display it here Node.js is used. Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
+                        p To build a databse of XBRL data and to display it here I use Node.js. Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
                         a.btn.btn-primary(href="http://nodejs.org/") More Info &raquo;
                     .col-md-4
                         img(src="/images/Cloudant150.png")
@@ -136,6 +138,19 @@ html
                             span#numDataPoints
                             | &nbsp;data points being indexed.  The backing store is Cloudant.  Cloudant is a "NoSQL" database, which is ideal for storing the arbitrarily dimensional data that XBRL provides.
                         a.btn.btn-primary(href="https://cloudant.com/") More Info &raquo;
+            #Source.container.text-center
+                h2 Source
+                .byline Make Your Own
+                p All the source code for this website and the application to build the data is available publicly.
+                p
+                    | The code to build the database is available here:&nbsp;
+                    a(href="https://hub.jazz.net/project/tpotma/XbrlBuilder") https://hub.jazz.net/project/tpotma/XbrlBuilder
+                    |.
+                p
+                    |The code for this website is available here:&nbsp
+                    a(href="https://hub.jazz.net/project/tpotma/XbrlServer") https://hub.jazz.net/project/tpotma/XbrlServer
+                P An IBM developerWorks article detailing how to recreate what you see here is forthcoming.
+
         #Contact.text-center
             h2 Contact
             h3 Get ahold of the developer
