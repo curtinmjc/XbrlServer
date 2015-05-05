@@ -18,7 +18,7 @@
 
   sendResponse = function(identifier, elementName, res) {
     return request({
-      url: (getCloudantUrl()) + "/fac/_design/factsMainViews/_view/EntityConceptName?key=[\"http://www.sec.gov/CIK/" + identifier + "\",\"" + elementName + "\"]&include_docs=true&stale=update_after&reduce=false"
+      url: (getCloudantUrl()) + "/factsdev/_design/factsMainViews/_view/EntityConceptName?key=[\"http://www.sec.gov/CIK/" + identifier + "\",\"" + elementName + "\"]&include_docs=true&stale=update_after&reduce=false"
     }).pipe(JSONStream.parse('rows.*.doc')).pipe(new ObjectStringTransformStream()).pipe(res);
   };
 

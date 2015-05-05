@@ -30,7 +30,7 @@ router.get(/\/companies/, (req, res) ->
   term = req.query.term
   tickerResolver(term, (tickerLookup) ->
 
-    cloudantUri = "#{getCloudantUrl()}/fac/_design/factsMainSearchIndexes/_search/EntityCipherCompanyName?q=companyName:#{term}&counts=[\"companyName\"]&limit=0"
+    cloudantUri = "#{getCloudantUrl()}/factsdev/_design/factsMainSearchIndexes/_search/EntityCipherCompanyName?q=companyName:#{term}&counts=[\"companyName\"]&limit=0"
     request({url: cloudantUri})
     .pipe(JSONStream.parse('counts.companyName')).on('data', (data) ->
 

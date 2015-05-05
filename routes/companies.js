@@ -35,7 +35,7 @@
     term = req.query.term;
     return tickerResolver(term, function(tickerLookup) {
       var cloudantUri;
-      cloudantUri = (getCloudantUrl()) + "/fac/_design/factsMainSearchIndexes/_search/EntityCipherCompanyName?q=companyName:" + term + "&counts=[\"companyName\"]&limit=0";
+      cloudantUri = (getCloudantUrl()) + "/factsdev/_design/factsMainSearchIndexes/_search/EntityCipherCompanyName?q=companyName:" + term + "&counts=[\"companyName\"]&limit=0";
       return request({
         url: cloudantUri
       }).pipe(JSONStream.parse('counts.companyName')).on('data', function(data) {

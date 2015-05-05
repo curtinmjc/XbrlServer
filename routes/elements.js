@@ -28,7 +28,7 @@
     var cloudantUri, identifier, term;
     identifier = req.query.identifier;
     term = req.query.term;
-    cloudantUri = (getCloudantUrl()) + "/fac/_design/factsMainSearchIndexes/_search/EntitySplitConcept?q=entity:\"" + identifier + "\"%20AND%20conceptNameSplit:" + term + "&counts=[\"conceptNameSplit\"]&limit=0";
+    cloudantUri = (getCloudantUrl()) + "/factsdev/_design/factsMainSearchIndexes/_search/EntitySplitConcept?q=entity:\"" + identifier + "\"%20AND%20conceptNameSplit:" + term + "&counts=[\"conceptNameSplit\"]&limit=0";
     return request({
       url: cloudantUri
     }).pipe(JSONStream.parse('counts.conceptNameSplit')).on('data', function(data) {

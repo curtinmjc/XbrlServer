@@ -8,7 +8,7 @@ JSONStream = require('JSONStream')
 
 sendResponse = (identifier, elementName, res) ->
 
-  request({url: "#{getCloudantUrl()}/fac/_design/factsMainViews/_view/EntityConceptName?key=[\"http://www.sec.gov/CIK/#{identifier}\",\"#{elementName}\"]&include_docs=true&stale=update_after&reduce=false"})
+  request({url: "#{getCloudantUrl()}/factsdev/_design/factsMainViews/_view/EntityConceptName?key=[\"http://www.sec.gov/CIK/#{identifier}\",\"#{elementName}\"]&include_docs=true&stale=update_after&reduce=false"})
   .pipe(JSONStream.parse('rows.*.doc'))
   .pipe(new ObjectStringTransformStream())
   .pipe(res)

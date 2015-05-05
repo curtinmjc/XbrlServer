@@ -6,7 +6,7 @@ router = express.Router()
 
 router.get('/size', (req, res) ->
 
-  cloudantUri = "#{getCloudantUrl()}/fac/_design/factsMainViews/_view/EntityConceptName?stale=update_after"
+  cloudantUri = "#{getCloudantUrl()}/factsdev/_design/factsMainViews/_view/EntityConceptName?stale=update_after"
 
   request({url: cloudantUri})
   .pipe(JSONStream.parse('rows.*.value')).on('data', (data) ->

@@ -11,18 +11,18 @@ router.post('/save', (req, res) ->
 
   uuid = uuid.v4()
   options = {
-    uri: "#{getCloudantUrl()}/share/"
+    uri: "#{getCloudantUrl()}/sharedev/"
     method: 'POST',
     json: {sets: req.body.sets, series: req.body.series, uuid: uuid},
     headers: { 'Content-type': 'application/json'}
   }
 
-#  request.post(options, (error, response, body) ->
-#    if (not error && response.statusCode is 201)
-#      res.end(uuid)
-#    else
-#      res.send(response)
-#  )
+  request.post(options, (error, response, body) ->
+    if (not error && response.statusCode is 201)
+      res.end(uuid)
+    else
+      res.send(response)
+  )
 )
 
 module.exports = router

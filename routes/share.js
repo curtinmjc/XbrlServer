@@ -11,7 +11,7 @@
     id = req.params[0];
     return res.render('share', {
       pageData: {
-        shareUrl: "http://xbrl.mybluemix.net/show/" + id
+        shareUrl: "http://xbrl-dev.mybluemix.net/show/" + id
       }
     });
   });
