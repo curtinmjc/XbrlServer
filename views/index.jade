@@ -141,15 +141,20 @@ html
             #Source.container.text-center
                 h2 Source
                 .byline Make Your Own
-                p All the source code for this website and the application to build the data is available publicly.
-                p
-                    | The code to build the database is available here:&nbsp;
-                    a(href="https://hub.jazz.net/project/tpotma/XbrlBuilder") https://hub.jazz.net/project/tpotma/XbrlBuilder
-                    |.
-                p
-                    |The code for this website is available here:&nbsp
-                    a(href="https://hub.jazz.net/project/tpotma/XbrlServer") https://hub.jazz.net/project/tpotma/XbrlServer
-                P An IBM developerWorks article detailing how to recreate what you see here is forthcoming.
+                .row
+                    .col-md-6
+                        img(src="/images/git150.png", style="margin-bottom: 5px;")
+                        p All the source code for this website and the application to build the data is available publicly.
+                        p
+                            | Build the database:&nbsp;
+                            a.btn.btn-primary(href="https://hub.jazz.net/project/tpotma/XbrlBuilder") XbrlBuilder &raquo;
+                        p
+                            | Build the website:&nbsp
+                            a.btn.btn-primary(href="https://hub.jazz.net/project/tpotma/XbrlServer") XbrlServer &raquo;
+                    .col-md-6
+                        img(src="/images/dW150.jpg", style="margin-bottom: 5px;")
+                        p IBM developerWorks has an article I wrote detailing how to recreate this app.  It provides a simple how-to, along with some of the trials and tribulations I went through, or "lessons learned" if you will.
+                        a.btn.btn-primary(href="http://www.ibm.com/developerworks/analytics/library/ba-bluemix-enterpise-scale-database-cloudant/index.html") More Info &raquo;
 
         #Contact.text-center
             h2 Contact
