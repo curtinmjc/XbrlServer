@@ -5,23 +5,29 @@
       this.doc = doc;
       this.IsDuration = this.doc['http://www.xbrl.org/2003/instance/Period'].indexOf('--') >= 0;
       this.IsNil = JSON.parse(this.doc["http://www.w3.org/2001/XMLSchema-instance/nil"]);
-      this.StartDate = this.IsDuration ? new Date(this.doc['http://www.xbrl.org/2003/instance/Period'].split('--')[0]) : new Date(this.doc['http://www.xbrl.org/2003/instance/Period']);
-      this.EndDate = this.IsDuration ? new Date(this.doc['http://www.xbrl.org/2003/instance/Period'].split('--')[1]) : new Date(this.doc['http://www.xbrl.org/2003/instance/Period']);
+      this.StartDate = this.IsDuration ? new Date(this.doc['http://www.xbrl.org/2003/instance/Period'].split('--')[0]) : this.dateObjectFromUTC(this.doc['http://www.xbrl.org/2003/instance/Period']);
+      this.EndDate = this.IsDuration ? new Date(this.doc['http://www.xbrl.org/2003/instance/Period'].split('--')[1]) : this.dateObjectFromUTC(this.doc['http://www.xbrl.org/2003/instance/Period']);
       this.FilingDate = new Date(this.doc['http://www.sec.gov/Archives/edgar/filingDate']);
       this.Amendment = JSON.parse(this.doc['http://xbrl.sec.gov/Amendment']);
       this.Value = !this.IsNil ? JSON.parse(this.doc['http://www.xbrl.org/2003/instance/Value']) : null;
       this.CIK = this.doc['http://www.xbrl.org/2003/instance/Entity'].substring(this.doc['http://www.xbrl.org/2003/instance/Entity'].lastIndexOf('/') + 1, this.doc['http://www.xbrl.org/2003/instance/Entity'].length);
       this.URL = this.doc['http://www.sec.gov/Archives/edgar/url'];
       this.AccesssionNumber = this.doc['http://www.sec.gov/Archives/edgar/accessionNumber'];
+      this.ElementName = this.GetElementName();
     }
+
+    Fact.prototype.dateObjectFromUTC = function(s) {
+      s = s.split(/\D/);
+      return new Date(Date.UTC(+s[0], --s[1], +s[2], +s[3], +s[4], +s[5], 0));
+    };
 
     Fact.prototype.getValue = function(fqn) {
       return fqn.substring(fqn.lastIndexOf("/") + 1, fqn.length);
     };
 
-    Fact.prototype.getElementName = function(fqn) {
+    Fact.prototype.GetElementName = function() {
       var namespace, prefix;
-      namespace = fqn.substring(0, fqn.lastIndexOf("/"));
+      namespace = this.doc['http://www.xbrl.org/2003/instance/Concept'].substring(0, this.doc['http://www.xbrl.org/2003/instance/Concept'].lastIndexOf("/"));
       prefix = null;
       switch (namespace) {
         case 'http://www.xbrl.org/us/fr/common/pte/2005-02-28':
@@ -72,7 +78,7 @@
         default:
           prefix = "ext";
       }
-      return prefix + ":" + (this.getValue(fqn));
+      return prefix + ":" + (this.getValue(this.doc['http://www.xbrl.org/2003/instance/Concept']));
     };
 
     Fact.prototype.GetUnitDescription = function() {
@@ -176,7 +182,7 @@
       if (this.seriesDescription != null) {
         return this.seriesDescription;
       }
-      this.seriesDescription = '[' + this.doc['http://www.sec.gov/Archives/edgar/companyName'] + "]:" + this.getElementName(this.doc['http://www.xbrl.org/2003/instance/Concept']) + (!this.IsDuration ? "" : " -- " + this.GetPeriodDescription()) + (this.GetDimensionsDescription() !== '' ? "<br/>" + this.GetDimensionsDescription() : "");
+      this.seriesDescription = '[' + this.doc['http://www.sec.gov/Archives/edgar/companyName'] + "]:" + this.ElementName + (!this.IsDuration ? "" : " -- " + this.GetPeriodDescription()) + (this.GetDimensionsDescription() !== '' ? "<br/>" + this.GetDimensionsDescription() : "");
       return this.seriesDescription;
     };
 
@@ -184,7 +190,7 @@
       if (this.seriesKey != null) {
         return this.seriesKey;
       }
-      this.seriesKey = this.doc['http://www.xbrl.org/2003/instance/Entity'] + ":" + this.getElementName(this.doc['http://www.xbrl.org/2003/instance/Concept']) + (!this.IsDuration ? "" : " -- " + this.GetPeriodDescription()) + (this.GetDimensionsDescription() !== '' ? " -- " + this.GetDimensionsDescription() : "");
+      this.seriesKey = this.doc['http://www.xbrl.org/2003/instance/Entity'] + ":" + this.ElementName + (!this.IsDuration ? "" : " -- " + this.GetPeriodDescription()) + (this.GetDimensionsDescription() !== '' ? " -- " + this.GetDimensionsDescription() : "");
       return this.seriesKey;
     };
 

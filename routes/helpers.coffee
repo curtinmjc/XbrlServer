@@ -9,6 +9,7 @@ getCloudantUrl = () ->
   return env['cloudantNoSQLDB'][0]['credentials']['url']
 
 
+
 unEscape = (value) ->
   return value.replace('&amp;', '&')
 

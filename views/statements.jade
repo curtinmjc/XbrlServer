@@ -1,0 +1,74 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/stylesheets/statements.css', media='all')
+    body
+        #outerdiv
+            #innerdiv
+                table
+                    tr
+                        td.headcol
+                            | &nbsp;
+                        each value in pageData.bsDates
+                            td= value
+                    tr
+                        td.Indent1x.headcol
+                            | Current Assets
+                        each value in pageData.bsFacts['CurrentAssets']
+                            td= value
+                    tr
+                        td.Indent1x.headcol
+                            | Noncurrent Assets
+                        each value in pageData.bsFacts['NoncurrentAssets']
+                            td= value
+                    tr
+                        td.headcol
+                            | Assets
+                        each value in pageData.bsFacts['Assets']
+                            td= value
+                    tr
+                        td.Indent1x.headcol
+                            | Current Liabilities
+                        each value in pageData.bsFacts['CurrentLiabilities']
+                            td= value
+                    tr
+                        td.Indent1x.headcol
+                            | Noncurrent Liabilities
+                        each value in pageData.bsFacts['NoncurrentLiabilities']
+                            td= value
+                    tr
+                        td.headcol
+                            | Liabilities
+                        each value in pageData.bsFacts['Liabilities']
+                            td= value
+                    tr
+                        td.headcol
+                            | Commitments and Contingencies
+                        each value in pageData.bsFacts['CommitmentsAndContingencies']
+                            td= value
+                    tr
+                        td.headcol
+                            | Temporary Equity and Redeemable Noncontrolling Interest
+                        each value in pageData.bsFacts['TemporaryEquity']
+                            td= value
+                    tr
+                        td.Indent1x.headcol
+                            | Equity Attributable to Parent
+                        each value in pageData.bsFacts['EquityAttributableToParent']
+                            td= value
+                    tr
+                        td.Indent1x.headcol
+                            | Equity Attributable to Noncontrolling Interest
+                        each value in pageData.bsFacts['EquityAttributableToNoncontrollingInterest']
+                            td= value
+                    tr
+                        td.headcol
+                            | Equity
+                        each value in pageData.bsFacts['Equity']
+                            td= value
+                    tr
+                        td.headcol
+                            | Liabilities and Equity
+                        each value in pageData.bsFacts['LiabilitiesAndEquity']
+                            td= value

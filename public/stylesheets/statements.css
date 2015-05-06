@@ -1,0 +1,37 @@
+body {
+    font:12px "Helvetica Neue";
+}
+table {
+    border-collapse:separate;
+
+}
+td {
+    margin:0;
+    border:3px solid grey;
+    border-top-width:0px;
+    white-space:nowrap;
+}
+#outerdiv {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 300px;
+}
+#innerdiv {
+    width: 100%;
+    overflow-x:scroll;
+    margin-left: 300px;
+    overflow-y:visible;
+    padding-bottom:1px;
+}
+.headcol {
+    position:absolute;
+    width:300px;
+    left:0;
+    top:auto;
+    border-right: 0px none black;
+    border-top-width:3px;
+    /*only relevant for first row*/
+    margin-top:-3px;
+    /*compensate for top border*/
+}

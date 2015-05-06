@@ -2,20 +2,25 @@ class exports.Fact
   constructor: (@doc) ->
     @IsDuration = @doc['http://www.xbrl.org/2003/instance/Period'].indexOf('--') >= 0
     @IsNil = JSON.parse(@doc["http://www.w3.org/2001/XMLSchema-instance/nil"])
-    @StartDate = if @IsDuration then new Date(@doc['http://www.xbrl.org/2003/instance/Period'].split('--')[0]) else new Date(@doc['http://www.xbrl.org/2003/instance/Period'])
-    @EndDate = if @IsDuration then new Date(@doc['http://www.xbrl.org/2003/instance/Period'].split('--')[1]) else new Date(@doc['http://www.xbrl.org/2003/instance/Period'])
+    @StartDate = if @IsDuration then new Date(@doc['http://www.xbrl.org/2003/instance/Period'].split('--')[0]) else @dateObjectFromUTC(@doc['http://www.xbrl.org/2003/instance/Period'])
+    @EndDate = if @IsDuration then new Date(@doc['http://www.xbrl.org/2003/instance/Period'].split('--')[1]) else @dateObjectFromUTC(@doc['http://www.xbrl.org/2003/instance/Period'])
     @FilingDate = new Date(@doc['http://www.sec.gov/Archives/edgar/filingDate'])
     @Amendment = JSON.parse(@doc['http://xbrl.sec.gov/Amendment'])
     @Value = if !@IsNil then JSON.parse(@doc['http://www.xbrl.org/2003/instance/Value']) else null
     @CIK = @doc['http://www.xbrl.org/2003/instance/Entity'].substring(@doc['http://www.xbrl.org/2003/instance/Entity'].lastIndexOf('/')+1, @doc['http://www.xbrl.org/2003/instance/Entity'].length)
     @URL = @doc['http://www.sec.gov/Archives/edgar/url']
     @AccesssionNumber = @doc['http://www.sec.gov/Archives/edgar/accessionNumber']
+    @ElementName = @GetElementName()
+
+  dateObjectFromUTC: (s) ->
+    s = s.split(/\D/);
+    return new Date(Date.UTC(+s[0], --s[1], +s[2], +s[3], +s[4], +s[5], 0));
 
   getValue: (fqn) ->
     return fqn.substring(fqn.lastIndexOf("/") + 1, fqn.length)
 
-  getElementName: (fqn) ->
-    namespace = fqn.substring(0, fqn.lastIndexOf("/"))
+  GetElementName:  ->
+    namespace = @doc['http://www.xbrl.org/2003/instance/Concept'].substring(0, @doc['http://www.xbrl.org/2003/instance/Concept'].lastIndexOf("/"))
     prefix = null
 
     switch namespace
@@ -36,7 +41,7 @@ class exports.Fact
       when 'http://www.xbrlsite.com/fac' then prefix = "fac"
       else prefix = "ext"
 
-    return "#{prefix}:#{@getValue(fqn)}"
+    return "#{prefix}:#{@getValue(@doc['http://www.xbrl.org/2003/instance/Concept'])}"
 
   GetUnitDescription: ->
     if @unitDescription?
@@ -144,14 +149,14 @@ class exports.Fact
     if @seriesDescription?
       return @seriesDescription
 
-    @seriesDescription = '[' + @doc['http://www.sec.gov/Archives/edgar/companyName'] + "]:" + @getElementName(@doc['http://www.xbrl.org/2003/instance/Concept']) + (if not @IsDuration then "" else " -- " + @GetPeriodDescription()) + (if @GetDimensionsDescription() isnt '' then "<br/>" + @GetDimensionsDescription() else "")
+    @seriesDescription = '[' + @doc['http://www.sec.gov/Archives/edgar/companyName'] + "]:" + @ElementName + (if not @IsDuration then "" else " -- " + @GetPeriodDescription()) + (if @GetDimensionsDescription() isnt '' then "<br/>" + @GetDimensionsDescription() else "")
     return @seriesDescription
 
   GetSeriesKey: ->
     if @seriesKey?
       return @seriesKey
 
-    @seriesKey = @doc['http://www.xbrl.org/2003/instance/Entity'] + ":" + @getElementName(@doc['http://www.xbrl.org/2003/instance/Concept']) + (if not @IsDuration then "" else " -- " + @GetPeriodDescription()) + (if @GetDimensionsDescription() isnt '' then " -- " + @GetDimensionsDescription() else "")
+    @seriesKey = @doc['http://www.xbrl.org/2003/instance/Entity'] + ":" + @ElementName + (if not @IsDuration then "" else " -- " + @GetPeriodDescription()) + (if @GetDimensionsDescription() isnt '' then " -- " + @GetDimensionsDescription() else "")
     return @seriesKey
 
   GetSortValue: (OtherFact) ->
