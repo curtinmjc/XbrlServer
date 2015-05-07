@@ -14,10 +14,11 @@ router.get('/statements', (req, res) ->
 #    res.render('m/index');
 #  else
 
-  request({url: "#{getCloudantUrl()}/factsdev/_design/factsMainViews/_view/facs?key=\"http://www.sec.gov/CIK/0000051143\"&include_docs=true&stale=update_after"})
+  request({url: "#{getCloudantUrl()}/factsdev/_design/factsMainViews/_view/facs?keys=[\"http://www.sec.gov/CIK/0000051143\", \"http://www.sec.gov/CIK/0000789019\"]&include_docs=true&stale=update_after"})
   .pipe(JSONStream.parse('rows.*.doc'))
-  .pipe(new FACTransformStream())
+  .pipe(new FACTransformStream(["http://www.sec.gov/CIK/0000051143", "http://www.sec.gov/CIK/0000789019"]))
   .on('data', (data) ->
+    data['entities'] = ['INTERNATIONAL BUSINESS MACHINES CORP', 'MICROSOFT CORP']
     res.render('statements', {pageData: data})
   )
 )

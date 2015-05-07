@@ -4,6 +4,7 @@
       <sourceFilesUrls>
         <item url="file://$PROJECT_DIR$/streams/FactTransformStream.js" />
         <item url="file://$PROJECT_DIR$/routes/helpers.js" />
+        <item url="file://$PROJECT_DIR$/public/scripts/statements.js" />
         <item url="file://$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/ipaddr.js/test/ipaddr.test.js" />
         <item url="file://$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/ipaddr.js/src/ipaddr.js" />
         <item url="file://$PROJECT_DIR$/routes/share.js" />
@@ -17,8 +18,8 @@
         <item url="file://$PROJECT_DIR$/public/scripts/index.js" />
         <item url="file://$PROJECT_DIR$/routes/show.js" />
         <item url="file://$PROJECT_DIR$/routes/rawfacts.js" />
-        <item url="file://$PROJECT_DIR$/routes/facs.js" />
         <item url="file://$PROJECT_DIR$/routes/index.js" />
+        <item url="file://$PROJECT_DIR$/public/scripts/statements.js" />
         <item url="file://$PROJECT_DIR$/streams/UniqueArrayWriteStream.js" />
         <item url="file://$PROJECT_DIR$/streams/BookmarkExtractorStream.js" />
         <item url="file://$PROJECT_DIR$/routes/statements.js" />
@@ -31,8 +32,10 @@
       <root url="file://$PROJECT_DIR$/streams/MongoAggregateTransformStream.js" />
       <root url="file://$PROJECT_DIR$/streams/MongoAggregateTransformStream.js" />
       <root url="file://$PROJECT_DIR$/routes/config.js" />
+      <root url="file://$PROJECT_DIR$/routes/facs.js" />
       <root url="file://$PROJECT_DIR$/streams/FactTransformStream.js" />
       <root url="file://$PROJECT_DIR$/routes/helpers.js" />
+      <root url="file://$PROJECT_DIR$/public/scripts/statements.js" />
       <root url="file://$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/ipaddr.js/test/ipaddr.test.js" />
       <root url="file://$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/ipaddr.js/src/ipaddr.js" />
       <root url="file://$PROJECT_DIR$/routes/share.js" />
@@ -46,8 +49,8 @@
       <root url="file://$PROJECT_DIR$/public/scripts/index.js" />
       <root url="file://$PROJECT_DIR$/routes/show.js" />
       <root url="file://$PROJECT_DIR$/routes/rawfacts.js" />
-      <root url="file://$PROJECT_DIR$/routes/facs.js" />
       <root url="file://$PROJECT_DIR$/routes/index.js" />
+      <root url="file://$PROJECT_DIR$/public/scripts/statements.js" />
       <root url="file://$PROJECT_DIR$/streams/UniqueArrayWriteStream.js" />
       <root url="file://$PROJECT_DIR$/streams/BookmarkExtractorStream.js" />
       <root url="file://$PROJECT_DIR$/routes/statements.js" />

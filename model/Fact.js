@@ -14,6 +14,7 @@
       this.URL = this.doc['http://www.sec.gov/Archives/edgar/url'];
       this.AccesssionNumber = this.doc['http://www.sec.gov/Archives/edgar/accessionNumber'];
       this.ElementName = this.GetElementName();
+      this.Entity = this.doc["http://www.xbrl.org/2003/instance/Entity"];
     }
 
     Fact.prototype.dateObjectFromUTC = function(s) {

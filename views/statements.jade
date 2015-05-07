@@ -3,72 +3,149 @@ html
     head
         title= title
         link(rel='stylesheet', href='/stylesheets/statements.css', media='all')
+        script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+        script(src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js")
     body
-        #outerdiv
-            #innerdiv
+        .table-container
+            .headcol
                 table
-                    tr
-                        td.headcol
-                            | &nbsp;
-                        each value in pageData.bsDates
-                            td= value
-                    tr
-                        td.Indent1x.headcol
-                            | Current Assets
-                        each value in pageData.bsFacts['CurrentAssets']
-                            td= value
-                    tr
-                        td.Indent1x.headcol
-                            | Noncurrent Assets
-                        each value in pageData.bsFacts['NoncurrentAssets']
-                            td= value
-                    tr
-                        td.headcol
-                            | Assets
-                        each value in pageData.bsFacts['Assets']
-                            td= value
-                    tr
-                        td.Indent1x.headcol
-                            | Current Liabilities
-                        each value in pageData.bsFacts['CurrentLiabilities']
-                            td= value
-                    tr
-                        td.Indent1x.headcol
-                            | Noncurrent Liabilities
-                        each value in pageData.bsFacts['NoncurrentLiabilities']
-                            td= value
-                    tr
-                        td.headcol
-                            | Liabilities
-                        each value in pageData.bsFacts['Liabilities']
-                            td= value
-                    tr
-                        td.headcol
-                            | Commitments and Contingencies
-                        each value in pageData.bsFacts['CommitmentsAndContingencies']
-                            td= value
-                    tr
-                        td.headcol
-                            | Temporary Equity and Redeemable Noncontrolling Interest
-                        each value in pageData.bsFacts['TemporaryEquity']
-                            td= value
-                    tr
-                        td.Indent1x.headcol
-                            | Equity Attributable to Parent
-                        each value in pageData.bsFacts['EquityAttributableToParent']
-                            td= value
-                    tr
-                        td.Indent1x.headcol
-                            | Equity Attributable to Noncontrolling Interest
-                        each value in pageData.bsFacts['EquityAttributableToNoncontrollingInterest']
-                            td= value
-                    tr
-                        td.headcol
-                            | Equity
-                        each value in pageData.bsFacts['Equity']
-                            td= value
-                    tr
-                        td.headcol
-                            | Liabilities and Equity
-                        each value in pageData.bsFacts['LiabilitiesAndEquity']
-                            td= value
+                    thead
+                        tr
+                            th
+                                | &nbsp;
+                        tr
+                            th
+                                | &nbsp;
+                    tbody
+                        tr
+                            td.indent1x
+                                | Current Assets
+                        tr
+                            td.indent1x
+                                | Noncurrent Assets
+                        tr
+                            td
+                                | Assets
+                        tr
+                            td.indent1x
+                                | Current Liabilities
+                        tr
+                            td.indent1x
+                                | Noncurrent Liabilities
+                        tr
+                            td
+                                | Liabilities
+                        tr
+                            td
+                                | Commitments and Contingencies
+                        tr
+                            td
+                                | Temporary Equity and Redeemable Noncontrolling Interest
+                        tr
+                            td.indent1x
+                                | Equity Attributable to Parent
+                        tr
+                            td.indent1x
+                                | Equity Attributable to Noncontrolling Interest
+                        tr
+                            td
+                                | Equity
+                        tr
+                            td
+                                | Liabilities and Equity
+            .right
+                table
+                    thead
+                        tr
+                            each value in pageData.bsDates
+                                th(colspan=pageData.entities.length)= value
+                        tr
+                            each value in pageData.bsDates
+                                each entity in pageData.entities
+                                    th= entity
+
+                    tbody
+                        tr
+                            each value in pageData.bsFacts['CurrentAssets']
+                                if value !== null
+                                    td= value
+                                else
+                                    td
+                                        | &nbsp
+                        tr
+                            each value in pageData.bsFacts['NoncurrentAssets']
+                                if value !== null
+                                    td= value
+                                else
+                                    td
+                                        | &nbsp
+                        tr
+                            each value in pageData.bsFacts['Assets']
+                                if value !== null
+                                    td= value
+                                else
+                                    td
+                                        | &nbsp
+                        tr
+                            each value in pageData.bsFacts['CurrentLiabilities']
+                                if value !== null
+                                    td= value
+                                else
+                                    td
+                                        | &nbsp
+                        tr
+                            each value in pageData.bsFacts['NoncurrentLiabilities']
+                                if value !== null
+                                    td= value
+                                else
+                                    td
+                                        | &nbsp
+                        tr
+                            each value in pageData.bsFacts['Liabilities']
+                                if value !== null
+                                    td= value
+                                else
+                                    td
+                                        | &nbsp
+                        tr
+                            each value in pageData.bsFacts['CommitmentsAndContingencies']
+                                if value !== null
+                                    td= value
+                                else
+                                    td
+                                        | &nbsp
+                        tr
+                            each value in pageData.bsFacts['TemporaryEquity']
+                                if value !== null
+                                    td= value
+                                else
+                                    td
+                                        | &nbsp
+                        tr
+                            each value in pageData.bsFacts['EquityAttributableToParent']
+                                if value !== null
+                                    td= value
+                                else
+                                    td
+                                        | &nbsp
+                        tr
+                            each value in pageData.bsFacts['EquityAttributableToNoncontrollingInterest']
+                                if value !== null
+                                    td= value
+                                else
+                                    td
+                                        | &nbsp
+                        tr
+                            each value in pageData.bsFacts['Equity']
+                                if value !== null
+                                    td= value
+                                else
+                                    td
+                                        | &nbsp
+                        tr
+                            each value in pageData.bsFacts['LiabilitiesAndEquity']
+                                if value !== null
+                                    td= value
+                                else
+                                    td
+                                        | &nbsp

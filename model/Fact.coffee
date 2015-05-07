@@ -11,6 +11,7 @@ class exports.Fact
     @URL = @doc['http://www.sec.gov/Archives/edgar/url']
     @AccesssionNumber = @doc['http://www.sec.gov/Archives/edgar/accessionNumber']
     @ElementName = @GetElementName()
+    @Entity = @doc["http://www.xbrl.org/2003/instance/Entity"]
 
   dateObjectFromUTC: (s) ->
     s = s.split(/\D/);

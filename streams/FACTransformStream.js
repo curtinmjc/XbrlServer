@@ -11,7 +11,9 @@
   exports.FACTransformStream = (function(superClass) {
     extend(FACTransformStream, superClass);
 
-    function FACTransformStream() {
+    function FACTransformStream(entities) {
+      var entity, i, len, ref;
+      this.entities = entities;
       this.bsFacts = {
         Assets: {},
         CurrentAssets: {},
@@ -27,6 +29,23 @@
         EquityAttributableToNoncontrollingInterest: {},
         EquityAttributableToParent: {}
       };
+      ref = this.entities;
+      for (i = 0, len = ref.length; i < len; i++) {
+        entity = ref[i];
+        this.bsFacts.Assets[entity] = {};
+        this.bsFacts.CurrentAssets[entity] = {};
+        this.bsFacts.NoncurrentAssets[entity] = {};
+        this.bsFacts.LiabilitiesAndEquity[entity] = {};
+        this.bsFacts.Liabilities[entity] = {};
+        this.bsFacts.CurrentLiabilities[entity] = {};
+        this.bsFacts.NoncurrentLiabilities[entity] = {};
+        this.bsFacts.CommitmentsAndContingencies[entity] = {};
+        this.bsFacts.TemporaryEquity[entity] = {};
+        this.bsFacts.RedeemableNoncontrollingInterest[entity] = {};
+        this.bsFacts.Equity[entity] = {};
+        this.bsFacts.EquityAttributableToNoncontrollingInterest[entity] = {};
+        this.bsFacts.EquityAttributableToParent[entity] = {};
+      }
       this.bsDates = {};
       FACTransformStream.__super__.constructor.call(this, {
         objectMode: true
@@ -39,50 +58,50 @@
       timeIndex = "" + (fact.EndDate.getTime());
       switch (fact.ElementName) {
         case 'fac:Assets':
-          this.bsFacts.Assets[timeIndex] = fact.Value;
+          this.bsFacts.Assets[fact.Entity][timeIndex] = fact.Value;
           break;
         case 'fac:CurrentAssets':
-          this.bsFacts.CurrentAssets[timeIndex] = fact.Value;
+          this.bsFacts.CurrentAssets[fact.Entity][timeIndex] = fact.Value;
           break;
         case 'fac:NoncurrentAssets':
-          this.bsFacts.NoncurrentAssets[timeIndex] = fact.Value;
+          this.bsFacts.NoncurrentAssets[fact.Entity][timeIndex] = fact.Value;
           break;
         case 'fac:LiabilitiesAndEquity':
-          this.bsFacts.LiabilitiesAndEquity[timeIndex] = fact.Value;
+          this.bsFacts.LiabilitiesAndEquity[fact.Entity][timeIndex] = fact.Value;
           break;
         case 'fac:Liabilities':
-          this.bsFacts.Liabilities[timeIndex] = fact.Value;
+          this.bsFacts.Liabilities[fact.Entity][timeIndex] = fact.Value;
           break;
         case 'fac:CurrentLiabilities':
-          this.bsFacts.CurrentLiabilities[timeIndex] = fact.Value;
+          this.bsFacts.CurrentLiabilities[fact.Entity][timeIndex] = fact.Value;
           break;
         case 'fac:NoncurrentLiabilities':
-          this.bsFacts.NoncurrentLiabilities[timeIndex] = fact.Value;
+          this.bsFacts.NoncurrentLiabilities[fact.Entity][timeIndex] = fact.Value;
           break;
         case 'fac:CommitmentsAndContingencies':
-          this.bsFacts.CommitmentsAndContingencies[timeIndex] = fact.Value;
+          this.bsFacts.CommitmentsAndContingencies[fact.Entity][timeIndex] = fact.Value;
           break;
         case 'fac:TemporaryEquity':
-          this.bsFacts.TemporaryEquity[timeIndex] = fact.Value;
+          this.bsFacts.TemporaryEquity[fact.Entity][timeIndex] = fact.Value;
           break;
         case 'fac:RedeemableNoncontrollingInterest':
-          this.bsFacts.RedeemableNoncontrollingInterest[timeIndex] = fact.Value;
+          this.bsFacts.RedeemableNoncontrollingInterest[fact.Entity][timeIndex] = fact.Value;
           break;
         case 'fac:Equity':
-          this.bsFacts.Equity[timeIndex] = fact.Value;
+          this.bsFacts.Equity[fact.Entity][timeIndex] = fact.Value;
           break;
         case 'fac:EquityAttributableToNoncontrollingInterest':
-          this.bsFacts.EquityAttributableToNoncontrollingInterest[timeIndex] = fact.Value;
+          this.bsFacts.EquityAttributableToNoncontrollingInterest[fact.Entity][timeIndex] = fact.Value;
           break;
         case 'fac:EquityAttributableToParent':
-          this.bsFacts.EquityAttributableToParent[timeIndex] = fact.Value;
+          this.bsFacts.EquityAttributableToParent[fact.Entity][timeIndex] = fact.Value;
       }
       this.bsDates["" + (fact.EndDate.getTime())] = fact.EndDate.getTime();
       return next();
     };
 
     FACTransformStream.prototype._flush = function(next) {
-      var date, i, k, len, outputBsDates, outputBsFacts, sortedBsDates, timeIndex, v, value;
+      var date, entity, i, j, k, len, len1, outputBsDates, outputBsFacts, ref, sortedBsDates, timeIndex, v, value;
       outputBsFacts = {};
       sortedBsDates = (function() {
         var ref, results;
@@ -129,20 +148,24 @@
       };
       for (i = 0, len = sortedBsDates.length; i < len; i++) {
         date = sortedBsDates[i];
-        timeIndex = "" + (date.getTime());
-        outputBsFacts.Assets.push(this.bsFacts.Assets[timeIndex] != null ? this.bsFacts.Assets[timeIndex] : '&nbsp;');
-        outputBsFacts.CurrentAssets.push(this.bsFacts.CurrentAssets[timeIndex] != null ? this.bsFacts.CurrentAssets[timeIndex] : '&nbsp;');
-        outputBsFacts.NoncurrentAssets.push(this.bsFacts.NoncurrentAssets[timeIndex] != null ? this.bsFacts.NoncurrentAssets[timeIndex] : '&nbsp;');
-        outputBsFacts.LiabilitiesAndEquity.push(this.bsFacts.LiabilitiesAndEquity[timeIndex] != null ? this.bsFacts.LiabilitiesAndEquity[timeIndex] : '&nbsp;');
-        outputBsFacts.Liabilities.push(this.bsFacts.Liabilities[timeIndex] != null ? this.bsFacts.Liabilities[timeIndex] : '&nbsp;');
-        outputBsFacts.CurrentLiabilities.push(this.bsFacts.CurrentLiabilities[timeIndex] != null ? this.bsFacts.CurrentLiabilities[timeIndex] : '&nbsp;');
-        outputBsFacts.NoncurrentLiabilities.push(this.bsFacts.NoncurrentLiabilities[timeIndex] != null ? this.bsFacts.NoncurrentLiabilities[timeIndex] : '&nbsp;');
-        outputBsFacts.CommitmentsAndContingencies.push(this.bsFacts.CommitmentsAndContingencies[timeIndex] != null ? this.bsFacts.CommitmentsAndContingencies[timeIndex] : '&nbsp;');
-        outputBsFacts.TemporaryEquity.push(this.bsFacts.TemporaryEquity[timeIndex] != null ? this.bsFacts.TemporaryEquity[timeIndex] : '&nbsp;');
-        outputBsFacts.RedeemableNoncontrollingInterest.push(this.bsFacts.RedeemableNoncontrollingInterest[timeIndex] != null ? this.bsFacts.RedeemableNoncontrollingInterest[timeIndex] : '&nbsp;');
-        outputBsFacts.Equity.push(this.bsFacts.Equity[timeIndex] != null ? this.bsFacts.Equity[timeIndex] : '&nbsp;');
-        outputBsFacts.EquityAttributableToNoncontrollingInterest.push(this.bsFacts.EquityAttributableToNoncontrollingInterest[timeIndex] != null ? this.bsFacts.EquityAttributableToNoncontrollingInterest[timeIndex] : '&nbsp;');
-        outputBsFacts.EquityAttributableToParent.push(this.bsFacts.EquityAttributableToParent[timeIndex] != null ? this.bsFacts.EquityAttributableToParent[timeIndex] : '&nbsp;');
+        ref = this.entities;
+        for (j = 0, len1 = ref.length; j < len1; j++) {
+          entity = ref[j];
+          timeIndex = "" + (date.getTime());
+          outputBsFacts.Assets.push(this.bsFacts.Assets[entity][timeIndex] != null ? this.bsFacts.Assets[entity][timeIndex] : null);
+          outputBsFacts.CurrentAssets.push(this.bsFacts.CurrentAssets[entity][timeIndex] != null ? this.bsFacts.CurrentAssets[entity][timeIndex] : null);
+          outputBsFacts.NoncurrentAssets.push(this.bsFacts.NoncurrentAssets[entity][timeIndex] != null ? this.bsFacts.NoncurrentAssets[entity][timeIndex] : null);
+          outputBsFacts.LiabilitiesAndEquity.push(this.bsFacts.LiabilitiesAndEquity[entity][timeIndex] != null ? this.bsFacts.LiabilitiesAndEquity[entity][timeIndex] : null);
+          outputBsFacts.Liabilities.push(this.bsFacts.Liabilities[entity][timeIndex] != null ? this.bsFacts.Liabilities[entity][timeIndex] : null);
+          outputBsFacts.CurrentLiabilities.push(this.bsFacts.CurrentLiabilities[entity][timeIndex] != null ? this.bsFacts.CurrentLiabilities[entity][timeIndex] : null);
+          outputBsFacts.NoncurrentLiabilities.push(this.bsFacts.NoncurrentLiabilities[entity][timeIndex] != null ? this.bsFacts.NoncurrentLiabilities[entity][timeIndex] : null);
+          outputBsFacts.CommitmentsAndContingencies.push(this.bsFacts.CommitmentsAndContingencies[entity][timeIndex] != null ? this.bsFacts.CommitmentsAndContingencies[entity][timeIndex] : null);
+          outputBsFacts.TemporaryEquity.push(this.bsFacts.TemporaryEquity[entity][timeIndex] != null ? this.bsFacts.TemporaryEquity[entity][timeIndex] : null);
+          outputBsFacts.RedeemableNoncontrollingInterest.push(this.bsFacts.RedeemableNoncontrollingInterest[entity][timeIndex] != null ? this.bsFacts.RedeemableNoncontrollingInterest[entity][timeIndex] : null);
+          outputBsFacts.Equity.push(this.bsFacts.Equity[entity][timeIndex] != null ? this.bsFacts.Equity[entity][timeIndex] : null);
+          outputBsFacts.EquityAttributableToNoncontrollingInterest.push(this.bsFacts.EquityAttributableToNoncontrollingInterest[entity][timeIndex] != null ? this.bsFacts.EquityAttributableToNoncontrollingInterest[entity][timeIndex] : null);
+          outputBsFacts.EquityAttributableToParent.push(this.bsFacts.EquityAttributableToParent[entity][timeIndex] != null ? this.bsFacts.EquityAttributableToParent[entity][timeIndex] : null);
+        }
       }
       this.push({
         bsDates: outputBsDates,

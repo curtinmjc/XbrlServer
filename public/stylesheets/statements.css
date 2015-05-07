@@ -1,37 +1,45 @@
 body {
-    font:12px "Helvetica Neue";
+    font-family: 'Didact Gothic', sans-serif;
+    font-size: 12pt;
 }
-table {
-    border-collapse:separate;
 
+
+table
+{
+    float: left;
+    border-collapse: collapse;
 }
+
+.table-container {
+    position: relative;
+    width: 1000px;
+    height: 100%;
+    border: 2px solid red;
+    display: inline-block;
+}
+
+th {
+    border: 1px solid black;
+    padding: 10px;
+    white-space: nowrap
+}
+
 td {
-    margin:0;
-    border:3px solid grey;
-    border-top-width:0px;
-    white-space:nowrap;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 0;
+    white-space: nowrap
 }
-#outerdiv {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 300px;
+
+.right {
+    overflow: auto;
 }
-#innerdiv {
-    width: 100%;
-    overflow-x:scroll;
-    margin-left: 300px;
-    overflow-y:visible;
-    padding-bottom:1px;
+
+.right td {
+    text-align: right;
 }
-.headcol {
-    position:absolute;
-    width:300px;
-    left:0;
-    top:auto;
-    border-right: 0px none black;
-    border-top-width:3px;
-    /*only relevant for first row*/
-    margin-top:-3px;
-    /*compensate for top border*/
+
+.indent1x
+{
+    padding-left: 25px;
 }
