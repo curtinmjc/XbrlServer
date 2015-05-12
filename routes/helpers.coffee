@@ -5,9 +5,8 @@ request = require('request')
 require('date-utils');
 
 getCloudantUrl = () ->
-#  env = JSON.parse(process.env.VCAP_SERVICES)
-#  return env['cloudantNoSQLDB'][0]['credentials']['url']
-  return "https://0741ae13-4f99-4ffb-8282-60d27e161c7f-bluemix:c5c6bb6c4156cf95d394f0641fdf58ad72ed80f1364b0a14a07cbbb71e9d3075@0741ae13-4f99-4ffb-8282-60d27e161c7f-bluemix.cloudant.com"
+  env = JSON.parse(process.env.VCAP_SERVICES)
+  return env['cloudantNoSQLDB'][0]['credentials']['url']
 
 
 
