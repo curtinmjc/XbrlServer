@@ -9,12 +9,7 @@ router = express.Router()
 
 router.get('/statements', (req, res) ->
 
-#  ua = req.header('user-agent')
-#  if(/mobile/i.test(ua))
-#    res.render('m/index');
-#  else
-
-  request({url: "#{getCloudantUrl()}/factsdev/_design/factsMainViews/_view/facs?keys=[\"http://www.sec.gov/CIK/0000051143\", \"http://www.sec.gov/CIK/0000789019\"]&include_docs=true&stale=update_after"})
+  request({url: "#{getCloudantUrl()}/factsdev/_design/factsMainViews/_view/FACEntity?keys=[\"http://www.sec.gov/CIK/0000051143\", \"http://www.sec.gov/CIK/0000789019\"]&include_docs=true&stale=update_after"})
   .pipe(JSONStream.parse('rows.*.doc'))
   .pipe(new FACTransformStream(["http://www.sec.gov/CIK/0000051143", "http://www.sec.gov/CIK/0000789019"]))
   .on('data', (data) ->

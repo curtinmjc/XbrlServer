@@ -1,7 +1,8 @@
 body {
     font-family: 'Didact Gothic', sans-serif;
-    font-size: 12pt;
+    font-size: 10pt;
 }
+
 
 
 table
@@ -14,21 +15,27 @@ table
     position: relative;
     width: 1000px;
     height: 100%;
-    border: 2px solid red;
+    border: 2px solid black;
     display: inline-block;
 }
 
 th {
     border: 1px solid black;
-    padding: 10px;
+    padding: 5px;
     white-space: nowrap
 }
 
 td {
     border: 1px solid black;
-    padding: 10px;
+    padding: 5px;
     margin: 0;
     white-space: nowrap
+}
+
+td.blankRow
+{
+    border-left: none;
+    border-right: none;
 }
 
 .right {
@@ -42,4 +49,10 @@ td {
 .indent1x
 {
     padding-left: 25px;
+}
+
+.topLeft {
+    border-bottom: none;
+    border-top: none;
+    padding-bottom: 6px;
 }

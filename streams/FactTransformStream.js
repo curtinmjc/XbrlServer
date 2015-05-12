@@ -19,47 +19,42 @@
     }
 
     FactTransformStream.prototype._transform = function(chunk, enc, next) {
-      var fact;
+      var fact, hashValue;
       fact = new Fact(chunk.doc);
       if (fact.IsDuration && fact.GetPeriodDescription() === 'other' || fact.IsNil) {
         return next();
       }
-      this.facts.push(fact);
+      hashValue = fact.GetHashValue();
+      if (!this.facts[hashValue]) {
+        this.facts[hashValue] = fact;
+      } else if (this.facts[hashValue].FilingDate < fact.FilingDate) {
+        this.facts[hashValue] = fact;
+      } else if (this.facts[hashValue].FilingDate === fact.FilingDate && !this.facts[hashValue].Amendment && fact.Amendment) {
+        this.facts[hashValue] = fact;
+      }
       return next();
     };
 
     FactTransformStream.prototype._flush = function(next) {
-      var fact, factHash, facts, hash, i, j, len, len1, ref, seriesCollection, seriesCollectionParsed, seriesDescription;
-      factHash = {};
-      ref = this.facts;
-      for (i = 0, len = ref.length; i < len; i++) {
-        fact = ref[i];
-        if (!factHash[fact.GetHashValue()]) {
-          factHash[fact.GetHashValue()] = fact;
-        } else if (factHash[fact.GetHashValue()].FilingDate < fact.FilingDate) {
-          factHash[fact.GetHashValue()] = fact;
-        } else if (factHash[fact.GetHashValue()].FilingDate === fact.FilingDate && !factHash[fact.GetHashValue()].Amendment && fact.Amendment) {
-          factHash[fact.GetHashValue()] = fact;
-        }
-      }
+      var fact, facts, hash, i, len, ref, seriesCollection, seriesCollectionParsed, seriesDescription;
       seriesCollection = {};
-      for (hash in factHash) {
-        fact = factHash[hash];
+      ref = this.facts;
+      for (hash in ref) {
+        fact = ref[hash];
         seriesDescription = fact.GetSeriesDescription();
         if (seriesCollection[seriesDescription] == null) {
           seriesCollection[seriesDescription] = [];
         }
         seriesCollection[seriesDescription].push(fact);
       }
-      factHash = null;
       seriesCollectionParsed = {};
       for (seriesDescription in seriesCollection) {
         facts = seriesCollection[seriesDescription];
         facts.sort(function(a, b) {
           return a.GetSortValue(b);
         });
-        for (j = 0, len1 = facts.length; j < len1; j++) {
-          fact = facts[j];
+        for (i = 0, len = facts.length; i < len; i++) {
+          fact = facts[i];
           if (fact.Value == null) {
             continue;
           }

@@ -5,8 +5,8 @@
       this.doc = doc;
       this.IsDuration = this.doc['http://www.xbrl.org/2003/instance/Period'].indexOf('--') >= 0;
       this.IsNil = JSON.parse(this.doc["http://www.w3.org/2001/XMLSchema-instance/nil"]);
-      this.StartDate = this.IsDuration ? new Date(this.doc['http://www.xbrl.org/2003/instance/Period'].split('--')[0]) : this.dateObjectFromUTC(this.doc['http://www.xbrl.org/2003/instance/Period']);
-      this.EndDate = this.IsDuration ? new Date(this.doc['http://www.xbrl.org/2003/instance/Period'].split('--')[1]) : this.dateObjectFromUTC(this.doc['http://www.xbrl.org/2003/instance/Period']);
+      this.StartDate = this.IsDuration ? this.dateObjectFromUTC(this.doc['http://www.xbrl.org/2003/instance/Period'].split('--')[0]) : this.dateObjectFromUTC(this.doc['http://www.xbrl.org/2003/instance/Period']);
+      this.EndDate = this.IsDuration ? this.dateObjectFromUTC(this.doc['http://www.xbrl.org/2003/instance/Period'].split('--')[1]) : this.dateObjectFromUTC(this.doc['http://www.xbrl.org/2003/instance/Period']);
       this.FilingDate = new Date(this.doc['http://www.sec.gov/Archives/edgar/filingDate']);
       this.Amendment = JSON.parse(this.doc['http://xbrl.sec.gov/Amendment']);
       this.Value = !this.IsNil ? JSON.parse(this.doc['http://www.xbrl.org/2003/instance/Value']) : null;
@@ -18,8 +18,11 @@
     }
 
     Fact.prototype.dateObjectFromUTC = function(s) {
+      var dateVar;
       s = s.split(/\D/);
-      return new Date(Date.UTC(+s[0], --s[1], +s[2], +s[3], +s[4], +s[5], 0));
+      dateVar = new Date(Date.UTC(+s[0], --s[1], +s[2], 0, 0, 0, 0));
+      dateVar.setTime(dateVar.getTime() + dateVar.getTimezoneOffset() * 60000);
+      return dateVar;
     };
 
     Fact.prototype.getValue = function(fqn) {

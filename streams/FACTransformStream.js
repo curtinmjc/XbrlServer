@@ -29,6 +29,48 @@
         EquityAttributableToNoncontrollingInterest: {},
         EquityAttributableToParent: {}
       };
+      this.isFacts = {
+        Revenues: {},
+        CostOfRevenue: {},
+        GrossProfit: {},
+        OperatingExpenses: {},
+        CostsAndExpenses: {},
+        OtherOperatingIncomeExpenses: {},
+        OperatingIncomeLoss: {},
+        NonoperatingIncomeLoss: {},
+        InterestAndDebtExpense: {},
+        IncomeLossBeforeEquityMethodInvestments: {},
+        IncomeLossFromEquityMethodInvestments: {},
+        IncomeLossFromContinuingOperationsBeforeTax: {},
+        IncomeTaxExpenseBenefit: {},
+        IncomeLossFromContinuingOperationsAfterTax: {},
+        IncomeLossFromDiscontinuedOperationsNetOfTax: {},
+        ExtraordinaryItemsOfIncomeExpenseNetOfTax: {},
+        NetIncomeLoss: {},
+        NetIncomeLossAvailableToCommonStockholdersBasic: {},
+        PreferredStockDividendsAndOtherAdjustments: {},
+        NetIncomeLossAttributableToNoncontrollingInterest: {},
+        NetIncomeLossAttributableToParent: {},
+        OtherComprehensiveIncomeLoss: {},
+        ComprehensiveIncomeLoss: {},
+        ComprehensiveIncomeLossAttributableToParent: {},
+        ComprehensiveIncomeLossAttributableToNoncontrollingInterest: {}
+      };
+      this.cfFacts = {
+        NetCashFlow: {},
+        NetCashFlowFromOperatingActivities: {},
+        NetCashFlowFromInvestingActivities: {},
+        NetCashFlowFromFinancingActivities: {},
+        NetCashFlowFromOperatingActivitiesContinuing: {},
+        NetCashFlowFromInvestingActivitiesContinuing: {},
+        NetCashFlowFromFinancingActivitiesContinuing: {},
+        NetCashFlowFromOperatingActivitiesDiscontinued: {},
+        NetCashFlowFromInvestingActivitiesDiscontinued: {},
+        NetCashFlowFromFinancingActivitiesDiscontinued: {},
+        NetCashFlowContinuing: {},
+        NetCashFlowDiscontinued: {},
+        ExchangeGainsLosses: {}
+      };
       ref = this.entities;
       for (i = 0, len = ref.length; i < len; i++) {
         entity = ref[i];
@@ -45,75 +87,262 @@
         this.bsFacts.Equity[entity] = {};
         this.bsFacts.EquityAttributableToNoncontrollingInterest[entity] = {};
         this.bsFacts.EquityAttributableToParent[entity] = {};
+        this.isFacts.Revenues[entity] = {};
+        this.isFacts.CostOfRevenue[entity] = {};
+        this.isFacts.GrossProfit[entity] = {};
+        this.isFacts.OperatingExpenses[entity] = {};
+        this.isFacts.CostsAndExpenses[entity] = {};
+        this.isFacts.OtherOperatingIncomeExpenses[entity] = {};
+        this.isFacts.OperatingIncomeLoss[entity] = {};
+        this.isFacts.NonoperatingIncomeLoss[entity] = {};
+        this.isFacts.InterestAndDebtExpense[entity] = {};
+        this.isFacts.IncomeLossBeforeEquityMethodInvestments[entity] = {};
+        this.isFacts.IncomeLossFromEquityMethodInvestments[entity] = {};
+        this.isFacts.IncomeLossFromContinuingOperationsBeforeTax[entity] = {};
+        this.isFacts.IncomeTaxExpenseBenefit[entity] = {};
+        this.isFacts.IncomeLossFromContinuingOperationsAfterTax[entity] = {};
+        this.isFacts.IncomeLossFromDiscontinuedOperationsNetOfTax[entity] = {};
+        this.isFacts.ExtraordinaryItemsOfIncomeExpenseNetOfTax[entity] = {};
+        this.isFacts.NetIncomeLoss[entity] = {};
+        this.isFacts.NetIncomeLossAvailableToCommonStockholdersBasic[entity] = {};
+        this.isFacts.PreferredStockDividendsAndOtherAdjustments[entity] = {};
+        this.isFacts.NetIncomeLossAttributableToNoncontrollingInterest[entity] = {};
+        this.isFacts.NetIncomeLossAttributableToParent[entity] = {};
+        this.isFacts.OtherComprehensiveIncomeLoss[entity] = {};
+        this.isFacts.ComprehensiveIncomeLoss[entity] = {};
+        this.isFacts.ComprehensiveIncomeLossAttributableToParent[entity] = {};
+        this.isFacts.ComprehensiveIncomeLossAttributableToNoncontrollingInterest[entity] = {};
+        this.cfFacts.NetCashFlow[entity] = {};
+        this.cfFacts.NetCashFlowFromOperatingActivities[entity] = {};
+        this.cfFacts.NetCashFlowFromInvestingActivities[entity] = {};
+        this.cfFacts.NetCashFlowFromFinancingActivities[entity] = {};
+        this.cfFacts.NetCashFlowFromOperatingActivitiesContinuing[entity] = {};
+        this.cfFacts.NetCashFlowFromInvestingActivitiesContinuing[entity] = {};
+        this.cfFacts.NetCashFlowFromFinancingActivitiesContinuing[entity] = {};
+        this.cfFacts.NetCashFlowFromOperatingActivitiesDiscontinued[entity] = {};
+        this.cfFacts.NetCashFlowFromInvestingActivitiesDiscontinued[entity] = {};
+        this.cfFacts.NetCashFlowFromFinancingActivitiesDiscontinued[entity] = {};
+        this.cfFacts.NetCashFlowContinuing[entity] = {};
+        this.cfFacts.NetCashFlowDiscontinued[entity] = {};
+        this.cfFacts.ExchangeGainsLosses[entity] = {};
       }
-      this.bsDates = {};
+      this.instantDates = {};
+      this.durationDates = {};
       FACTransformStream.__super__.constructor.call(this, {
         objectMode: true
       });
     }
 
+    FACTransformStream.prototype.chooseFact = function(fact1, fact2) {
+      if (fact1 == null) {
+        return fact2;
+      } else if (fact1.FilingDate < fact2.FilingDate) {
+        return fact2;
+      } else if (fact1.FilingDate === fact2.FilingDate && !fact1.Amendment && fact2.Amendment) {
+        return fact2;
+      } else {
+        return fact1;
+      }
+    };
+
     FACTransformStream.prototype._transform = function(chunk, enc, next) {
       var fact, timeIndex;
       fact = new Fact(chunk);
-      timeIndex = "" + (fact.EndDate.getTime());
+      timeIndex = fact.IsDuration ? (fact.StartDate.getTime()) + "--" + (fact.EndDate.getTime()) : "" + (fact.EndDate.getTime());
       switch (fact.ElementName) {
         case 'fac:Assets':
-          this.bsFacts.Assets[fact.Entity][timeIndex] = fact.Value;
+          this.bsFacts.Assets[fact.Entity][timeIndex] = this.chooseFact(this.bsFacts.Assets[fact.Entity][timeIndex], fact);
           break;
         case 'fac:CurrentAssets':
-          this.bsFacts.CurrentAssets[fact.Entity][timeIndex] = fact.Value;
+          this.bsFacts.CurrentAssets[fact.Entity][timeIndex] = this.chooseFact(this.bsFacts.CurrentAssets[fact.Entity][timeIndex], fact);
           break;
         case 'fac:NoncurrentAssets':
-          this.bsFacts.NoncurrentAssets[fact.Entity][timeIndex] = fact.Value;
+          this.bsFacts.NoncurrentAssets[fact.Entity][timeIndex] = this.chooseFact(this.bsFacts.NoncurrentAssets[fact.Entity][timeIndex], fact);
           break;
         case 'fac:LiabilitiesAndEquity':
-          this.bsFacts.LiabilitiesAndEquity[fact.Entity][timeIndex] = fact.Value;
+          this.bsFacts.LiabilitiesAndEquity[fact.Entity][timeIndex] = this.chooseFact(this.bsFacts.LiabilitiesAndEquity[fact.Entity][timeIndex], fact);
           break;
         case 'fac:Liabilities':
-          this.bsFacts.Liabilities[fact.Entity][timeIndex] = fact.Value;
+          this.bsFacts.Liabilities[fact.Entity][timeIndex] = this.chooseFact(this.bsFacts.Liabilities[fact.Entity][timeIndex], fact);
           break;
         case 'fac:CurrentLiabilities':
-          this.bsFacts.CurrentLiabilities[fact.Entity][timeIndex] = fact.Value;
+          this.bsFacts.CurrentLiabilities[fact.Entity][timeIndex] = this.chooseFact(this.bsFacts.CurrentLiabilities[fact.Entity][timeIndex], fact);
           break;
         case 'fac:NoncurrentLiabilities':
-          this.bsFacts.NoncurrentLiabilities[fact.Entity][timeIndex] = fact.Value;
+          this.bsFacts.NoncurrentLiabilities[fact.Entity][timeIndex] = this.chooseFact(this.bsFacts.NoncurrentLiabilities[fact.Entity][timeIndex], fact);
           break;
         case 'fac:CommitmentsAndContingencies':
-          this.bsFacts.CommitmentsAndContingencies[fact.Entity][timeIndex] = fact.Value;
+          this.bsFacts.CommitmentsAndContingencies[fact.Entity][timeIndex] = this.chooseFact(this.bsFacts.CommitmentsAndContingencies[fact.Entity][timeIndex], fact);
           break;
         case 'fac:TemporaryEquity':
-          this.bsFacts.TemporaryEquity[fact.Entity][timeIndex] = fact.Value;
+          this.bsFacts.TemporaryEquity[fact.Entity][timeIndex] = this.chooseFact(this.bsFacts.TemporaryEquity[fact.Entity][timeIndex], fact);
           break;
         case 'fac:RedeemableNoncontrollingInterest':
-          this.bsFacts.RedeemableNoncontrollingInterest[fact.Entity][timeIndex] = fact.Value;
+          this.bsFacts.RedeemableNoncontrollingInterest[fact.Entity][timeIndex] = this.chooseFact(this.bsFacts.RedeemableNoncontrollingInterest[fact.Entity][timeIndex], fact);
           break;
         case 'fac:Equity':
-          this.bsFacts.Equity[fact.Entity][timeIndex] = fact.Value;
+          this.bsFacts.Equity[fact.Entity][timeIndex] = this.chooseFact(this.bsFacts.Equity[fact.Entity][timeIndex], fact);
           break;
         case 'fac:EquityAttributableToNoncontrollingInterest':
-          this.bsFacts.EquityAttributableToNoncontrollingInterest[fact.Entity][timeIndex] = fact.Value;
+          this.bsFacts.EquityAttributableToNoncontrollingInterest[fact.Entity][timeIndex] = this.chooseFact(this.bsFacts.EquityAttributableToNoncontrollingInterest[fact.Entity][timeIndex], fact);
           break;
         case 'fac:EquityAttributableToParent':
-          this.bsFacts.EquityAttributableToParent[fact.Entity][timeIndex] = fact.Value;
+          this.bsFacts.EquityAttributableToParent[fact.Entity][timeIndex] = this.chooseFact(this.bsFacts.EquityAttributableToParent[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:Revenues':
+          this.isFacts.Revenues[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.Revenues[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:CostOfRevenue':
+          this.isFacts.CostOfRevenue[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.CostOfRevenue[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:GrossProfit':
+          this.isFacts.GrossProfit[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.GrossProfit[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:OperatingExpenses':
+          this.isFacts.OperatingExpenses[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.OperatingExpenses[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:CostsAndExpenses':
+          this.isFacts.CostsAndExpenses[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.CostsAndExpenses[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:OtherOperatingIncomeExpenses':
+          this.isFacts.OtherOperatingIncomeExpenses[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.OtherOperatingIncomeExpenses[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:OperatingIncomeLoss':
+          this.isFacts.OperatingIncomeLoss[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.OperatingIncomeLoss[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:NonoperatingIncomeLoss':
+          this.isFacts.NonoperatingIncomeLoss[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.NonoperatingIncomeLoss[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:InterestAndDebtExpense':
+          this.isFacts.InterestAndDebtExpense[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.InterestAndDebtExpense[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:IncomeLossBeforeEquityMethodInvestments':
+          this.isFacts.IncomeLossBeforeEquityMethodInvestments[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.IncomeLossBeforeEquityMethodInvestments[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:IncomeLossFromEquityMethodInvestments':
+          this.isFacts.IncomeLossFromEquityMethodInvestments[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.IncomeLossFromEquityMethodInvestments[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:IncomeLossFromContinuingOperationsBeforeTax':
+          this.isFacts.IncomeLossFromContinuingOperationsBeforeTax[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.IncomeLossFromContinuingOperationsBeforeTax[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:IncomeTaxExpenseBenefit':
+          this.isFacts.IncomeTaxExpenseBenefit[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.IncomeTaxExpenseBenefit[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:IncomeLossFromContinuingOperationsAfterTax':
+          this.isFacts.IncomeLossFromContinuingOperationsAfterTax[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.IncomeLossFromContinuingOperationsAfterTax[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:IncomeLossFromDiscontinuedOperationsNetOfTax':
+          this.isFacts.IncomeLossFromDiscontinuedOperationsNetOfTax[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.IncomeLossFromDiscontinuedOperationsNetOfTax[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:ExtraordinaryItemsOfIncomeExpenseNetOfTax':
+          this.isFacts.ExtraordinaryItemsOfIncomeExpenseNetOfTax[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.ExtraordinaryItemsOfIncomeExpenseNetOfTax[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:NetIncomeLoss':
+          this.isFacts.NetIncomeLoss[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.NetIncomeLoss[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:NetIncomeLossAvailableToCommonStockholdersBasic':
+          this.isFacts.NetIncomeLossAvailableToCommonStockholdersBasic[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.NetIncomeLossAvailableToCommonStockholdersBasic[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:PreferredStockDividendsAndOtherAdjustments':
+          this.isFacts.PreferredStockDividendsAndOtherAdjustments[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.PreferredStockDividendsAndOtherAdjustments[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:NetIncomeLossAttributableToNoncontrollingInterest':
+          this.isFacts.NetIncomeLossAttributableToNoncontrollingInterest[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.NetIncomeLossAttributableToNoncontrollingInterest[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:NetIncomeLossAttributableToParent':
+          this.isFacts.NetIncomeLossAttributableToParent[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.NetIncomeLossAttributableToParent[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:OtherComprehensiveIncomeLoss':
+          this.isFacts.OtherComprehensiveIncomeLoss[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.OtherComprehensiveIncomeLoss[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:ComprehensiveIncomeLoss':
+          this.isFacts.ComprehensiveIncomeLoss[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.ComprehensiveIncomeLoss[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:ComprehensiveIncomeLossAttributableToParent':
+          this.isFacts.ComprehensiveIncomeLossAttributableToParent[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.ComprehensiveIncomeLossAttributableToParent[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:ComprehensiveIncomeLossAttributableToNoncontrollingInterest':
+          this.isFacts.ComprehensiveIncomeLossAttributableToNoncontrollingInterest[fact.Entity][timeIndex] = this.chooseFact(this.isFacts.ComprehensiveIncomeLossAttributableToNoncontrollingInterest[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:NetCashFlow':
+          this.cfFacts.NetCashFlow[fact.Entity][timeIndex] = this.chooseFact(this.cfFacts.NetCashFlow[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:NetCashFlowFromOperatingActivities':
+          this.cfFacts.NetCashFlowFromOperatingActivities[fact.Entity][timeIndex] = this.chooseFact(this.cfFacts.NetCashFlowFromOperatingActivities[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:NetCashFlowFromInvestingActivities':
+          this.cfFacts.NetCashFlowFromInvestingActivities[fact.Entity][timeIndex] = this.chooseFact(this.cfFacts.NetCashFlowFromInvestingActivities[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:NetCashFlowFromFinancingActivities':
+          this.cfFacts.NetCashFlowFromFinancingActivities[fact.Entity][timeIndex] = this.chooseFact(this.cfFacts.NetCashFlowFromFinancingActivities[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:NetCashFlowFromOperatingActivitiesContinuing':
+          this.cfFacts.NetCashFlowFromOperatingActivitiesContinuing[fact.Entity][timeIndex] = this.chooseFact(this.cfFacts.NetCashFlowFromOperatingActivitiesContinuing[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:NetCashFlowFromInvestingActivitiesContinuing':
+          this.cfFacts.NetCashFlowFromInvestingActivitiesContinuing[fact.Entity][timeIndex] = this.chooseFact(this.cfFacts.NetCashFlowFromInvestingActivitiesContinuing[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:NetCashFlowFromFinancingActivitiesContinuing':
+          this.cfFacts.NetCashFlowFromFinancingActivitiesContinuing[fact.Entity][timeIndex] = this.chooseFact(this.cfFacts.NetCashFlowFromFinancingActivitiesContinuing[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:NetCashFlowFromOperatingActivitiesDiscontinued':
+          this.cfFacts.NetCashFlowFromOperatingActivitiesDiscontinued[fact.Entity][timeIndex] = this.chooseFact(this.cfFacts.NetCashFlowFromOperatingActivitiesDiscontinued[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:NetCashFlowFromInvestingActivitiesDiscontinued':
+          this.cfFacts.NetCashFlowFromInvestingActivitiesDiscontinued[fact.Entity][timeIndex] = this.chooseFact(this.cfFacts.NetCashFlowFromInvestingActivitiesDiscontinued[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:NetCashFlowFromFinancingActivitiesDiscontinued':
+          this.cfFacts.NetCashFlowFromFinancingActivitiesDiscontinued[fact.Entity][timeIndex] = this.chooseFact(this.cfFacts.NetCashFlowFromFinancingActivitiesDiscontinued[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:NetCashFlowContinuing':
+          this.cfFacts.NetCashFlowContinuing[fact.Entity][timeIndex] = this.chooseFact(this.cfFacts.NetCashFlowContinuing[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:NetCashFlowDiscontinued':
+          this.cfFacts.NetCashFlowDiscontinued[fact.Entity][timeIndex] = this.chooseFact(this.cfFacts.NetCashFlowDiscontinued[fact.Entity][timeIndex], fact);
+          break;
+        case 'fac:ExchangeGainsLosses':
+          this.cfFacts.ExchangeGainsLosses[fact.Entity][timeIndex] = this.chooseFact(this.cfFacts.ExchangeGainsLosses[fact.Entity][timeIndex], fact);
       }
-      this.bsDates["" + (fact.EndDate.getTime())] = fact.EndDate.getTime();
+      if (fact.IsDuration) {
+        this.durationDates[(fact.StartDate.getTime()) + "--" + (fact.EndDate.getTime())] = {
+          startDate: fact.StartDate,
+          endDate: fact.EndDate
+        };
+      } else {
+        this.instantDates["" + (fact.EndDate.getTime())] = fact.EndDate;
+      }
       return next();
     };
 
+    FACTransformStream.prototype.formatBSValue = function(fact) {
+      if (fact.IsNil) {
+        return "nil";
+      }
+      if (fact.GetUnitDescription() === 'USD') {
+        if (fact.Value >= 0) {
+          return (fact.Value / 1000000.0) + "&nbsp;";
+        } else {
+          return "(" + (Math.abs(fact.Value / 1000000.0)) + ")";
+        }
+      } else {
+        return "" + (fact.Value / 1000000.0) + (fact.GetUnitDescription());
+      }
+    };
+
     FACTransformStream.prototype._flush = function(next) {
-      var date, entity, i, j, k, len, len1, outputBsDates, outputBsFacts, ref, sortedBsDates, timeIndex, v, value;
+      var date, dateObj, entity, i, j, k, l, len, len1, len2, len3, m, outputBsFacts, outputCfFacts, outputDurationDates, outputInstantDates, outputIsFacts, ref, ref1, sortedDurationDates, sortedInstantDates, timeIndex, v, value;
       outputBsFacts = {};
-      sortedBsDates = (function() {
+      sortedInstantDates = (function() {
         var ref, results;
-        ref = this.bsDates;
+        ref = this.instantDates;
         results = [];
         for (k in ref) {
           v = ref[k];
-          results.push(new Date(v));
+          results.push(v);
         }
         return results;
       }).call(this);
-      sortedBsDates.sort(function(a, b) {
+      sortedInstantDates.sort(function(a, b) {
         if (a > b) {
           return -1;
         } else if (a < b) {
@@ -122,12 +351,44 @@
           return 0;
         }
       });
-      outputBsDates = (function() {
+      sortedDurationDates = (function() {
+        var ref, results;
+        ref = this.durationDates;
+        results = [];
+        for (k in ref) {
+          v = ref[k];
+          results.push(v);
+        }
+        return results;
+      }).call(this);
+      sortedDurationDates.sort(function(a, b) {
+        if (a.endDate > b.endDate) {
+          return -1;
+        } else if (a.endDate < b.endDate) {
+          return 1;
+        } else if (a.endDate === b.endDate && a.startDate > b.startDate) {
+          return -1;
+        } else if (a.endDate === b.endDate && a.startDate < b.startDate) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      outputInstantDates = (function() {
         var i, len, results;
         results = [];
-        for (i = 0, len = sortedBsDates.length; i < len; i++) {
-          value = sortedBsDates[i];
+        for (i = 0, len = sortedInstantDates.length; i < len; i++) {
+          value = sortedInstantDates[i];
           results.push(value.getMonth() + 1 + "/" + value.getDate() + "/" + value.getFullYear());
+        }
+        return results;
+      })();
+      outputDurationDates = (function() {
+        var i, len, results;
+        results = [];
+        for (i = 0, len = sortedDurationDates.length; i < len; i++) {
+          value = sortedDurationDates[i];
+          results.push(value.startDate.getMonth() + 1 + "/" + value.startDate.getDate() + "/" + value.startDate.getFullYear() + '-' + (value.endDate.getMonth() + 1) + "/" + value.endDate.getDate() + "/" + value.endDate.getFullYear());
         }
         return results;
       })();
@@ -146,30 +407,121 @@
         EquityAttributableToNoncontrollingInterest: [],
         EquityAttributableToParent: []
       };
-      for (i = 0, len = sortedBsDates.length; i < len; i++) {
-        date = sortedBsDates[i];
+      outputIsFacts = {
+        Revenues: [],
+        CostOfRevenue: [],
+        GrossProfit: [],
+        OperatingExpenses: [],
+        CostsAndExpenses: [],
+        OtherOperatingIncomeExpenses: [],
+        OperatingIncomeLoss: [],
+        NonoperatingIncomeLoss: [],
+        InterestAndDebtExpense: [],
+        IncomeLossBeforeEquityMethodInvestments: [],
+        IncomeLossFromEquityMethodInvestments: [],
+        IncomeLossFromContinuingOperationsBeforeTax: [],
+        IncomeTaxExpenseBenefit: [],
+        IncomeLossFromContinuingOperationsAfterTax: [],
+        IncomeLossFromDiscontinuedOperationsNetOfTax: [],
+        ExtraordinaryItemsOfIncomeExpenseNetOfTax: [],
+        NetIncomeLoss: [],
+        NetIncomeLossAvailableToCommonStockholdersBasic: [],
+        PreferredStockDividendsAndOtherAdjustments: [],
+        NetIncomeLossAttributableToNoncontrollingInterest: [],
+        NetIncomeLossAttributableToParent: [],
+        OtherComprehensiveIncomeLoss: [],
+        ComprehensiveIncomeLoss: [],
+        ComprehensiveIncomeLossAttributableToParent: [],
+        ComprehensiveIncomeLossAttributableToNoncontrollingInterest: []
+      };
+      outputCfFacts = {
+        NetCashFlow: [],
+        NetCashFlowFromOperatingActivities: [],
+        NetCashFlowFromInvestingActivities: [],
+        NetCashFlowFromFinancingActivities: [],
+        NetCashFlowFromOperatingActivitiesContinuing: [],
+        NetCashFlowFromInvestingActivitiesContinuing: [],
+        NetCashFlowFromFinancingActivitiesContinuing: [],
+        NetCashFlowFromOperatingActivitiesDiscontinued: [],
+        NetCashFlowFromInvestingActivitiesDiscontinued: [],
+        NetCashFlowFromFinancingActivitiesDiscontinued: [],
+        NetCashFlowContinuing: [],
+        NetCashFlowDiscontinued: [],
+        ExchangeGainsLosses: []
+      };
+      for (i = 0, len = sortedInstantDates.length; i < len; i++) {
+        date = sortedInstantDates[i];
         ref = this.entities;
         for (j = 0, len1 = ref.length; j < len1; j++) {
           entity = ref[j];
           timeIndex = "" + (date.getTime());
-          outputBsFacts.Assets.push(this.bsFacts.Assets[entity][timeIndex] != null ? this.bsFacts.Assets[entity][timeIndex] : null);
-          outputBsFacts.CurrentAssets.push(this.bsFacts.CurrentAssets[entity][timeIndex] != null ? this.bsFacts.CurrentAssets[entity][timeIndex] : null);
-          outputBsFacts.NoncurrentAssets.push(this.bsFacts.NoncurrentAssets[entity][timeIndex] != null ? this.bsFacts.NoncurrentAssets[entity][timeIndex] : null);
-          outputBsFacts.LiabilitiesAndEquity.push(this.bsFacts.LiabilitiesAndEquity[entity][timeIndex] != null ? this.bsFacts.LiabilitiesAndEquity[entity][timeIndex] : null);
-          outputBsFacts.Liabilities.push(this.bsFacts.Liabilities[entity][timeIndex] != null ? this.bsFacts.Liabilities[entity][timeIndex] : null);
-          outputBsFacts.CurrentLiabilities.push(this.bsFacts.CurrentLiabilities[entity][timeIndex] != null ? this.bsFacts.CurrentLiabilities[entity][timeIndex] : null);
-          outputBsFacts.NoncurrentLiabilities.push(this.bsFacts.NoncurrentLiabilities[entity][timeIndex] != null ? this.bsFacts.NoncurrentLiabilities[entity][timeIndex] : null);
-          outputBsFacts.CommitmentsAndContingencies.push(this.bsFacts.CommitmentsAndContingencies[entity][timeIndex] != null ? this.bsFacts.CommitmentsAndContingencies[entity][timeIndex] : null);
-          outputBsFacts.TemporaryEquity.push(this.bsFacts.TemporaryEquity[entity][timeIndex] != null ? this.bsFacts.TemporaryEquity[entity][timeIndex] : null);
-          outputBsFacts.RedeemableNoncontrollingInterest.push(this.bsFacts.RedeemableNoncontrollingInterest[entity][timeIndex] != null ? this.bsFacts.RedeemableNoncontrollingInterest[entity][timeIndex] : null);
-          outputBsFacts.Equity.push(this.bsFacts.Equity[entity][timeIndex] != null ? this.bsFacts.Equity[entity][timeIndex] : null);
-          outputBsFacts.EquityAttributableToNoncontrollingInterest.push(this.bsFacts.EquityAttributableToNoncontrollingInterest[entity][timeIndex] != null ? this.bsFacts.EquityAttributableToNoncontrollingInterest[entity][timeIndex] : null);
-          outputBsFacts.EquityAttributableToParent.push(this.bsFacts.EquityAttributableToParent[entity][timeIndex] != null ? this.bsFacts.EquityAttributableToParent[entity][timeIndex] : null);
+          outputBsFacts.Assets.push(this.bsFacts.Assets[entity][timeIndex] != null ? this.formatBSValue(this.bsFacts.Assets[entity][timeIndex]) : null);
+          outputBsFacts.CurrentAssets.push(this.bsFacts.CurrentAssets[entity][timeIndex] != null ? this.formatBSValue(this.bsFacts.CurrentAssets[entity][timeIndex]) : null);
+          outputBsFacts.NoncurrentAssets.push(this.bsFacts.NoncurrentAssets[entity][timeIndex] != null ? this.formatBSValue(this.bsFacts.NoncurrentAssets[entity][timeIndex]) : null);
+          outputBsFacts.LiabilitiesAndEquity.push(this.bsFacts.LiabilitiesAndEquity[entity][timeIndex] != null ? this.formatBSValue(this.bsFacts.LiabilitiesAndEquity[entity][timeIndex]) : null);
+          outputBsFacts.Liabilities.push(this.bsFacts.Liabilities[entity][timeIndex] != null ? this.formatBSValue(this.bsFacts.Liabilities[entity][timeIndex]) : null);
+          outputBsFacts.CurrentLiabilities.push(this.bsFacts.CurrentLiabilities[entity][timeIndex] != null ? this.formatBSValue(this.bsFacts.CurrentLiabilities[entity][timeIndex]) : null);
+          outputBsFacts.NoncurrentLiabilities.push(this.bsFacts.NoncurrentLiabilities[entity][timeIndex] != null ? this.formatBSValue(this.bsFacts.NoncurrentLiabilities[entity][timeIndex]) : null);
+          outputBsFacts.CommitmentsAndContingencies.push(this.bsFacts.CommitmentsAndContingencies[entity][timeIndex] != null ? this.formatBSValue(this.bsFacts.CommitmentsAndContingencies[entity][timeIndex]) : null);
+          outputBsFacts.TemporaryEquity.push(this.bsFacts.TemporaryEquity[entity][timeIndex] != null ? this.formatBSValue(this.bsFacts.TemporaryEquity[entity][timeIndex]) : null);
+          outputBsFacts.RedeemableNoncontrollingInterest.push(this.bsFacts.RedeemableNoncontrollingInterest[entity][timeIndex] != null ? this.formatBSValue(this.bsFacts.RedeemableNoncontrollingInterest[entity][timeIndex]) : null);
+          outputBsFacts.Equity.push(this.bsFacts.Equity[entity][timeIndex] != null ? this.formatBSValue(this.bsFacts.Equity[entity][timeIndex]) : null);
+          outputBsFacts.EquityAttributableToNoncontrollingInterest.push(this.bsFacts.EquityAttributableToNoncontrollingInterest[entity][timeIndex] != null ? this.formatBSValue(this.bsFacts.EquityAttributableToNoncontrollingInterest[entity][timeIndex]) : null);
+          outputBsFacts.EquityAttributableToParent.push(this.bsFacts.EquityAttributableToParent[entity][timeIndex] != null ? this.formatBSValue(this.bsFacts.EquityAttributableToParent[entity][timeIndex]) : null);
+        }
+      }
+      for (l = 0, len2 = sortedDurationDates.length; l < len2; l++) {
+        dateObj = sortedDurationDates[l];
+        ref1 = this.entities;
+        for (m = 0, len3 = ref1.length; m < len3; m++) {
+          entity = ref1[m];
+          timeIndex = (dateObj.startDate.getTime()) + "--" + (dateObj.endDate.getTime());
+          outputIsFacts.Revenues.push(this.isFacts.Revenues[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.Revenues[entity][timeIndex]) : null);
+          outputIsFacts.CostOfRevenue.push(this.isFacts.CostOfRevenue[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.CostOfRevenue[entity][timeIndex]) : null);
+          outputIsFacts.GrossProfit.push(this.isFacts.GrossProfit[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.GrossProfit[entity][timeIndex]) : null);
+          outputIsFacts.OperatingExpenses.push(this.isFacts.OperatingExpenses[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.OperatingExpenses[entity][timeIndex]) : null);
+          outputIsFacts.CostsAndExpenses.push(this.isFacts.CostsAndExpenses[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.CostsAndExpenses[entity][timeIndex]) : null);
+          outputIsFacts.OtherOperatingIncomeExpenses.push(this.isFacts.OtherOperatingIncomeExpenses[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.OtherOperatingIncomeExpenses[entity][timeIndex]) : null);
+          outputIsFacts.OperatingIncomeLoss.push(this.isFacts.OperatingIncomeLoss[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.OperatingIncomeLoss[entity][timeIndex]) : null);
+          outputIsFacts.NonoperatingIncomeLoss.push(this.isFacts.NonoperatingIncomeLoss[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.NonoperatingIncomeLoss[entity][timeIndex]) : null);
+          outputIsFacts.InterestAndDebtExpense.push(this.isFacts.InterestAndDebtExpense[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.InterestAndDebtExpense[entity][timeIndex]) : null);
+          outputIsFacts.IncomeLossBeforeEquityMethodInvestments.push(this.isFacts.IncomeLossBeforeEquityMethodInvestments[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.IncomeLossBeforeEquityMethodInvestments[entity][timeIndex]) : null);
+          outputIsFacts.IncomeLossFromEquityMethodInvestments.push(this.isFacts.IncomeLossFromEquityMethodInvestments[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.IncomeLossFromEquityMethodInvestments[entity][timeIndex]) : null);
+          outputIsFacts.IncomeLossFromContinuingOperationsBeforeTax.push(this.isFacts.IncomeLossFromContinuingOperationsBeforeTax[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.IncomeLossFromContinuingOperationsBeforeTax[entity][timeIndex]) : null);
+          outputIsFacts.IncomeTaxExpenseBenefit.push(this.isFacts.IncomeTaxExpenseBenefit[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.IncomeTaxExpenseBenefit[entity][timeIndex]) : null);
+          outputIsFacts.IncomeLossFromContinuingOperationsAfterTax.push(this.isFacts.IncomeLossFromContinuingOperationsAfterTax[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.IncomeLossFromContinuingOperationsAfterTax[entity][timeIndex]) : null);
+          outputIsFacts.IncomeLossFromDiscontinuedOperationsNetOfTax.push(this.isFacts.IncomeLossFromDiscontinuedOperationsNetOfTax[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.IncomeLossFromDiscontinuedOperationsNetOfTax[entity][timeIndex]) : null);
+          outputIsFacts.ExtraordinaryItemsOfIncomeExpenseNetOfTax.push(this.isFacts.ExtraordinaryItemsOfIncomeExpenseNetOfTax[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.ExtraordinaryItemsOfIncomeExpenseNetOfTax[entity][timeIndex]) : null);
+          outputIsFacts.NetIncomeLoss.push(this.isFacts.NetIncomeLoss[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.NetIncomeLoss[entity][timeIndex]) : null);
+          outputIsFacts.NetIncomeLossAvailableToCommonStockholdersBasic.push(this.isFacts.NetIncomeLossAvailableToCommonStockholdersBasic[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.NetIncomeLossAvailableToCommonStockholdersBasic[entity][timeIndex]) : null);
+          outputIsFacts.PreferredStockDividendsAndOtherAdjustments.push(this.isFacts.PreferredStockDividendsAndOtherAdjustments[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.PreferredStockDividendsAndOtherAdjustments[entity][timeIndex]) : null);
+          outputIsFacts.NetIncomeLossAttributableToNoncontrollingInterest.push(this.isFacts.NetIncomeLossAttributableToNoncontrollingInterest[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.NetIncomeLossAttributableToNoncontrollingInterest[entity][timeIndex]) : null);
+          outputIsFacts.NetIncomeLossAttributableToParent.push(this.isFacts.NetIncomeLossAttributableToParent[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.NetIncomeLossAttributableToParent[entity][timeIndex]) : null);
+          outputIsFacts.OtherComprehensiveIncomeLoss.push(this.isFacts.OtherComprehensiveIncomeLoss[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.OtherComprehensiveIncomeLoss[entity][timeIndex]) : null);
+          outputIsFacts.ComprehensiveIncomeLoss.push(this.isFacts.ComprehensiveIncomeLoss[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.ComprehensiveIncomeLoss[entity][timeIndex]) : null);
+          outputIsFacts.ComprehensiveIncomeLossAttributableToParent.push(this.isFacts.ComprehensiveIncomeLossAttributableToParent[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.ComprehensiveIncomeLossAttributableToParent[entity][timeIndex]) : null);
+          outputIsFacts.ComprehensiveIncomeLossAttributableToNoncontrollingInterest.push(this.isFacts.ComprehensiveIncomeLossAttributableToNoncontrollingInterest[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.ComprehensiveIncomeLossAttributableToNoncontrollingInterest[entity][timeIndex]) : null);
+          outputCfFacts.NetCashFlow.push(this.cfFacts.NetCashFlow[entity][timeIndex] != null ? this.formatBSValue(this.cfFacts.NetCashFlow[entity][timeIndex]) : null);
+          outputCfFacts.NetCashFlowFromOperatingActivities.push(this.cfFacts.NetCashFlowFromOperatingActivities[entity][timeIndex] != null ? this.formatBSValue(this.cfFacts.NetCashFlowFromOperatingActivities[entity][timeIndex]) : null);
+          outputCfFacts.NetCashFlowFromInvestingActivities.push(this.cfFacts.NetCashFlowFromInvestingActivities[entity][timeIndex] != null ? this.formatBSValue(this.cfFacts.NetCashFlowFromInvestingActivities[entity][timeIndex]) : null);
+          outputCfFacts.NetCashFlowFromFinancingActivities.push(this.cfFacts.NetCashFlowFromFinancingActivities[entity][timeIndex] != null ? this.formatBSValue(this.cfFacts.NetCashFlowFromFinancingActivities[entity][timeIndex]) : null);
+          outputCfFacts.NetCashFlowFromOperatingActivitiesContinuing.push(this.cfFacts.NetCashFlowFromOperatingActivitiesContinuing[entity][timeIndex] != null ? this.formatBSValue(this.cfFacts.NetCashFlowFromOperatingActivitiesContinuing[entity][timeIndex]) : null);
+          outputCfFacts.NetCashFlowFromInvestingActivitiesContinuing.push(this.cfFacts.NetCashFlowFromInvestingActivitiesContinuing[entity][timeIndex] != null ? this.formatBSValue(this.cfFacts.NetCashFlowFromInvestingActivitiesContinuing[entity][timeIndex]) : null);
+          outputCfFacts.NetCashFlowFromFinancingActivitiesContinuing.push(this.cfFacts.NetCashFlowFromFinancingActivitiesContinuing[entity][timeIndex] != null ? this.formatBSValue(this.cfFacts.NetCashFlowFromFinancingActivitiesContinuing[entity][timeIndex]) : null);
+          outputCfFacts.NetCashFlowFromOperatingActivitiesDiscontinued.push(this.cfFacts.NetCashFlowFromOperatingActivitiesDiscontinued[entity][timeIndex] != null ? this.formatBSValue(this.cfFacts.NetCashFlowFromOperatingActivitiesDiscontinued[entity][timeIndex]) : null);
+          outputCfFacts.NetCashFlowFromInvestingActivitiesDiscontinued.push(this.cfFacts.NetCashFlowFromInvestingActivitiesDiscontinued[entity][timeIndex] != null ? this.formatBSValue(this.cfFacts.NetCashFlowFromInvestingActivitiesDiscontinued[entity][timeIndex]) : null);
+          outputCfFacts.NetCashFlowFromFinancingActivitiesDiscontinued.push(this.cfFacts.NetCashFlowFromFinancingActivitiesDiscontinued[entity][timeIndex] != null ? this.formatBSValue(this.cfFacts.NetCashFlowFromFinancingActivitiesDiscontinued[entity][timeIndex]) : null);
+          outputCfFacts.NetCashFlowContinuing.push(this.cfFacts.NetCashFlowContinuing[entity][timeIndex] != null ? this.formatBSValue(this.cfFacts.NetCashFlowContinuing[entity][timeIndex]) : null);
+          outputCfFacts.NetCashFlowDiscontinued.push(this.cfFacts.NetCashFlowDiscontinued[entity][timeIndex] != null ? this.formatBSValue(this.cfFacts.NetCashFlowDiscontinued[entity][timeIndex]) : null);
+          outputCfFacts.ExchangeGainsLosses.push(this.cfFacts.ExchangeGainsLosses[entity][timeIndex] != null ? this.formatBSValue(this.cfFacts.ExchangeGainsLosses[entity][timeIndex]) : null);
         }
       }
       this.push({
-        bsDates: outputBsDates,
-        bsFacts: outputBsFacts
+        instantDates: outputInstantDates,
+        durationDates: outputDurationDates,
+        bsFacts: outputBsFacts,
+        isFacts: outputIsFacts,
+        cfFacts: outputCfFacts
       });
       return next();
     };
