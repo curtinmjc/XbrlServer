@@ -12,6 +12,7 @@ class exports.Fact
     @AccesssionNumber = @doc['http://www.sec.gov/Archives/edgar/accessionNumber']
     @ElementName = @GetElementName()
     @Entity = @doc["http://www.xbrl.org/2003/instance/Entity"]
+    @FiscalPeriod = @doc["http://xbrl.mybluemix.net/FiscalPeriod"]
 
   dateObjectFromUTC: (s) ->
     s = s.split(/\D/);

@@ -138,7 +138,11 @@ class exports.FACTransformStream extends stream.Transform
   _transform: (chunk, enc, next) ->
 
     fact = new Fact(chunk)
-    timeIndex = if fact.IsDuration then "#{fact.StartDate.getTime()}--#{fact.EndDate.getTime()}" else "#{fact.EndDate.getTime()}"
+
+    if not fact.FiscalPeriod?
+      return next()
+
+    timeIndex = fact.FiscalPeriod
     switch fact.ElementName
       when 'fac:Assets' then @bsFacts.Assets[fact.Entity][timeIndex] = @chooseFact(@bsFacts.Assets[fact.Entity][timeIndex], fact)
       when 'fac:CurrentAssets' then @bsFacts.CurrentAssets[fact.Entity][timeIndex] = @chooseFact(@bsFacts.CurrentAssets[fact.Entity][timeIndex], fact)
@@ -195,9 +199,9 @@ class exports.FACTransformStream extends stream.Transform
       when 'fac:ExchangeGainsLosses' then @cfFacts.ExchangeGainsLosses[fact.Entity][timeIndex] = @chooseFact(@cfFacts.ExchangeGainsLosses[fact.Entity][timeIndex], fact)
 
     if fact.IsDuration
-      @durationDates["#{fact.StartDate.getTime()}--#{fact.EndDate.getTime()}"] = {startDate: fact.StartDate, endDate: fact.EndDate}
+      @durationDates[fact.FiscalPeriod] = {period: fact.FiscalPeriod.split(' ')[0], year: parseInt(fact.FiscalPeriod.split(' ')[1])}
     else
-      @instantDates["#{fact.EndDate.getTime()}"] = fact.EndDate
+      @instantDates[fact.FiscalPeriod] = {period: fact.FiscalPeriod.split(' ')[0], year: parseInt(fact.FiscalPeriod.split(' ')[1])}
     next()
 
   formatBSValue: (fact) ->
@@ -207,7 +211,7 @@ class exports.FACTransformStream extends stream.Transform
 
     if fact.GetUnitDescription() is 'USD'
       if fact.Value >= 0
-        return "#{fact.Value/1000000.0}&nbsp;"
+        return "#{fact.Value/1000000.0}"
       else
         return "(#{Math.abs(fact.Value/1000000.0)})"
     else
@@ -219,30 +223,39 @@ class exports.FACTransformStream extends stream.Transform
     outputBsFacts = {}
     sortedInstantDates = (v for k, v of @instantDates)
     sortedInstantDates.sort((a, b) ->
-      if a > b
+
+      periodIndices = {Q1: 1, Q2: 2, Q3: 3, YE: 4}
+
+      if a.year > b.year
         return -1
-      else if a < b
+      else if a.year < b.year
+        return 1
+      else if periodIndices[a.period] > periodIndices[b.period]
+        return -1
+      else if periodIndices[a.period] < periodIndices[b.period]
         return 1
       else
         return 0)
+
+    outputInstantDates = ("#{date.period} #{date.year}" for date in sortedInstantDates)
 
     sortedDurationDates = (v for k, v of @durationDates)
     sortedDurationDates.sort((a, b) ->
-      if a.endDate > b.endDate
+
+      periodIndices = {FY: 0, "2H": 1, Q4: 2, "Q1-Q3": 3, "Q2-Q3": 4, Q3: 5, "1H": 6, Q2: 7, Q1: 8}
+
+      if a.year > b.year
         return -1
-      else if a.endDate < b.endDate
+      else if a.year < b.year
         return 1
-      else if a.endDate is b.endDate and a.startDate > b.startDate
+      else if periodIndices[a.period] > periodIndices[b.period]
+        return 1
+      else if periodIndices[a.period] < periodIndices[b.period]
         return -1
-      else if a.endDate is b.endDate and a.startDate < b.startDate
-        return 1
       else
         return 0)
 
-
-
-    outputInstantDates = (value.getMonth()+1 + "/" + value.getDate() + "/" + value.getFullYear() for value in sortedInstantDates)
-    outputDurationDates = (value.startDate.getMonth()+1 + "/" + value.startDate.getDate() + "/" + value.startDate.getFullYear() + '-' + (value.endDate.getMonth()+1) + "/" + value.endDate.getDate() + "/" + value.endDate.getFullYear() for value in sortedDurationDates)
+    outputDurationDates = ("#{date.period} #{date.year}" for date in sortedDurationDates)
 
     outputBsFacts = {
       Assets:[],
@@ -306,7 +319,7 @@ class exports.FACTransformStream extends stream.Transform
 
     for date in sortedInstantDates
       for entity in @entities
-        timeIndex = "#{date.getTime()}"
+        timeIndex = "#{date.period} #{date.year}"
         outputBsFacts.Assets.push(if @bsFacts.Assets[entity][timeIndex]? then @formatBSValue(@bsFacts.Assets[entity][timeIndex]) else null)
         outputBsFacts.CurrentAssets.push(if @bsFacts.CurrentAssets[entity][timeIndex]? then @formatBSValue(@bsFacts.CurrentAssets[entity][timeIndex]) else null)
         outputBsFacts.NoncurrentAssets.push(if @bsFacts.NoncurrentAssets[entity][timeIndex]? then @formatBSValue(@bsFacts.NoncurrentAssets[entity][timeIndex]) else null)
@@ -321,9 +334,9 @@ class exports.FACTransformStream extends stream.Transform
         outputBsFacts.EquityAttributableToNoncontrollingInterest.push(if @bsFacts.EquityAttributableToNoncontrollingInterest[entity][timeIndex]? then @formatBSValue(@bsFacts.EquityAttributableToNoncontrollingInterest[entity][timeIndex]) else null)
         outputBsFacts.EquityAttributableToParent.push(if @bsFacts.EquityAttributableToParent[entity][timeIndex]? then @formatBSValue(@bsFacts.EquityAttributableToParent[entity][timeIndex]) else null)
 
-    for dateObj in sortedDurationDates
+    for date in sortedDurationDates
       for entity in @entities
-        timeIndex = "#{dateObj.startDate.getTime()}--#{dateObj.endDate.getTime()}"
+        timeIndex = "#{date.period} #{date.year}"
         outputIsFacts.Revenues.push(if @isFacts.Revenues[entity][timeIndex]? then @formatBSValue(@isFacts.Revenues[entity][timeIndex]) else null)
         outputIsFacts.CostOfRevenue.push(if @isFacts.CostOfRevenue[entity][timeIndex]? then @formatBSValue(@isFacts.CostOfRevenue[entity][timeIndex]) else null)
         outputIsFacts.GrossProfit.push(if @isFacts.GrossProfit[entity][timeIndex]? then @formatBSValue(@isFacts.GrossProfit[entity][timeIndex]) else null)

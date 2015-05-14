@@ -148,7 +148,10 @@
     FACTransformStream.prototype._transform = function(chunk, enc, next) {
       var fact, timeIndex;
       fact = new Fact(chunk);
-      timeIndex = fact.IsDuration ? (fact.StartDate.getTime()) + "--" + (fact.EndDate.getTime()) : "" + (fact.EndDate.getTime());
+      if (fact.FiscalPeriod == null) {
+        return next();
+      }
+      timeIndex = fact.FiscalPeriod;
       switch (fact.ElementName) {
         case 'fac:Assets':
           this.bsFacts.Assets[fact.Entity][timeIndex] = this.chooseFact(this.bsFacts.Assets[fact.Entity][timeIndex], fact);
@@ -304,12 +307,15 @@
           this.cfFacts.ExchangeGainsLosses[fact.Entity][timeIndex] = this.chooseFact(this.cfFacts.ExchangeGainsLosses[fact.Entity][timeIndex], fact);
       }
       if (fact.IsDuration) {
-        this.durationDates[(fact.StartDate.getTime()) + "--" + (fact.EndDate.getTime())] = {
-          startDate: fact.StartDate,
-          endDate: fact.EndDate
+        this.durationDates[fact.FiscalPeriod] = {
+          period: fact.FiscalPeriod.split(' ')[0],
+          year: parseInt(fact.FiscalPeriod.split(' ')[1])
         };
       } else {
-        this.instantDates["" + (fact.EndDate.getTime())] = fact.EndDate;
+        this.instantDates[fact.FiscalPeriod] = {
+          period: fact.FiscalPeriod.split(' ')[0],
+          year: parseInt(fact.FiscalPeriod.split(' ')[1])
+        };
       }
       return next();
     };
@@ -320,7 +326,7 @@
       }
       if (fact.GetUnitDescription() === 'USD') {
         if (fact.Value >= 0) {
-          return (fact.Value / 1000000.0) + "&nbsp;";
+          return "" + (fact.Value / 1000000.0);
         } else {
           return "(" + (Math.abs(fact.Value / 1000000.0)) + ")";
         }
@@ -330,7 +336,7 @@
     };
 
     FACTransformStream.prototype._flush = function(next) {
-      var date, dateObj, entity, i, j, k, l, len, len1, len2, len3, m, outputBsFacts, outputCfFacts, outputDurationDates, outputInstantDates, outputIsFacts, ref, ref1, sortedDurationDates, sortedInstantDates, timeIndex, v, value;
+      var date, entity, i, j, k, l, len, len1, len2, len3, m, outputBsFacts, outputCfFacts, outputDurationDates, outputInstantDates, outputIsFacts, ref, ref1, sortedDurationDates, sortedInstantDates, timeIndex, v;
       outputBsFacts = {};
       sortedInstantDates = (function() {
         var ref, results;
@@ -343,14 +349,34 @@
         return results;
       }).call(this);
       sortedInstantDates.sort(function(a, b) {
-        if (a > b) {
+        var periodIndices;
+        periodIndices = {
+          Q1: 1,
+          Q2: 2,
+          Q3: 3,
+          YE: 4
+        };
+        if (a.year > b.year) {
           return -1;
-        } else if (a < b) {
+        } else if (a.year < b.year) {
+          return 1;
+        } else if (periodIndices[a.period] > periodIndices[b.period]) {
+          return -1;
+        } else if (periodIndices[a.period] < periodIndices[b.period]) {
           return 1;
         } else {
           return 0;
         }
       });
+      outputInstantDates = (function() {
+        var i, len, results;
+        results = [];
+        for (i = 0, len = sortedInstantDates.length; i < len; i++) {
+          date = sortedInstantDates[i];
+          results.push(date.period + " " + date.year);
+        }
+        return results;
+      })();
       sortedDurationDates = (function() {
         var ref, results;
         ref = this.durationDates;
@@ -362,33 +388,36 @@
         return results;
       }).call(this);
       sortedDurationDates.sort(function(a, b) {
-        if (a.endDate > b.endDate) {
+        var periodIndices;
+        periodIndices = {
+          FY: 0,
+          "2H": 1,
+          Q4: 2,
+          "Q1-Q3": 3,
+          "Q2-Q3": 4,
+          Q3: 5,
+          "1H": 6,
+          Q2: 7,
+          Q1: 8
+        };
+        if (a.year > b.year) {
           return -1;
-        } else if (a.endDate < b.endDate) {
+        } else if (a.year < b.year) {
           return 1;
-        } else if (a.endDate === b.endDate && a.startDate > b.startDate) {
+        } else if (periodIndices[a.period] > periodIndices[b.period]) {
+          return 1;
+        } else if (periodIndices[a.period] < periodIndices[b.period]) {
           return -1;
-        } else if (a.endDate === b.endDate && a.startDate < b.startDate) {
-          return 1;
         } else {
           return 0;
         }
       });
-      outputInstantDates = (function() {
-        var i, len, results;
-        results = [];
-        for (i = 0, len = sortedInstantDates.length; i < len; i++) {
-          value = sortedInstantDates[i];
-          results.push(value.getMonth() + 1 + "/" + value.getDate() + "/" + value.getFullYear());
-        }
-        return results;
-      })();
       outputDurationDates = (function() {
         var i, len, results;
         results = [];
         for (i = 0, len = sortedDurationDates.length; i < len; i++) {
-          value = sortedDurationDates[i];
-          results.push(value.startDate.getMonth() + 1 + "/" + value.startDate.getDate() + "/" + value.startDate.getFullYear() + '-' + (value.endDate.getMonth() + 1) + "/" + value.endDate.getDate() + "/" + value.endDate.getFullYear());
+          date = sortedDurationDates[i];
+          results.push(date.period + " " + date.year);
         }
         return results;
       })();
@@ -454,7 +483,7 @@
         ref = this.entities;
         for (j = 0, len1 = ref.length; j < len1; j++) {
           entity = ref[j];
-          timeIndex = "" + (date.getTime());
+          timeIndex = date.period + " " + date.year;
           outputBsFacts.Assets.push(this.bsFacts.Assets[entity][timeIndex] != null ? this.formatBSValue(this.bsFacts.Assets[entity][timeIndex]) : null);
           outputBsFacts.CurrentAssets.push(this.bsFacts.CurrentAssets[entity][timeIndex] != null ? this.formatBSValue(this.bsFacts.CurrentAssets[entity][timeIndex]) : null);
           outputBsFacts.NoncurrentAssets.push(this.bsFacts.NoncurrentAssets[entity][timeIndex] != null ? this.formatBSValue(this.bsFacts.NoncurrentAssets[entity][timeIndex]) : null);
@@ -471,11 +500,11 @@
         }
       }
       for (l = 0, len2 = sortedDurationDates.length; l < len2; l++) {
-        dateObj = sortedDurationDates[l];
+        date = sortedDurationDates[l];
         ref1 = this.entities;
         for (m = 0, len3 = ref1.length; m < len3; m++) {
           entity = ref1[m];
-          timeIndex = (dateObj.startDate.getTime()) + "--" + (dateObj.endDate.getTime());
+          timeIndex = date.period + " " + date.year;
           outputIsFacts.Revenues.push(this.isFacts.Revenues[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.Revenues[entity][timeIndex]) : null);
           outputIsFacts.CostOfRevenue.push(this.isFacts.CostOfRevenue[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.CostOfRevenue[entity][timeIndex]) : null);
           outputIsFacts.GrossProfit.push(this.isFacts.GrossProfit[entity][timeIndex] != null ? this.formatBSValue(this.isFacts.GrossProfit[entity][timeIndex]) : null);

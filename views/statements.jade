@@ -1,468 +1,235 @@
 doctype html
-html
+html(ng-app="statementsApp")
     head
         title= title
         link(rel='stylesheet', href='/stylesheets/statements.css', media='all')
-    body
+        script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js")
+        script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+        script(src="/scripts/statements.js")
+    body#statmentsController(ng-controller="StatementsController as statements")
         h2 Balance Sheet
         p All values in millions USD unless specified otherwise
-        .table-container
-            .headcol
+        #bsTable.table-container
+            .headcol#bsTableHeadCol
                 table
                     thead
                         tr
-                            th.topLeft
-                                | &nbsp;
+                            th.topLeft &nbsp;
                         tr
-                            th.topLeft
-                                | &nbsp;
+                            th.topLeft &nbsp;
                     tbody
                         tr
-                            td.indent1x
-                                | Current Assets
+                            td.indent1x Current Assets
                         tr
-                            td.indent1x
-                                | Noncurrent Assets
+                            td.indent1x Noncurrent Assets
+                        tr.totalRow
+                            td Assets
                         tr
-                            td
-                                | Assets
+                            td.indent1x Current Liabilities
                         tr
-                            td.indent1x
-                                | Current Liabilities
+                            td.indent1x Noncurrent Liabilities
+                        tr.totalRow
+                            td Liabilities
                         tr
-                            td.indent1x
-                                | Noncurrent Liabilities
+                            td Commitments and Contingencies
                         tr
-                            td
-                                | Liabilities
+                            td Temporary Equity and Redeemable Noncontrolling Interest
                         tr
-                            td
-                                | Commitments and Contingencies
+                            td.indent1x Equity Attributable to Parent
                         tr
-                            td
-                                | Temporary Equity and Redeemable Noncontrolling Interest
+                            td.indent1x Equity Attributable to Noncontrolling Interest
+                        tr.totalRow
+                            td Equity
                         tr
-                            td.indent1x
-                                | Equity Attributable to Parent
-                        tr
-                            td.indent1x
-                                | Equity Attributable to Noncontrolling Interest
-                        tr
-                            td
-                                | Equity
-                        tr
-                            td
-                                | Liabilities and Equity
-            .right
-                table
+                            td Liabilities and Equity
+            .right#bsTableRight
+                img.loaderImage(src="images/ajax-loader-black-transparent.gif", ng-show="statements.loading")
+                table(ng-show="statements.loaded")
                     thead
                         tr
-                            each value in pageData.instantDates
-                                th(colspan=pageData.entities.length)= value
+                            th(ng-repeat="date in statements.instantDates track by $index", ng-attr-colspan="{{statements.entities.length}}") {{date}}
                         tr
-                            each value in pageData.instantDates
-                                each entity in pageData.entities
-                                    th= entity
+                            th(ng-repeat="entity in statements.instantEntities track by $index") {{entity}}
                     tbody
                         tr
-                            each value in pageData.bsFacts['CurrentAssets']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.bsFacts.CurrentAssets track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.bsFacts['NoncurrentAssets']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.bsFacts.NoncurrentAssets track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.bsFacts['Assets']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.bsFacts.Assets track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.bsFacts['CurrentLiabilities']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.bsFacts.CurrentLiabilities track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.bsFacts['NoncurrentLiabilities']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.bsFacts.NoncurrentLiabilities track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.bsFacts['Liabilities']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.bsFacts.Liabilities track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.bsFacts['CommitmentsAndContingencies']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.bsFacts.CommitmentsAndContingencies track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.bsFacts['TemporaryEquity']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.bsFacts.TemporaryEquity track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.bsFacts['EquityAttributableToParent']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.bsFacts.EquityAttributableToParent track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.bsFacts['EquityAttributableToNoncontrollingInterest']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.bsFacts.EquityAttributableToNoncontrollingInterest track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.bsFacts['Equity']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.bsFacts.Equity track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.bsFacts['LiabilitiesAndEquity']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.bsFacts.LiabilitiesAndEquity track by $index") {{fact || "&nbsp;"}}
         h2 Income Statement
         p All values in millions USD unless specified otherwise
-        .table-container
+        #isTable.table-container
             .headcol
                 table
                     thead
                         tr
-                            th
-                                | &nbsp;
+                            th &nbsp;
                         tr
-                            th
-                                | &nbsp;
+                            th &nbsp;
                     tbody
                         tr
-                            td
-                                | Revenues (single-step alternative)
+                            td Revenues (single-step alternative)
                         tr
-                            td
-                                | Costs of Revenues (single-step alternative)
+                            td Costs of Revenues (single-step alternative)
                         tr
-                            td
-                                | Operating Expenses (single-step alternative)
+                            td Operating Expenses (single-step alternative)
                         tr
-                            td
-                                | Costs and Expenses (single-step alternative)
+                            td Costs and Expenses (single-step alternative)
                         tr
-                            td
-                                | Other Operating Income (Expenses) (single-step alternative)
+                            td Other Operating Income (Expenses) (single-step alternative)
                         tr
-                            td
-                                | Operating Income (Loss) (Single-step alternative)
+                            td Operating Income (Loss) (Single-step alternative)
                         tr
                             td.blankRow  &nbsp;
                         tr
-                            td
-                                | Revenues (multi-step alternative)
+                            td Revenues (multi-step alternative)
                         tr
-                            td
-                                | Costs of Revenue (multi-step alternative)
+                            td Costs of Revenue (multi-step alternative)
                         tr
-                            td
-                                | Gross Profit (multi-step alternative)
+                            td Gross Profit (multi-step alternative)
                         tr
                             td.blankRow  &nbsp;
                         tr
-                            td
-                                | Operating Expenses (multi-step alternative)
+                            td Operating Expenses (multi-step alternative)
                         tr
-                            td
-                                | Other Operating Income (Expenses) (multi-step alternative)
+                            td Other Operating Income (Expenses) (multi-step alternative)
                         tr
                             td.blankRow  &nbsp;
                         tr
-                            td
-                                | Operating Income (Loss) (multi-step alternative)
+                            td Operating Income (Loss) (multi-step alternative)
                         tr
                             td.blankRow  &nbsp;
                         tr
-                            td
-                                | Nonoperating Income (Loss)
+                            td Nonoperating Income (Loss)
                         tr
-                            td
-                                | Interest and Debt Expense
+                            td Interest and Debt Expense
                         tr
-                            td
-                                | Income (Loss) before Equity Method Investments
+                            td Income (Loss) before Equity Method Investments
                         tr
-                            td
-                                | Income (Loss) from Equity Method Investments
+                            td Income (Loss) from Equity Method Investments
                         tr
                             td.blankRow  &nbsp;
                         tr
-                            td
-                                | Income (Loss) from Continuing Operations Before Tax
+                            td Income (Loss) from Continuing Operations Before Tax
                         tr
-                            td
-                                | Income Tax Expense (Benefit)
+                            td Income Tax Expense (Benefit)
                         tr
-                            td
-                                | Income (Loss) from Continuing Operations After Tax
+                            td Income (Loss) from Continuing Operations After Tax
                         tr
-                            td
-                                | Income (Loss) from Discontinued Operations, Net of Tax
+                            td Income (Loss) from Discontinued Operations, Net of Tax
                         tr
-                            td
-                                | Extraordinary Items, Gain (Loss), Net of Tax
+                            td Extraordinary Items, Gain (Loss), Net of Tax
                         tr
-                            td
-                                | Net Income (Loss)
+                            td Net Income (Loss)
                         tr
                             td.blankRow  &nbsp;
                         tr
-                            td
-                                | Net Income (Loss) Attributable to Parent
+                            td Net Income (Loss) Attributable to Parent
                         tr
-                            td
-                                | Net Income (Loss) Attributable to Noncontrolling Interest
+                            td Net Income (Loss) Attributable to Noncontrolling Interest
                         tr
                             td.blankRow  &nbsp;
                         tr
-                            td
-                                | Preferred Stock Dividends and Other Adjustments
+                            td Preferred Stock Dividends and Other Adjustments
                         tr
-                            td
-                                | Net Income (Loss) Available to Common Stockholders, Basic
-            .right
-                table
+                            td Net Income (Loss) Available to Common Stockholders, Basic
+            .right#isTableRight
+                img.loaderImage(src="images/ajax-loader-black-transparent.gif", ng-show="statements.loading")
+                table(ng-show="statements.loaded")
                     thead
                         tr
-                            each value in pageData.durationDates
-                                th(colspan=pageData.entities.length)= value
+                            th(ng-repeat="date in statements.durationDates track by $index", ng-attr-colspan="{{statements.entities.length}}") {{date}}
                         tr
-                            each value in pageData.durationDates
-                                each entity in pageData.entities
-                                    th= entity
+                            th(ng-repeat="entity in statements.durationEntities track by $index") {{entity}}
                     tbody
                         tr
-                            each value in pageData.isFacts['Revenues']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.Revenues track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['CostOfRevenue']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.CostOfRevenue track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['OperatingExpenses']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.OperatingExpenses track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['CostsAndExpenses']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.CostsAndExpenses track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['OtherOperatingIncomeExpenses']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.OtherOperatingIncomeExpenses track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['OperatingIncomeLoss']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.OperatingIncomeLoss track by $index") {{fact || "&nbsp;"}}
                         tr
                             td.blankRow &nbsp
                         tr
-                            each value in pageData.isFacts['Revenues']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.Revenues track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['CostOfRevenue']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.CostOfRevenue track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['GrossProfit']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.GrossProfit track by $index") {{fact || "&nbsp;"}}
                         tr
                             td.blankRow &nbsp
                         tr
-                            each value in pageData.isFacts['OperatingExpenses']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.OperatingExpenses track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['OtherOperatingIncomeExpenses']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.OtherOperatingIncomeExpenses track by $index") {{fact || "&nbsp;"}}
                         tr
                             td.blankRow &nbsp
                         tr
-                            each value in pageData.isFacts['OperatingIncomeLoss']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.OperatingIncomeLoss track by $index") {{fact || "&nbsp;"}}
                         tr
                             td.blankRow &nbsp
                         tr
-                            each value in pageData.isFacts['NonoperatingIncomeLoss']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.NonoperatingIncomeLoss track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['InterestAndDebtExpense']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.InterestAndDebtExpense track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['IncomeLossBeforeEquityMethodInvestments']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.IncomeLossBeforeEquityMethodInvestments track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['IncomeLossFromEquityMethodInvestments']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.IncomeLossFromEquityMethodInvestments track by $index") {{fact || "&nbsp;"}}
                         tr
                             td.blankRow &nbsp
                         tr
-                            each value in pageData.isFacts['IncomeLossFromContinuingOperationsBeforeTax']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.IncomeLossFromContinuingOperationsBeforeTax track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['IncomeTaxExpenseBenefit']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.IncomeTaxExpenseBenefit track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['IncomeLossFromContinuingOperationsAfterTax']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.IncomeLossFromContinuingOperationsAfterTax track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['IncomeLossFromDiscontinuedOperationsNetOfTax']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.IncomeLossFromDiscontinuedOperationsNetOfTax track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['ExtraordinaryItemsOfIncomeExpenseNetOfTax']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.ExtraordinaryItemsOfIncomeExpenseNetOfTax track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['NetIncomeLoss']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.NetIncomeLoss track by $index") {{fact || "&nbsp;"}}
                         tr
                             td.blankRow &nbsp
                         tr
-                            each value in pageData.isFacts['NetIncomeLossAttributableToParent']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.NetIncomeLossAttributableToParent track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['NetIncomeLossAttributableToNoncontrollingInterest']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.NetIncomeLossAttributableToNoncontrollingInterest track by $index") {{fact || "&nbsp;"}}
                         tr
                             td.blankRow &nbsp
                         tr
-                            each value in pageData.isFacts['PreferredStockDividendsAndOtherAdjustments']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.PreferredStockDividendsAndOtherAdjustments track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['NetIncomeLossAvailableToCommonStockholdersBasic']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td
-                                        | &nbsp
+                            td(ng-repeat="fact in statements.isFacts.NetIncomeLossAvailableToCommonStockholdersBasic track by $index") {{fact || "&nbsp;"}}
         h2 Statement of Comprehensive Income
         p All values in millions USD unless specified otherwise
-        .table-container
+        #cisTable.table-container
             .headcol
                 table
                     thead
@@ -483,52 +250,30 @@ html
                             td Comprehensive Income (Loss) Attributable to Parent
                         tr
                             td Comprehensive Income (Loss) Attributable to Noncontrolling Interest
-            .right
-                table
+            .right#cisTableRight
+                img.loaderImage(src="images/ajax-loader-black-transparent.gif", ng-show="statements.loading")
+                table(ng-show="statements.loaded")
                     thead
                         tr
-                            each value in pageData.durationDates
-                                th(colspan=pageData.entities.length)= value
+                            th(ng-repeat="date in statements.durationDates track by $index", ng-attr-colspan="{{statements.entities.length}}") {{date}}
                         tr
-                            each value in pageData.durationDates
-                                each entity in pageData.entities
-                                    th= entity
+                            th(ng-repeat="entity in statements.durationEntities track by $index") {{entity}}
                     tbody
                         tr
-                            each value in pageData.isFacts['NetIncomeLoss']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td &nbsp
+                            td(ng-repeat="fact in statements.isFacts.NetIncomeLoss track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['OtherComprehensiveIncomeLoss']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td &nbsp
+                            td(ng-repeat="fact in statements.isFacts.OtherComprehensiveIncomeLoss track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['ComprehensiveIncomeLoss']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td &nbsp
+                            td(ng-repeat="fact in statements.isFacts.ComprehensiveIncomeLoss track by $index") {{fact || "&nbsp;"}}
                         tr
                             td &nbsp;
                         tr
-                            each value in pageData.isFacts['ComprehensiveIncomeLossAttributableToParent']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td &nbsp
+                            td(ng-repeat="fact in statements.isFacts.ComprehensiveIncomeLossAttributableToParent track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.isFacts['ComprehensiveIncomeLossAttributableToNoncontrollingInterest']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td &nbsp
+                            td(ng-repeat="fact in statements.isFacts.ComprehensiveIncomeLossAttributableToNoncontrollingInterest track by $index") {{fact || "&nbsp;"}}
         h2 Cash Flow Statement
         p All values in millions USD unless specified otherwise
-        .table-container
+        #cfTable.table-container
             .headcol
                 table
                     thead
@@ -563,93 +308,39 @@ html
                             td Exchange Gains (Losses)
                         tr
                             td Net Cash Flow
-            .right
-                table
+            .right#cfTableRight
+                img.loaderImage(src="images/ajax-loader-black-transparent.gif", ng-show="statements.loading")
+                table(ng-show="statements.loaded")
                     thead
                         tr
-                            each value in pageData.durationDates
-                                th(colspan=pageData.entities.length)= value
+                            th(ng-repeat="date in statements.durationDates track by $index", ng-attr-colspan="{{statements.entities.length}}") {{date}}
                         tr
-                            each value in pageData.durationDates
-                                each entity in pageData.entities
-                                    th= entity
+                            th(ng-repeat="entity in statements.durationEntities track by $index") {{entity}}
                     tbody
                         tr
-                            each value in pageData.cfFacts['NetCashFlowFromOperatingActivitiesContinuing']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td &nbsp
+                            td(ng-repeat="fact in statements.cfFacts.NetCashFlowFromOperatingActivitiesContinuing track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.cfFacts['NetCashFlowFromOperatingActivitiesDiscontinued']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td &nbsp
+                            td(ng-repeat="fact in statements.cfFacts.NetCashFlowFromOperatingActivitiesDiscontinued track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.cfFacts['NetCashFlowFromOperatingActivities']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td &nbsp
+                            td(ng-repeat="fact in statements.cfFacts.NetCashFlowFromOperatingActivities track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.cfFacts['NetCashFlowFromInvestingActivitiesContinuing']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td &nbsp
+                            td(ng-repeat="fact in statements.cfFacts.NetCashFlowFromInvestingActivitiesContinuing track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.cfFacts['NetCashFlowFromInvestingActivitiesDiscontinued']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td &nbsp
+                            td(ng-repeat="fact in statements.cfFacts.NetCashFlowFromInvestingActivitiesDiscontinued track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.cfFacts['NetCashFlowFromInvestingActivities']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td &nbsp
+                            td(ng-repeat="fact in statements.cfFacts.NetCashFlowFromInvestingActivities track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.cfFacts['NetCashFlowFromFinancingActivitiesContinuing']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td &nbsp
+                            td(ng-repeat="fact in statements.cfFacts.NetCashFlowFromFinancingActivitiesContinuing track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.cfFacts['NetCashFlowFromFinancingActivitiesDiscontinued']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td &nbsp
+                            td(ng-repeat="fact in statements.cfFacts.NetCashFlowFromFinancingActivitiesDiscontinued track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.cfFacts['NetCashFlowFromFinancingActivities']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td &nbsp
+                            td(ng-repeat="fact in statements.cfFacts.NetCashFlowFromFinancingActivities track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.cfFacts['NetCashFlowContinuing']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td &nbsp
+                            td(ng-repeat="fact in statements.cfFacts.NetCashFlowContinuing track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.cfFacts['NetCashFlowDiscontinued']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td &nbsp
+                            td(ng-repeat="fact in statements.cfFacts.NetCashFlowDiscontinued track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.cfFacts['ExchangeGainsLosses']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td &nbsp
+                            td(ng-repeat="fact in statements.cfFacts.ExchangeGainsLosses track by $index") {{fact || "&nbsp;"}}
                         tr
-                            each value in pageData.cfFacts['NetCashFlow']
-                                if value !== null
-                                    td!=value
-                                else
-                                    td &nbsp
-                                                         
+                            
+

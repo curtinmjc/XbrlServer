@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var statements = require('./routes/statements');
+var statementData = require('./routes/statementData');
 var facts = require('./routes/facts');
 var rawfacts = require('./routes/rawfacts');
 var elements = require('./routes/elements');
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/', statements);
+app.use('/', statementData);
 app.use('/', facts);
 app.use('/', rawfacts);
 app.use('/', elements);
