@@ -4,13 +4,16 @@
       <sourceFilesUrls>
         <item url="file://$PROJECT_DIR$/streams/FactTransformStream.js" />
         <item url="file://$PROJECT_DIR$/routes/helpers.js" />
-        <item url="file://$PROJECT_DIR$/streams/FACTransformStream.js" />
         <item url="file://$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/ipaddr.js/test/ipaddr.test.js" />
         <item url="file://$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/ipaddr.js/src/ipaddr.js" />
         <item url="file://$PROJECT_DIR$/routes/share.js" />
-        <item url="file://$PROJECT_DIR$/routes/statementData.js" />
         <item url="file://$PROJECT_DIR$/routes/save.js" />
         <item url="file://$PROJECT_DIR$/routes/facts.js" />
+        <item url="file://$PROJECT_DIR$/streams/CsvRowStream.js" />
+        <item url="file://$PROJECT_DIR$/streams/FACTransformStream.js" />
+        <item url="file://$PROJECT_DIR$/streams/CsvHeaderStream.js" />
+        <item url="file://$PROJECT_DIR$/routes/csv.js" />
+        <item url="file://$PROJECT_DIR$/routes/statementData.js" />
         <item url="file://$PROJECT_DIR$/public/scripts/statements.js" />
         <item url="file://$PROJECT_DIR$/routes/statements.js" />
         <item url="file://$PROJECT_DIR$/routes/elements.js" />
@@ -35,13 +38,16 @@
       <root url="file://$PROJECT_DIR$/routes/facs.js" />
       <root url="file://$PROJECT_DIR$/streams/FactTransformStream.js" />
       <root url="file://$PROJECT_DIR$/routes/helpers.js" />
-      <root url="file://$PROJECT_DIR$/streams/FACTransformStream.js" />
       <root url="file://$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/ipaddr.js/test/ipaddr.test.js" />
       <root url="file://$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/ipaddr.js/src/ipaddr.js" />
       <root url="file://$PROJECT_DIR$/routes/share.js" />
-      <root url="file://$PROJECT_DIR$/routes/statementData.js" />
       <root url="file://$PROJECT_DIR$/routes/save.js" />
       <root url="file://$PROJECT_DIR$/routes/facts.js" />
+      <root url="file://$PROJECT_DIR$/streams/CsvRowStream.js" />
+      <root url="file://$PROJECT_DIR$/streams/FACTransformStream.js" />
+      <root url="file://$PROJECT_DIR$/streams/CsvHeaderStream.js" />
+      <root url="file://$PROJECT_DIR$/routes/csv.js" />
+      <root url="file://$PROJECT_DIR$/routes/statementData.js" />
       <root url="file://$PROJECT_DIR$/public/scripts/statements.js" />
       <root url="file://$PROJECT_DIR$/routes/statements.js" />
       <root url="file://$PROJECT_DIR$/routes/elements.js" />

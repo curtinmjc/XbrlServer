@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c29c413d-2788-498b-9726-bdf1ff4f30d2" name="Default" comment="added financial statements test">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/ajax-loader-black-transparent.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/statementData.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/statementData.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/scripts/statements.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/scripts/statements.js.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/scripts/statements.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/streams/FACTransformStream.coffee" afterPath="$PROJECT_DIR$/streams/FACTransformStream.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/streams/FACTransformStream.js.map" afterPath="$PROJECT_DIR$/streams/FACTransformStream.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/streams/FACTransformStream.js" afterPath="$PROJECT_DIR$/streams/FACTransformStream.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/Fact.coffee" afterPath="$PROJECT_DIR$/model/Fact.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/Fact.js.map" afterPath="$PROJECT_DIR$/model/Fact.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/Fact.js" afterPath="$PROJECT_DIR$/model/Fact.js" />
+    <list default="true" id="c29c413d-2788-498b-9726-bdf1ff4f30d2" name="Default" comment="added CSV endpoint">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/streams/CsvHeaderStream.coffee" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/streams/CsvHeaderStream.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/streams/CsvHeaderStream.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/streams/CsvRowStream.coffee" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/streams/CsvRowStream.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/csv.coffee" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/csv.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/csv.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/statementData.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/helpers.coffee" afterPath="$PROJECT_DIR$/routes/helpers.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/statements.coffee" afterPath="$PROJECT_DIR$/routes/statements.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/stylesheets/statements.css" afterPath="$PROJECT_DIR$/public/stylesheets/statements.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/statements.jade" afterPath="$PROJECT_DIR$/views/statements.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/statements.js.map" afterPath="$PROJECT_DIR$/routes/statements.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/statements.js" afterPath="$PROJECT_DIR$/routes/statements.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/helpers.js.map" afterPath="$PROJECT_DIR$/routes/helpers.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="XbrlServer.iws" />
@@ -46,67 +37,88 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="statements.jade" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/statements.jade">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.44">
-              <caret line="8" column="80" selection-start-line="8" selection-start-column="80" selection-end-line="8" selection-end-column="80" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="helpers.coffee" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/helpers.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.11466666">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.8590425">
+              <caret line="40" column="1" selection-start-line="40" selection-start-column="1" selection-end-line="40" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="statements.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/stylesheets/statements.css">
+      <file leaf-file-name="statementData.coffee" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/statementData.coffee">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="53" column="22" selection-start-line="53" selection-start-column="22" selection-end-line="53" selection-end-column="22" />
+              <caret line="14" column="45" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="statements.coffee" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/scripts/statements.coffee">
+      <file leaf-file-name="rawfacts.coffee" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/rawfacts.coffee">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+              <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.coffee" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/scripts/index.coffee">
+      <file leaf-file-name="csv.coffee" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/csv.coffee">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="4" />
+              <caret line="43" column="41" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="csv.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/csv.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding>
-                <marker date="1430165059044" expanded="true" signature="1184:1196" placeholder="..." />
-                <marker date="1430165059044" expanded="true" signature="1310:1323" placeholder="..." />
-                <marker date="1430165059044" expanded="true" signature="2415:2427" placeholder="..." />
-                <marker date="1430165059044" expanded="true" signature="2467:2486" placeholder="..." />
+                <marker date="1431962717425" expanded="true" signature="1173:3005" placeholder="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
+      <file leaf-file-name="CsvHeaderStream.coffee" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/streams/CsvHeaderStream.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.692307">
-              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="10" selection-start-line="0" selection-start-column="0" selection-end-line="20" selection-end-column="10" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CsvRowStream.coffee" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/streams/CsvRowStream.coffee">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CsvHeaderStream.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/streams/CsvHeaderStream.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-13.92">
+              <caret line="27" column="7" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
+              <folding>
+                <marker date="1431960113671" expanded="true" signature="47:1365" placeholder="{...}" />
+                <marker date="1431960113671" expanded="true" signature="513:1342" placeholder="{...}" />
+                <marker date="1431960113671" expanded="true" signature="787:967" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -115,7 +127,7 @@
         <entry file="file://$PROJECT_DIR$/model/Fact.coffee">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="14" column="65" selection-start-line="14" selection-start-column="65" selection-end-line="14" selection-end-column="65" />
+              <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="90" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -124,24 +136,10 @@
       <file leaf-file-name="FACTransformStream.coffee" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/streams/FACTransformStream.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.9215684">
-              <caret line="244" column="98" selection-start-line="244" selection-start-column="98" selection-end-line="244" selection-end-column="98" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FACTransformStream.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/streams/FACTransformStream.js">
-          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="542" column="10" selection-start-line="542" selection-start-column="10" selection-end-line="542" selection-end-column="10" />
+              <caret line="220" column="0" selection-start-line="220" selection-start-column="0" selection-end-line="220" selection-end-column="19" />
               <folding>
-                <marker date="1431631855263" expanded="true" signature="47:37032" placeholder="{...}" />
-                <marker date="1431631855263" expanded="true" signature="516:37009" placeholder="{...}" />
-                <marker date="1431631855263" expanded="true" signature="20101:36971" placeholder="{...}" />
-                <marker date="1431631855263" expanded="true" signature="27769:36735" placeholder="{...}" />
-                <marker date="1431631855263" expanded="true" signature="36752:36942" placeholder="{...}" />
+                <element signature="e#5331#5570#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -187,13 +185,17 @@
         <option value="$PROJECT_DIR$/streams/FactTransformStream.coffee" />
         <option value="$PROJECT_DIR$/routes/statements.coffee" />
         <option value="$PROJECT_DIR$/routes/statementData.coffee" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/model/Fact.coffee" />
         <option value="$PROJECT_DIR$/streams/FACTransformStream.coffee" />
         <option value="$PROJECT_DIR$/public/stylesheets/statements.css" />
         <option value="$PROJECT_DIR$/public/scripts/statements.coffee" />
         <option value="$PROJECT_DIR$/views/statements.jade" />
+        <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/streams/CsvHeaderStream.js" />
+        <option value="$PROJECT_DIR$/streams/CsvHeaderStream.coffee" />
+        <option value="$PROJECT_DIR$/routes/csv.coffee" />
+        <option value="$PROJECT_DIR$/streams/CsvRowStream.coffee" />
         <option value="$PROJECT_DIR$/routes/helpers.coffee" />
       </list>
     </option>
@@ -237,8 +239,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -299,7 +299,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="FACTransformStream.coffee" />
+              <option name="myItemId" value="CsvHeaderStream.coffee" />
               <option name="myItemType" value="com.intellij.plugins.watcher.projectView.NestingTreeNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -327,62 +327,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
+              <option name="myItemId" value="routes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="stylesheets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="XbrlServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="XbrlServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="XbrlServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="XbrlServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="XbrlServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="XbrlServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="csv.coffee" />
+              <option name="myItemType" value="com.intellij.plugins.watcher.projectView.NestingTreeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -402,6 +352,8 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -584,17 +536,17 @@
     <editor active="true" />
     <layout>
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18956336" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19275825" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21274298" sideWeight="0.5002633" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33072627" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32997763" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16017316" sideWeight="0.4997367" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15982722" sideWeight="0.4997367" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3874459" sideWeight="0.4997367" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38660908" sideWeight="0.4997367" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -650,7 +602,8 @@
     <MESSAGE value="changed to factsdev" />
     <MESSAGE value="added some missing files" />
     <MESSAGE value="added financial statements test" />
-    <option name="LAST_COMMIT_MESSAGE" value="added financial statements test" />
+    <MESSAGE value="changed to FY dates for statements" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed to FY dates for statements" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -660,11 +613,16 @@
           <line>547</line>
           <option name="timeStamp" value="278" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/streams/CsvHeaderStream.js</url>
+          <line>21</line>
+          <option name="timeStamp" value="284" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="279" />
+      <option name="time" value="285" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="NodeJSConfigurationType">
@@ -673,51 +631,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/express/lib/router/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="229" column="0" selection-start-line="229" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/stylesheets/bootstrap.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="128.15587">
-          <caret line="4885" column="56" selection-start-line="4885" selection-start-column="51" selection-end-line="4885" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.IntelliJIdea13/system/extLibs/nodejs-v0.10.31-src/core-modules-sources/lib/_stream_writable.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="151" column="0" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/streams/BookmarkExtractorStream.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/streams/UniqueArrayWriteStream.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="13" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/show.js.map">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="sourcemapFileViewerProvider">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/elements.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -892,24 +805,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/streams/FactTransformStream.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/streams/FactTransformStream.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/rawfacts.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="29" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -931,7 +830,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.23995657">
           <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -939,23 +837,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8859935">
           <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/statementData.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25841478">
-          <caret line="14" column="45" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -963,7 +844,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -971,13 +851,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.692307">
+        <state vertical-scroll-proportion="0.0">
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding />
         </state>
@@ -988,40 +867,19 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="542" column="10" selection-start-line="542" selection-start-column="10" selection-end-line="542" selection-end-column="10" />
           <folding>
-            <marker date="1431631855263" expanded="true" signature="47:37032" placeholder="{...}" />
-            <marker date="1431631855263" expanded="true" signature="516:37009" placeholder="{...}" />
-            <marker date="1431631855263" expanded="true" signature="20101:36971" placeholder="{...}" />
-            <marker date="1431631855263" expanded="true" signature="27769:36735" placeholder="{...}" />
-            <marker date="1431631855263" expanded="true" signature="36752:36942" placeholder="{...}" />
+            <marker date="1431631855263" expanded="true" signature="-1:-1" placeholder="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/Fact.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="65" selection-start-line="14" selection-start-column="65" selection-end-line="14" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/streams/FACTransformStream.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.9215684">
-          <caret line="244" column="98" selection-start-line="244" selection-start-column="98" selection-end-line="244" selection-end-column="98" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/index.jade">
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.25793102">
           <caret line="11" column="81" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="81" />
-          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/scripts/index.coffee">
@@ -1029,10 +887,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="4" />
           <folding>
-            <marker date="1430165059044" expanded="true" signature="1184:1196" placeholder="..." />
-            <marker date="1430165059044" expanded="true" signature="1310:1323" placeholder="..." />
-            <marker date="1430165059044" expanded="true" signature="2415:2427" placeholder="..." />
-            <marker date="1430165059044" expanded="true" signature="2467:2486" placeholder="..." />
+            <marker date="1430165059044" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1430165059044" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1430165059044" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1430165059044" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1045,26 +903,302 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/scripts/statements.coffee">
+    <entry file="file://$PROJECT_DIR$/views/statements.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+          <caret line="8" column="80" selection-start-line="8" selection-start-column="80" selection-end-line="8" selection-end-column="80" />
+          <folding>
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1431643552502" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/statements.jade">
+    <entry file="file://$PROJECT_DIR$/streams/BookmarkExtractorStream.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.44">
-          <caret line="8" column="80" selection-start-line="8" selection-start-column="80" selection-end-line="8" selection-end-column="80" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="27" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/scripts/statements.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="78" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/statementData.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="45" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/streams/FactTransformStream.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38430852">
+          <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/csv.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding>
+            <marker date="1431962717425" expanded="true" signature="1173:3005" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/streams/FACTransformStream.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="220" column="0" selection-start-line="220" selection-start-column="0" selection-end-line="220" selection-end-column="19" />
+          <folding>
+            <element signature="e#5331#5570#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/streams/CsvHeaderStream.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.92">
+          <caret line="27" column="7" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
+          <folding>
+            <marker date="1431960113671" expanded="true" signature="47:1365" placeholder="{...}" />
+            <marker date="1431960113671" expanded="true" signature="513:1342" placeholder="{...}" />
+            <marker date="1431960113671" expanded="true" signature="787:967" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/Fact.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="90" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/streams/CsvHeaderStream.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="10" selection-start-line="0" selection-start-column="0" selection-end-line="20" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/rawfacts.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/csv.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="41" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/streams/CsvRowStream.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/helpers.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11466666">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.8590425">
+          <caret line="40" column="1" selection-start-line="40" selection-start-column="1" selection-end-line="40" selection-end-column="1" />
           <folding />
         </state>
       </provider>
