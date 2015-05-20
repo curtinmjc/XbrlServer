@@ -19,12 +19,23 @@
   router = express.Router();
 
   router.post('/statementData', function(req, res) {
+    var entity, reqEntities;
     if (req.body.entities == null) {
       res.send(500);
     }
+    reqEntities = ((function() {
+      var i, len, ref, results;
+      ref = req.body.entities;
+      results = [];
+      for (i = 0, len = ref.length; i < len; i++) {
+        entity = ref[i];
+        results.push("\"" + entity + "\"");
+      }
+      return results;
+    })()).join();
     return request({
-      url: (getCloudantUrl()) + "/factsdev/_design/factsMainViews/_view/FACEntity?keys=[\"http://www.sec.gov/CIK/0000051143\", \"http://www.sec.gov/CIK/0000789019\"]&include_docs=true&stale=update_after"
-    }).pipe(JSONStream.parse('rows.*.doc')).pipe(new FACTransformStream(["http://www.sec.gov/CIK/0000051143", "http://www.sec.gov/CIK/0000789019"])).on('data', function(data) {
+      url: (getCloudantUrl()) + "/factsdev/_design/factsMainViews/_view/FACEntity?keys=[" + reqEntities + "]&include_docs=true&stale=update_after"
+    }).pipe(JSONStream.parse('rows.*.doc')).pipe(new FACTransformStream(req.body.entities)).on('data', function(data) {
       data['entities'] = ['INTERNATIONAL BUSINESS MACHINES CORP', 'MICROSOFT CORP'];
       return res.end(JSON.stringify(data));
     });

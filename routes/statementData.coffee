@@ -11,10 +11,10 @@ router.post('/statementData', (req, res) ->
 
   if not req.body.entities?
     res.send(500)
-
-  request({url: "#{getCloudantUrl()}/factsdev/_design/factsMainViews/_view/FACEntity?keys=[\"http://www.sec.gov/CIK/0000051143\", \"http://www.sec.gov/CIK/0000789019\"]&include_docs=true&stale=update_after"})
+  reqEntities = ("\"#{entity}\"" for entity in req.body.entities).join()
+  request({url: "#{getCloudantUrl()}/factsdev/_design/factsMainViews/_view/FACEntity?keys=[#{reqEntities}]&include_docs=true&stale=update_after"})
   .pipe(JSONStream.parse('rows.*.doc'))
-  .pipe(new FACTransformStream(["http://www.sec.gov/CIK/0000051143", "http://www.sec.gov/CIK/0000789019"]))
+  .pipe(new FACTransformStream(req.body.entities))
   .on('data', (data) ->
     data['entities'] = ['INTERNATIONAL BUSINESS MACHINES CORP', 'MICROSOFT CORP']
     res.end(JSON.stringify(data))

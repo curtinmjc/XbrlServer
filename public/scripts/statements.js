@@ -6,24 +6,39 @@
     function StatementsController($scope, $http) {
       this.$scope = $scope;
       this.$http = $http;
-      this.entities = [
-        {
-          name: 'IBM',
-          identifier: "http://www.sec.gov/CIK/0000051143"
-        }, {
-          name: 'MSFT',
-          identifier: "http://www.sec.gov/CIK/0000789019"
-        }
-      ];
+      this.initialize();
+      this.entities = [];
+    }
+
+    StatementsController.prototype.addEntity = function() {
+      if ((this.selectedEntity != null) && (this.selectedEntity.originalObject != null) && !this.entities.some((function(_this) {
+        return function(entity) {
+          return entity.id === _this.selectedEntity.originalObject.id;
+        };
+      })(this))) {
+        this.entities.push(this.selectedEntity.originalObject);
+        this.initialize();
+        return this.showStatements();
+      }
+    };
+
+    StatementsController.prototype.initialize = function() {
+      this.selectedEntity = null;
       this.instantDates = [];
       this.durationDates = [];
       this.instantEntities = [];
       this.durationEntities = [];
       this.bsFacts = {};
+      this.isFacts = {};
+      this.cfFacts = {};
       this.loading = false;
-      this.loaded = false;
-      this.showStatements();
-    }
+      return this.loaded = false;
+    };
+
+    StatementsController.prototype.startOver = function() {
+      this.initialize();
+      return this.entities = [];
+    };
 
     StatementsController.prototype.showStatements = function() {
       var entity, identifiers;
@@ -33,7 +48,7 @@
         results = [];
         for (i = 0, len = ref.length; i < len; i++) {
           entity = ref[i];
-          results.push(entity.identifier);
+          results.push(entity.id);
         }
         return results;
       }).call(this);
@@ -50,7 +65,7 @@
             ref1 = _this.entities;
             for (j = 0, len1 = ref1.length; j < len1; j++) {
               entity = ref1[j];
-              _this.instantEntities.push(entity.name);
+              _this.instantEntities.push(entity.value);
             }
           }
           _this.bsFacts = data.bsFacts;
@@ -61,7 +76,7 @@
             ref3 = _this.entities;
             for (l = 0, len3 = ref3.length; l < len3; l++) {
               entity = ref3[l];
-              _this.durationEntities.push(entity.name);
+              _this.durationEntities.push(entity.value);
             }
           }
           _this.isFacts = data.isFacts;
@@ -78,13 +93,13 @@
 
   StatementsController.$inject = ["$scope", "$http"];
 
-  angular.module("statementsApp", []).controller("StatementsController", StatementsController);
+  angular.module("statementsApp", ["angucomplete"]).controller("StatementsController", StatementsController);
 
   $(function() {
-    $('#bsTableRight').height($('#bsTable').height());
-    $('#isTableRight').height($('#isTable').height());
-    $('#cisTableRight').height($('#cisTable').height());
-    return $('#cfTableRight').height($('#cfTable').height());
+    $('#bsTableRight').height($('#bsTable').height() + 10);
+    $('#isTableRight').height($('#isTable').height() + 10);
+    $('#cisTableRight').height($('#cisTable').height() + 10);
+    return $('#cfTableRight').height($('#cfTable').height() + 10);
   });
 
 }).call(this);

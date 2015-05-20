@@ -87,8 +87,7 @@ class exports.Fact
         k isnt "http://www.sec.gov/Archives/edgar/fileNumber" and
         k isnt "http://www.sec.gov/Archives/edgar/url" and
         k isnt "http://xbrl.sec.gov/Amendment" and
-        k isnt "http://xbrl.sec.gov/FiscalYear" and
-        k isnt "http://xbrl.sec.gov/FiscalPeriod" and
+        k isnt "http://xbrl.mybluemix.net/FiscalPeriod" and
         k isnt "_id" and
         k isnt "_rev"
           @dimensions[k] = v
@@ -110,8 +109,7 @@ class exports.Fact
         k isnt "http://www.sec.gov/Archives/edgar/fileNumber" and
         k isnt "http://www.sec.gov/Archives/edgar/url" and
         k isnt "http://xbrl.sec.gov/Amendment" and
-        k isnt "http://xbrl.sec.gov/FiscalYear" and
-        k isnt "http://xbrl.sec.gov/FiscalPeriod" and
+        k isnt "http://xbrl.mybluemix.net/FiscalPeriod" and
         k isnt "_id" and
         k isnt "_rev"
           hashValues.push(v)
