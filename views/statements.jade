@@ -42,7 +42,7 @@ html(ng-app="statementsApp")
                                                 th.topLeft &nbsp;
                                         tbody
                                             tr
-                                                td.indent1x Current Assets
+                                                td.indent1x(ng-style="statements.highlightConcepts['CurrentAssets']") Current Assets
                                             tr
                                                 td.indent1x Noncurrent Assets
                                             tr.totalRow
@@ -67,7 +67,7 @@ html(ng-app="statementsApp")
                                                 td Liabilities and Equity
                                 .right#bsTableRight
                                     img.loaderImage(src="images/ajax-loader-black-transparent.gif", ng-show="statements.loading")
-                                    table(ng-show="statements.loaded")
+                                    table.dataTable(ng-show="statements.loaded")
                                         thead
                                             tr
                                                 th(ng-repeat="date in statements.instantDates track by $index", ng-attr-colspan="{{statements.entities.length}}") {{date}}
@@ -78,13 +78,13 @@ html(ng-app="statementsApp")
                                                 td(ng-repeat="fact in statements.bsFacts.CurrentAssets track by $index") {{fact || "&nbsp;"}}
                                             tr
                                                 td(ng-repeat="fact in statements.bsFacts.NoncurrentAssets track by $index") {{fact || "&nbsp;"}}
-                                            tr
+                                            tr.totalRow
                                                 td(ng-repeat="fact in statements.bsFacts.Assets track by $index") {{fact || "&nbsp;"}}
                                             tr
                                                 td(ng-repeat="fact in statements.bsFacts.CurrentLiabilities track by $index") {{fact || "&nbsp;"}}
                                             tr
                                                 td(ng-repeat="fact in statements.bsFacts.NoncurrentLiabilities track by $index") {{fact || "&nbsp;"}}
-                                            tr
+                                            tr.totalRow
                                                 td(ng-repeat="fact in statements.bsFacts.Liabilities track by $index") {{fact || "&nbsp;"}}
                                             tr
                                                 td(ng-repeat="fact in statements.bsFacts.CommitmentsAndContingencies track by $index") {{fact || "&nbsp;"}}
@@ -94,7 +94,7 @@ html(ng-app="statementsApp")
                                                 td(ng-repeat="fact in statements.bsFacts.EquityAttributableToParent track by $index") {{fact || "&nbsp;"}}
                                             tr
                                                 td(ng-repeat="fact in statements.bsFacts.EquityAttributableToNoncontrollingInterest track by $index") {{fact || "&nbsp;"}}
-                                            tr
+                                            tr.totalRow
                                                 td(ng-repeat="fact in statements.bsFacts.Equity track by $index") {{fact || "&nbsp;"}}
                                             tr
                                                 td(ng-repeat="fact in statements.bsFacts.LiabilitiesAndEquity track by $index") {{fact || "&nbsp;"}}
@@ -180,7 +180,7 @@ html(ng-app="statementsApp")
                                                 td Net Income (Loss) Available to Common Stockholders, Basic
                                 .right#isTableRight
                                     img.loaderImage(src="images/ajax-loader-black-transparent.gif", ng-show="statements.loading")
-                                    table(ng-show="statements.loaded")
+                                    table.dataTable(ng-show="statements.loaded")
                                         thead
                                             tr
                                                 th(ng-repeat="date in statements.durationDates track by $index", ng-attr-colspan="{{statements.entities.length}}") {{date}}
@@ -281,7 +281,7 @@ html(ng-app="statementsApp")
                                                 td Comprehensive Income (Loss) Attributable to Noncontrolling Interest
                                 .right#cisTableRight
                                     img.loaderImage(src="images/ajax-loader-black-transparent.gif", ng-show="statements.loading")
-                                    table(ng-show="statements.loaded")
+                                    table.dataTable(ng-show="statements.loaded")
                                         thead
                                             tr
                                                 th(ng-repeat="date in statements.durationDates track by $index", ng-attr-colspan="{{statements.entities.length}}") {{date}}
@@ -342,7 +342,7 @@ html(ng-app="statementsApp")
                                                 td Net Cash Flow
                                 .right#cfTableRight
                                     img.loaderImage(src="images/ajax-loader-black-transparent.gif", ng-show="statements.loading")
-                                    table(ng-show="statements.loaded")
+                                    table.dataTable(ng-show="statements.loaded")
                                         thead
                                             tr
                                                 th(ng-repeat="date in statements.durationDates track by $index", ng-attr-colspan="{{statements.entities.length}}") {{date}}
@@ -353,19 +353,19 @@ html(ng-app="statementsApp")
                                                 td(ng-repeat="fact in statements.cfFacts.NetCashFlowFromOperatingActivitiesContinuing track by $index") {{fact || "&nbsp;"}}
                                             tr
                                                 td(ng-repeat="fact in statements.cfFacts.NetCashFlowFromOperatingActivitiesDiscontinued track by $index") {{fact || "&nbsp;"}}
-                                            tr
+                                            tr.totalRow
                                                 td(ng-repeat="fact in statements.cfFacts.NetCashFlowFromOperatingActivities track by $index") {{fact || "&nbsp;"}}
                                             tr
                                                 td(ng-repeat="fact in statements.cfFacts.NetCashFlowFromInvestingActivitiesContinuing track by $index") {{fact || "&nbsp;"}}
                                             tr
                                                 td(ng-repeat="fact in statements.cfFacts.NetCashFlowFromInvestingActivitiesDiscontinued track by $index") {{fact || "&nbsp;"}}
-                                            tr
+                                            tr.totalRow
                                                 td(ng-repeat="fact in statements.cfFacts.NetCashFlowFromInvestingActivities track by $index") {{fact || "&nbsp;"}}
                                             tr
                                                 td(ng-repeat="fact in statements.cfFacts.NetCashFlowFromFinancingActivitiesContinuing track by $index") {{fact || "&nbsp;"}}
                                             tr
                                                 td(ng-repeat="fact in statements.cfFacts.NetCashFlowFromFinancingActivitiesDiscontinued track by $index") {{fact || "&nbsp;"}}
-                                            tr
+                                            tr.totalRow
                                                 td(ng-repeat="fact in statements.cfFacts.NetCashFlowFromFinancingActivities track by $index") {{fact || "&nbsp;"}}
                                             tr
                                                 td(ng-repeat="fact in statements.cfFacts.NetCashFlowContinuing track by $index") {{fact || "&nbsp;"}}

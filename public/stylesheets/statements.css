@@ -5,6 +5,7 @@ body {
 
 tr.totalRow td {
     font-weight: bold;
+    border-bottom: double 3px black;
 }
 
 
@@ -36,11 +37,13 @@ td {
 }
 
 tr:hover > td {
-    opacity: 0.5;
+    background-color: #5596e6;
+    color: #FFFFFF;
 }
 
 tr:hover > td:hover {
-    opacity: 1.0;
+    background-color: white;
+    color: black;
 }
 
 td.blankRow
@@ -58,6 +61,14 @@ td.blankRow
 
 .headColTable {
     width: 400px;
+}
+
+.headColTable td {
+    border-left: none;
+}
+
+.headColTable th {
+    border-left: none;
 }
 
 .right {
@@ -106,3 +117,29 @@ td.blankRow
     height: 30px;
     width: 30px;
 }
+
+.panel-primary>.panel-heading {
+    background-color: #325c80;
+    border-color: #325c80;
+    border-radius: 0px;
+}
+
+.panel-primary {
+    border-color: #000000;
+    border-radius: 0px;
+}
+
+.form-control {
+    border: none;
+}
+
+.btn-primary {
+    background-color: #ff7832;
+    border-color: #ff7832;
+    border-radius: 0px;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #ffd4a0;
+}
+
