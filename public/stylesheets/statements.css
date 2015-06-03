@@ -3,6 +3,16 @@ body {
     font-size: 8pt;
 }
 
+#companies {
+    border: none;
+}
+
+.angucomplete-dropdown {
+    overflow-y: auto;
+    max-height: 200px;
+    width: 1000px;
+}
+
 tr.totalRow td {
     font-weight: bold;
     border-bottom: double 3px black;
@@ -97,20 +107,17 @@ td.blankRow
 }
 
 ::-webkit-scrollbar-track{
-    -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.3);
     border: 1px solid lightgray;
-    background: rgb(11,11,11);
-    border-radius: 10px;
+    background: #5a5a5a;
+    border-radius: 0px;
 
 }
 ::-webkit-scrollbar-thumb{
-    border-radius:10px;
+    border-radius:0px;
     height: 30px;
     width: 8px;
     border: 1px solid black;
-    background: rgb(111,111,111);
-    -webkit-box-shadow: 0 1px 1px rgb(0,0,0);
-    background: -webkit-linear-gradient(rgb(200,200,200), rgb(150,150,150));
+    background: #e0e0e0;
 }
 
 ::-webkit-scrollbar-track-piece {

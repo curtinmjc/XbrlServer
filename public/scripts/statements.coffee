@@ -26,6 +26,7 @@ class StatementsController
     @entities = []
 
   showStatements: ->
+    @$scope.$broadcast('angucomplete-alt:clearInput');
     identifiers = (entity.id for entity in @entities)
     @loading = true
     @$http.post('statementData', {entities: identifiers}).success((data, status, headers, config) =>
@@ -51,7 +52,7 @@ class StatementsController
 
 StatementsController.$inject = ["$scope", "$http"]
 
-angular.module("statementsApp", ["angucomplete"]).controller("StatementsController", StatementsController)
+angular.module("statementsApp", ["angucomplete-alt"]).controller("StatementsController", StatementsController)
 
 $ ->
   $('#bsTableRight').height($('#bsTable').height()+10)

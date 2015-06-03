@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c29c413d-2788-498b-9726-bdf1ff4f30d2" name="Default" comment="changed some styles">
+    <list default="true" id="c29c413d-2788-498b-9726-bdf1ff4f30d2" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/scripts/angucomplete-alt.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/helpers.coffee" afterPath="$PROJECT_DIR$/routes/helpers.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/helpers.js.map" afterPath="$PROJECT_DIR$/routes/helpers.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/helpers.js" afterPath="$PROJECT_DIR$/routes/helpers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/statements.coffee" afterPath="$PROJECT_DIR$/public/scripts/statements.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/stylesheets/statements.css" afterPath="$PROJECT_DIR$/public/stylesheets/statements.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/statements.jade" afterPath="$PROJECT_DIR$/views/statements.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/statements.js.map" afterPath="$PROJECT_DIR$/public/scripts/statements.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/statements.js" afterPath="$PROJECT_DIR$/public/scripts/statements.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="XbrlServer.iws" />
@@ -30,8 +37,8 @@
       <file leaf-file-name="statements.jade" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/statements.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="72" column="110" selection-start-line="72" selection-start-column="110" selection-end-line="72" selection-end-column="110" />
+            <state vertical-scroll-proportion="-16.32">
+              <caret line="24" column="190" selection-start-line="24" selection-start-column="190" selection-end-line="24" selection-end-column="190" />
               <folding />
             </state>
           </provider>
@@ -40,8 +47,8 @@
       <file leaf-file-name="statements.coffee" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/scripts/statements.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.24321389">
-              <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.7535854">
+              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -51,7 +58,7 @@
         <entry file="file://$PROJECT_DIR$/routes/helpers.coffee">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <caret line="7" column="186" selection-start-line="7" selection-start-column="186" selection-end-line="7" selection-end-column="186" />
               <folding />
             </state>
           </provider>
@@ -61,7 +68,7 @@
         <entry file="file://$PROJECT_DIR$/public/stylesheets/statements.css">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="39" column="29" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="29" />
+              <caret line="119" column="24" selection-start-line="119" selection-start-column="24" selection-end-line="119" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -118,10 +125,10 @@
         <option value="$PROJECT_DIR$/model/Fact.coffee" />
         <option value="$PROJECT_DIR$/views/share.jade" />
         <option value="$PROJECT_DIR$/manifest.yml" />
-        <option value="$PROJECT_DIR$/public/stylesheets/statements.css" />
+        <option value="$PROJECT_DIR$/routes/helpers.coffee" />
         <option value="$PROJECT_DIR$/views/statements.jade" />
         <option value="$PROJECT_DIR$/public/scripts/statements.coffee" />
-        <option value="$PROJECT_DIR$/routes/helpers.coffee" />
+        <option value="$PROJECT_DIR$/public/stylesheets/statements.css" />
       </list>
     </option>
   </component>
@@ -164,6 +171,9 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -244,9 +254,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -436,7 +443,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33072627" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32997763" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15812431" sideWeight="0.4997367" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1626188" sideWeight="0.4997367" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38660908" sideWeight="0.4997367" order="2" side_tool="false" content_ui="tabs" />
@@ -498,7 +505,8 @@
     <MESSAGE value="changed to FY dates for statements" />
     <MESSAGE value="added CSV endpoint" />
     <MESSAGE value="added company chooser for statements" />
-    <option name="LAST_COMMIT_MESSAGE" value="added company chooser for statements" />
+    <MESSAGE value="changed some styles" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed some styles" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -562,13 +570,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/companies.js.map">
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="sourcemapFileViewerProvider">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/helpers.js">
@@ -724,13 +732,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model/Fact.js.map">
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="sourcemapFileViewerProvider">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
@@ -797,13 +805,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/share.js.map">
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="sourcemapFileViewerProvider">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/share.coffee">
@@ -872,34 +880,34 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/stylesheets/statements.css">
+    <entry file="file://$PROJECT_DIR$/routes/helpers.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="29" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="29" />
+          <caret line="7" column="186" selection-start-line="7" selection-start-column="186" selection-end-line="7" selection-end-column="186" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/statements.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="110" selection-start-line="72" selection-start-column="110" selection-end-line="72" selection-end-column="110" />
+        <state vertical-scroll-proportion="-16.32">
+          <caret line="24" column="190" selection-start-line="24" selection-start-column="190" selection-end-line="24" selection-end-column="190" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/helpers.coffee">
+    <entry file="file://$PROJECT_DIR$/public/stylesheets/statements.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <caret line="119" column="24" selection-start-line="119" selection-start-column="24" selection-end-line="119" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/scripts/statements.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24321389">
-          <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.7535854">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding />
         </state>
       </provider>

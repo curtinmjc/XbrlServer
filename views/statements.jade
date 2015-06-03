@@ -9,7 +9,7 @@ html(ng-app="statementsApp")
         script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
         script(src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js")
         script(src="/scripts/statements.js")
-        script(src="/scripts/angucomplete.js")
+        script(src="/scripts/angucomplete-alt.min.js")
     body#statmentsController(ng-controller="StatementsController as statements")
         .container-fluid
             .row
@@ -22,7 +22,7 @@ html(ng-app="statementsApp")
                         .panel-content
                             .row
                                 .col-md-9
-                                    angucomplete.form-control(id="companies", tabindex="0" pause="400", selectedObject="statements.selectedEntity", url="/companies?term=", titlefield="value", placeholder="Search for a company...")
+                                    angucomplete-alt.form-control(id="companies", tabindex="0" pause="400", selected-object="statements.selectedEntity", remote-url="/companies?term=", title-field="value", placeholder="Search for a company...")
                                 .col-md-3
                                     a#addCompany.btn.btn-sm.btn-primary(ng-href="#", ng-click="statements.addEntity()", role="button",style="width: 100px; margin: 6px;", tabindex="1") Add
                                     | Or

@@ -42,6 +42,7 @@
 
     StatementsController.prototype.showStatements = function() {
       var entity, identifiers;
+      this.$scope.$broadcast('angucomplete-alt:clearInput');
       identifiers = (function() {
         var i, len, ref, results;
         ref = this.entities;
@@ -93,7 +94,7 @@
 
   StatementsController.$inject = ["$scope", "$http"];
 
-  angular.module("statementsApp", ["angucomplete"]).controller("StatementsController", StatementsController);
+  angular.module("statementsApp", ["angucomplete-alt"]).controller("StatementsController", StatementsController);
 
   $(function() {
     $('#bsTableRight').height($('#bsTable').height() + 10);
