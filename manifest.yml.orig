@@ -1,9 +1,9 @@
 applications:
 - services:
-  - CloudantNoSQLDB-curtinm
+  - CloudantXbrl
   disk_quota: 1024M
-#  host: xbrl
-  name: XbrlServer-curtinm
+  host: xbrl
+  name: XbrlServer
   command: node app.js
   path: .
   domain: mybluemix.net
