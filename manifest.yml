@@ -2,7 +2,7 @@ applications:
 - services:
   - CloudantNoSQLDB-curtinm
   disk_quota: 1024M
-#  host: xbrl
+# host: xbrl
   name: XbrlServer-curtinm
   command: node app.js
   path: .
